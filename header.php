@@ -23,29 +23,35 @@ require_once 'core/init.php';
         </div>
         <div class="collapse navbar-collapse"  id="navbar-1" >
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="homePage.php">HOME</a>
-                </li>
-                <li>
-                    <a href="about.php">ABOUT</a>
-                </li>
-                <li>
-                    <a href="contact.php">CONTACT</a>
-                </li>
                 <?php
                 if(!isset($_SESSION['isLoggedIn'])|| $_SESSION['isLoggedIn']==false){
                     ?>
+                    <li>
+                        <a href="homePage.php">HOME</a>
+                    </li>
                     <li>
                         <a href="login.php">LOGIN</a>
                     </li>
                     <li>
                         <a href="register.php">REGISTER</a>
                     </li>
+                    <li>
+                        <a href="about.php">ABOUT</a>
+                    </li>
+                    <li>
+                        <a href="contact.php">CONTACT</a>
+                    </li>
                 <?php
                 }else{
                 ?>
                 <li>
                     <a href="dashboard_student.php">DASHBOARD</a>
+                </li>
+                <li>
+                    <a href="about.php">ABOUT</a>
+                </li>
+                <li>
+                    <a href="contact.php">CONTACT</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
