@@ -43,21 +43,18 @@ include "adminSidebar.php";
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4>Transaction History</h4>
-                    <div class="col-lg-12">
-                        <div class="col-lg-4" style="float: right">
-                            <label>Search</label><br>
-                            <lable>Specific date</lable>
-                            <input type="date" name="search" onkeyup="autoSuggest('byDate','admin_searchTransaction.php')">
-                        </div>
-
-                    </div>
-                    <div class="">
-                        <!--                    <a data-toggle="modal" data-target="#at"><button class="btn btn-default">All Transactions</button></a>-->
-                        <a data-toggle="modal" data-target="#mtform"><button class="btn btn-default">Monthly</button></a>
-<!--                        <a data-toggle="modal" data-target="#dtform"><button class="btn btn-default">Spacific Date</button></a>-->
-
+                </div>
+                <div class="col-lg-12">
+                    <div class="col-lg-4" style="float: right">
+                        <label>Search</label><br>
+                        <lable>Specific date</lable>
+                        <input type="date" name="search" onchange="autoSuggest('byDate','admin_searchTransaction.php')">
                     </div>
                 </div>
+                    <div class="">
+                        <button class="btn btn-default">Monthly</button>
+                    </div>
+
 
 <!--                <a href="dashboard_admin.php"><button class="btn btn-default">Back to Dashboard</button></a>-->
 <!--                all transactions-->
@@ -67,7 +64,7 @@ include "adminSidebar.php";
                     </div>
                 </div>
                 <div class="pre-scrollable">
-                <div class="table-responsive">
+                <div class="">
                     <table class="table table-striped table-bordered table-hover">
                         <?php
                         echo"<label>All Transactions</label><br>";
@@ -117,75 +114,6 @@ include "adminSidebar.php";
                 </div>
             </div>
 <!--                All transactions end-->
-            <div id="mtform" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h3 class="modal-title">Enter Month & Year</h3>
-                        </div>
-                        <div class="modal-body">
-                            <form action="admin_transaction_month.php" method="post" class="form-horizontal">
-                                <div class="gap">
-                                    <div class="col-lg-3">
-                                        <input class="form-control" id="month" name="month" type="number" placeholder="Enter Month"  required value="<?php echo Input::get('month')?>">
-                                    </div>
-
-                                    <div class="col-lg-3">
-                                        <input class="form-control" id="year" name="year" type="number" placeholder="Enter Year" required value="<?php echo Input::get('year')?>">
-                                    </div>
-
-                                </div>
-
-                                <div class="gap">
-                                    <input class="btn btn-default" type="submit"  value="Search">
-<!--                                    <a data-toggle="modal" data-target="#mt"><button class="btn btn-default">Open</button></a>-->
-                                </div>
-
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-<!--                monthly transactions end-->
-<!--                <div id="dtform" class="modal fade" role="dialog">-->
-<!--                    <div class="modal-dialog">-->
-<!--                        <!-- Modal content-->-->
-<!--                        <div class="modal-content">-->
-<!--                            <div class="modal-header">-->
-<!--                                <button type="button" class="close" data-dismiss="modal">&times;</button>-->
-<!--                                <h3 class="modal-title">Enter Date, Month & Year</h3>-->
-<!--                            </div>-->
-<!--                            <div class="modal-body">-->
-<!--                                <form action="admin_transaction_date.php" method="post" class="form-horizontal">-->
-<!--                                    <div class="col-lg-3 ">-->
-<!--                                        <input class="form-control" id="date" name="date" type="number" placeholder="Enter Date"  required value="--><?php //echo Input::get('date') ?><!--">-->
-<!--                                    </div>-->
-<!--                                    <div class="col-lg-3 ">-->
-<!--                                        <input class="form-control" id="month" name="month" type="number" placeholder="Enter Month" required   value="--><?php //echo Input::get('month')?><!--">-->
-<!--                                    </div>-->
-<!--                                    <div class="col-lg-3 ">-->
-<!--                                        <input class="form-control" id="year" name="year" type="number" placeholder="Enter Year" required  value="--><?php //echo Input::get('year')?><!--">-->
-<!--                                    </div>-->
-<!--                                    <div class="gap">-->
-<!--                                        <input class="btn btn-default" type="submit" value="Search">-->
-<!--                                    </div>-->
-<!---->
-<!--                                </form>-->
-<!--                            </div>-->
-<!--                            <div class="modal-footer">-->
-<!--                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                daily transactions end-->
-
-
         </div>
     </div>
 </div>
