@@ -36,89 +36,95 @@ if($_SESSION['student']){
 include "adminSidebar.php";
 ?>
 
-<div id="page-wrapper" class="container col-lg-9" >
-    <div id="page-inner">
-        <br>
-        <div class="">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4>Transaction History</h4>
-                </div>
-                <div class="col-lg-12">
-                    <div class="col-lg-4" style="float: right">
-                        <label>Search</label><br>
-                        <lable>Specific date</lable>
-                        <input type="date" name="search" onchange="autoSuggest('byDate','admin_searchTransaction.php')">
-                    </div>
-                </div>
-                    <div class="">
-                        <button class="btn btn-default">Monthly</button>
+    <div id="page-wrapper" class="container col-lg-9" >
+        <div id="page-inner">
+            <br>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Transaction History</h4>
                     </div>
 
+                    <div class="panel-body">
+                        <br>
+                        <div class="col-lg-12">
+                            <div class="col-lg-4" style="float: right">
+                                <label>Search</label>
+                                <input type="date" name="search" onchange="autoSuggest('byDate','admin_searchTransaction.php')">
+                            </div>
+                        </div>
 
-<!--                <a href="dashboard_admin.php"><button class="btn btn-default">Back to Dashboard</button></a>-->
-<!--                all transactions-->
-                <div class="pre-scrollable">
+
+
+<!-- search results-->
                     <div id="byDate">
 
                     </div>
+
+<!-- search results end-->
+
+                    <!--                all transactions-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5><strong>All Transactions</strong></h5>
+                        </div>
+                    <div class="pre-scrollable">
+                        <div class="">
+                            <table class="table table-striped table-bordered table-hover">
+                                <?php
+                                $Alltransactions = DB::getInstance()->get('transaction',array(1,'=',1));
+                                //foreach($Alltransactions->results() as $res){
+                                //    print_r($res);
+                                //    echo"<br>";
+                                //}
+                                if(!$Alltransactions->count()){
+                                    echo 'No transactions';
+                                }else{
+                                ?>
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Transaction ID</th>
+                                    <th>PayerID</th>
+                                    <th>Payment type</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $counter = 0;
+                                foreach($Alltransactions->results() as $t){
+                                    //                                   print_r($t);
+                                    //                                   echo'<br>';
+                                    $counter+=1;
+                                    echo"<tr>";
+                                    echo "<td>".$counter."</td>";
+                                    echo "<td>".$t->date."</td>";
+                                    echo "<td>".$t->time."</td>";
+                                    echo "<td>".$t->transactionID."</td>";
+                                    echo "<td>".$t->payerID."</td>";
+                                    echo "<td>".$t->paymentType."</td>";
+                                    echo "<td>".$t->statusDescription."</td>";
+                                    echo "<td>".$t->amount."</td>";
+                                    echo "</tr>";
+                                }
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    </div>
+                    <!--                All transactions end-->
+
+
                 </div>
-                <div class="pre-scrollable">
-                <div class="">
-                    <table class="table table-striped table-bordered table-hover">
-                        <?php
-                        echo"<label>All Transactions</label><br>";
-                        $Alltransactions = DB::getInstance()->get('transaction',array(1,'=',1));
-                        //foreach($Alltransactions->results() as $res){
-                        //    print_r($res);
-                        //    echo"<br>";
-                        //}
-                        if(!$Alltransactions->count()){
-                            echo 'No transactions';
-                        }else{
-                        ?>
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Transaction ID</th>
-                            <th>PayerID</th>
-                            <th>Payment type</th>
-                            <th>Status</th>
-                            <th>Amount</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        $counter = 0;
-                        foreach($Alltransactions->results() as $t){
-                            //                                   print_r($t);
-                            //                                   echo'<br>';
-                            $counter+=1;
-                            echo"<tr>";
-                            echo "<td>".$counter."</td>";
-                            echo "<td>".$t->date."</td>";
-                            echo "<td>".$t->time."</td>";
-                            echo "<td>".$t->transactionID."</td>";
-                            echo "<td>".$t->payerID."</td>";
-                            echo "<td>".$t->paymentType."</td>";
-                            echo "<td>".$t->statusDescription."</td>";
-                            echo "<td>".$t->amount."</td>";
-                            echo "</tr>";
-                        }
-                        }
-                        ?>
-                        </tbody>
-                    </table>
                 </div>
-            </div>
-<!--                All transactions end-->
         </div>
     </div>
 </div>
-</div>
-    </div>
 <?php
 include "footer.php";
 ?>
