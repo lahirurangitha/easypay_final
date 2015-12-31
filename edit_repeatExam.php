@@ -53,13 +53,14 @@ if ($user->hasPermission('admin')) {
 ?>
 
 <form action="" method="post">
-    <div class="field">
-        <label>Enter the new date</label>
+    <h4>Update Repeat Exam  </h4>
+    <div class="gap">
+        <label>Closing Date</label>
         <input class="form-control" type="date" name="date" id="date" value="<?php echo($inData)?>">
     </div>
 
-    <div class="field">
-        <label>Enter the new amount</label>
+    <div class="gap">
+        <label>Payment Amount</label>
         <input class="form-control" type="text" name="amount" id="amount" value="<?php echo($inAmount)?>" >
     </div>
 
