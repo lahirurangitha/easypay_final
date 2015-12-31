@@ -21,8 +21,11 @@ require 'Files/accessFile.php';
 include "header.php";
 ?>
 <div class="backgroundImg container-fluid">
+    <?php
+    include "adminSidebar.php";
+    ?>
     <br>
-    <div class="jumbotron col-lg-5 col-lg-offset-3">
+    <div class="jumbotron col-lg-5 col-lg-offset-1">
 <?php
 
 $user = new User();
