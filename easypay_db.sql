@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2015 at 07:46 PM
+-- Generation Time: Dec 31, 2015 at 01:40 PM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -101,7 +101,8 @@ INSERT INTO `new_academic_year` (`transactionID`, `acaYear`, `paymentStatus`) VA
 (115, 2015, 0),
 (116, 2015, 0),
 (117, 2015, 0),
-(119, 2015, 0);
+(119, 2015, 0),
+(125, 2015, 0);
 
 -- --------------------------------------------------------
 
@@ -121,9 +122,11 @@ CREATE TABLE IF NOT EXISTS `notification` (
 --
 
 INSERT INTO `notification` (`nID`, `topic`, `detail`, `datetime`) VALUES
-(1, 'test', '1234', '01/11/15 10:37:40'),
-(2, 'test 2', 'khvjdjvsdl;', '01/11/15 10:39:37'),
-(4, 'test123', 'qwerty', '17/11/15 06:49:30');
+(1, 'new', 'new', '18/10/15 11:34:38'),
+(2, 'pay for repeat exams', 'you have to pay Rs:25 per each repeat subject.', '12/09/2015 10:04:18'),
+(3, 'pay registration fee', 'you have to pay Rs:2500 for the UCSC registrtion.', '31/05/2015 22:10:28'),
+(4, 'pay for new academic year', 'you have to pay Rs:800 for the new academic year.', '08/04/2015 08:14:33'),
+(5, 'hte', 'hrn', '18/11/15 09:00:02');
 
 -- --------------------------------------------------------
 
@@ -148,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `repeat_exam` (
   `gradeThird` varchar(2) NOT NULL,
   `paymentStatus` int(1) NOT NULL,
   `adminStatus` int(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1 COMMENT='For repeat exam fees';
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1 COMMENT='For repeat exam fees';
 
 --
 -- Dumping data for table `repeat_exam`
@@ -178,7 +181,9 @@ INSERT INTO `repeat_exam` (`id`, `transactionID`, `Year`, `Semester`, `subjectCo
 (21, 88, 1, 'FYS2', '1900', '13000888', 'NPLR Pathirana', 'Lahiru Pathirana', '0332293329', 'qwerty', 'no', 'C', '-', '-', 0, 0),
 (22, 96, 1, 'FYS2', '1900', '13000888', 'NPLR Pathirana', 'Lahiru Pathirana', '0332293329', 'qwerty', 'no', 'C', '-', '-', 0, 0),
 (23, 9, 1, 'FYS2', 'SCS0022', '13000829', 'KHML niroshan', 'lasith niro', '0912837662', 'FCS', 'yes', 'D+', '-', '-', 0, 0),
-(24, 114, 2, 'FYS2', 'SCS2109', '13000888', 'KHML niroshan', 'niroshan', '077232343', 'FCS', 'yes', 'C-', '-', '-', 0, 0);
+(24, 114, 2, 'FYS2', 'SCS2109', '13000888', 'KHML niroshan', 'niroshan', '077232343', 'FCS', 'yes', 'C-', '-', '-', 0, 0),
+(25, 121, 1, 'FYS2', 'SCS1108', '13000111', 'HVGN Dilanga', 'nadeesh dilanga', '0412225683', 'Algo', 'yes', 'D-', 'C-', 'C-', 0, 0),
+(26, 126, 1, 'FYS2', 'SCS1108', '13000111', '     ', 'nadeesh dilanga', '     ', 'Algo', 'yes', '-', '-', '-', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -235,7 +240,7 @@ INSERT INTO `transaction` (`transactionID`, `payeeID`, `payerID`, `date`, `time`
 CREATE TABLE IF NOT EXISTS `transaction_temp` (
   `traID` int(20) NOT NULL,
   `userID` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `transaction_temp`
@@ -361,7 +366,14 @@ INSERT INTO `transaction_temp` (`traID`, `userID`) VALUES
 (117, 11),
 (118, 11),
 (119, 11),
-(120, 11);
+(120, 11),
+(121, 3),
+(122, 3),
+(123, 3),
+(124, 3),
+(125, 3),
+(126, 3),
+(127, 3);
 
 -- --------------------------------------------------------
 
@@ -412,7 +424,9 @@ INSERT INTO `ucsc_registration` (`transactionID`, `regYear`, `paymentStatus`) VA
 (98, 2016, 0),
 (4, 2016, 0),
 (111, 2016, 0),
-(118, 2016, 0);
+(118, 2016, 0),
+(123, 2016, 0),
+(124, 2016, 0);
 
 -- --------------------------------------------------------
 
@@ -425,6 +439,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(20) NOT NULL,
   `password` varchar(64) NOT NULL,
   `regNumber` varchar(9) NOT NULL,
+  `indexNumber` varchar(8) DEFAULT NULL,
   `fname` varchar(50) NOT NULL,
   `lname` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -433,23 +448,24 @@ CREATE TABLE IF NOT EXISTS `users` (
   `dob` date NOT NULL,
   `year` int(2) NOT NULL,
   `group` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `regNumber`, `fname`, `lname`, `email`, `phone`, `nic`, `dob`, `year`, `group`) VALUES
-(1, 'lasith', '98f7494c30aaa7c55d7c8cad6d04cb0c08c93295310d6931c33a89dda28a47a3', '', 'lasith', 'niroshan', 'lasith2013.l2n@gmail', '0712837662', '923342699V', '1992-11-29', 1, 2),
-(2, 'shanika', '98f7494c30aaa7c55d7c8cad6d04cb0c08c93295310d6931c33a89dda28a47a3', '2013is012', 'shanika', 'surangi', 'sse@gmail.com', '0722235502', '923565488V', '1992-06-29', 2, 2),
-(3, 'nadeesh', '8412850906603b50d968536a6c0b1da6c1f52ae947e917e62de4f4662a62dce9', '2013cs088', 'nadeesh', 'dilanga', 'nadeesh@gmail.com', '0770294331', '922970988v', '1992-10-14', 1, 1),
-(4, 'student1', '509e87a6c45ee0a3c657bf946dd6dc43d7e5502143be195280f279002e70f7d9', '2013cs085', 'student', 'student', 'student1@gmail.com', '0712837662', '9233426992', '1992-06-29', 2, 1),
-(9, 'student2', 'eb4b3111401df980f14f28ad6804ae096df1e1c6963c51eab4140be226f8c94c', '2013cs086', 'student2', 'student2', 'student2@gmail.com', '0712837662', '9233426992', '1992-10-14', 1, 1),
-(10, 'anjana', '8182e42c77b763a311306c7de924279ad89ddff152f003898c6ce100699f2610', '2013cs081', 'anjana', 'nisal', 'anjana@gmail.com', '0770336863', '9233426992', '1992-06-29', 2, 1),
-(11, 'lahiru', '01d44c3e9548a0b4479dc4cd1d0e16d495e937ad45c5a24b2c7c35e2adc18ba3', '2013cs220', 'lahiru', 'rangitha', 'lahiru@gmail.com', '0715721241', '923342699V', '1992-06-29', 4, 1),
-(12, 'pushpika', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', '2013CS127', 'pushpika', 'wanniachchi', 'pushpika@gmail.com', '0715721241', '921601883v', '1992-06-08', 2, 1),
-(13, 'hasantha', '75155c02717e90650b6aa692391ff81cbaf08f46f7d1bce7e2c4bf444485c380', '2013cs067', 'hasantha', 'lakshan', 'hasantha@gmail.com', '0715721241', '921601883v', '1992-06-08', 2, 1),
-(14, 'nimal', 'ad27266cd9aa5c55922c709207cfe69ae0544af6c66bb739fa76271481f5b904', '2013cs012', 'nimal', 'nandana', 'nimal@gmail.com', '0715721241', '931601883v', '1985-12-31', 2, 1);
+INSERT INTO `users` (`id`, `username`, `password`, `regNumber`, `indexNumber`, `fname`, `lname`, `email`, `phone`, `nic`, `dob`, `year`, `group`) VALUES
+(1, 'lasith', '98f7494c30aaa7c55d7c8cad6d04cb0c08c93295310d6931c33a89dda28a47a3', '', NULL, 'lasith', 'niroshan', 'lasith2013.l2n@gmail', '0712837662', '923342699V', '1992-11-29', 1, 2),
+(2, 'shanika', '98f7494c30aaa7c55d7c8cad6d04cb0c08c93295310d6931c33a89dda28a47a3', '2013is012', NULL, 'shanika', 'surangi', 'sse@gmail.com', '0722235502', '923565488V', '1992-06-29', 2, 2),
+(3, 'nadeesh', '8412850906603b50d968536a6c0b1da6c1f52ae947e917e62de4f4662a62dce9', '2013cs088', '13000111', 'nadeesh', 'dilanga', 'nadeesh@gmail.com', '0770294331', '922970988v', '1992-10-14', 1, 1),
+(4, 'student1', '509e87a6c45ee0a3c657bf946dd6dc43d7e5502143be195280f279002e70f7d9', '2013cs085', NULL, 'student', 'student', 'student1@gmail.com', '0712837662', '9233426992', '1992-06-29', 2, 1),
+(9, 'student2', 'eb4b3111401df980f14f28ad6804ae096df1e1c6963c51eab4140be226f8c94c', '2013cs086', NULL, 'student2', 'student2', 'student2@gmail.com', '0712837662', '9233426992', '1992-10-14', 1, 1),
+(10, 'anjana', '8182e42c77b763a311306c7de924279ad89ddff152f003898c6ce100699f2610', '2013cs081', NULL, 'anjana', 'nisal', 'anjana@gmail.com', '0770336863', '9233426992', '1992-06-29', 2, 1),
+(11, 'lahiru', '01d44c3e9548a0b4479dc4cd1d0e16d495e937ad45c5a24b2c7c35e2adc18ba3', '2013cs220', '13000888', 'lahiru', 'rangitha', 'lahiru@gmail.com', '0715721241', '923342699V', '1992-06-29', 4, 1),
+(12, 'pushpika', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', '2013CS127', NULL, 'pushpika', 'wanniachchi', 'pushpika@gmail.com', '0715721241', '921601883v', '1992-06-08', 2, 1),
+(13, 'hasantha', '75155c02717e90650b6aa692391ff81cbaf08f46f7d1bce7e2c4bf444485c380', '2013cs067', NULL, 'hasantha', 'lakshan', 'hasantha@gmail.com', '0715721241', '921601883v', '1992-06-08', 2, 1),
+(14, 'nimal', 'ad27266cd9aa5c55922c709207cfe69ae0544af6c66bb739fa76271481f5b904', '2013cs012', NULL, 'nimal', 'nandana', 'nimal@gmail.com', '0715721241', '931601883v', '1985-12-31', 2, 1),
+(15, 'testuser', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '13000888', NULL, 'test', 'user', 'lahirupathiranalr@gmail.com', '0715721241', '921601883v', '1990-12-27', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -547,7 +563,7 @@ ALTER TABLE `notification`
 -- AUTO_INCREMENT for table `repeat_exam`
 --
 ALTER TABLE `repeat_exam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `transaction`
 --
@@ -557,12 +573,12 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `transaction_temp`
 --
 ALTER TABLE `transaction_temp`
-  MODIFY `traID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=121;
+  MODIFY `traID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=128;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `users_session`
 --
