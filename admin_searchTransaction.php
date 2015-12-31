@@ -17,11 +17,16 @@ if(isset($_POST['searchVal'])) {
         //    echo"<br>";
         //}
         if (!$DayTra->count()){
-            echo "<div class='text text-danger'><strong>No transactions found on $date</strong></div><br>";
+            echo "<div class='alert alert-info'><strong>No transactions found on $date</strong></div><br>";
         }else{
-            echo"<label>Transactions on $date</label><br>";
         ?>
+
             <div class="panel panel-default">
+            <div class="panel-heading">
+                <?php
+                echo"<label>Transactions on $date</label><br>";
+                ?>
+            </div>
             <div class="panel-body">
             <div class="pre-scrollable">
             <table class="table table-striped table-bordered table-hover">

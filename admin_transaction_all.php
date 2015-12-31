@@ -41,17 +41,25 @@ include "adminSidebar.php";
             <br>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4>Transaction History</h4>
+                        <div class="list-inline">
+                            <h4>Transaction History</h4>
+                            <div class="col-lg-offset-8">
+                                <label>Search</label>
+                                <input type="date" name="search" onchange="autoSuggest('byDate','admin_searchTransaction.php')">
+                            </div>
+
+                        </div>
+
                     </div>
 
                     <div class="panel-body">
                         <br>
-                        <div class="col-lg-12">
-                            <div class="col-lg-4" style="float: right">
-                                <label>Search</label>
-                                <input type="date" name="search" onchange="autoSuggest('byDate','admin_searchTransaction.php')">
-                            </div>
-                        </div>
+<!--                        <div class="col-lg-12">-->
+<!--                            <div class="col-lg-4" style="float: right">-->
+<!--                                <label>Search</label>-->
+<!--                                <input type="date" name="search" onchange="autoSuggest('byDate','admin_searchTransaction.php')">-->
+<!--                            </div>-->
+<!--                        </div>-->
 
 
 
@@ -67,6 +75,7 @@ include "adminSidebar.php";
                         <div class="panel-heading">
                             <h5><strong>All Transactions</strong></h5>
                         </div>
+                        <div class="panel-body">
                     <div class="pre-scrollable">
                         <div class="">
                             <table class="table table-striped table-bordered table-hover">
@@ -116,6 +125,7 @@ include "adminSidebar.php";
                             </table>
                         </div>
                     </div>
+                        </div>
                     </div>
                     <!--                All transactions end-->
 
