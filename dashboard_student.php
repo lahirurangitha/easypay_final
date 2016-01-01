@@ -57,7 +57,7 @@ include "studentSidebar.php";
                             <th>Date</th>
                             <th>Time</th>
                             <th>Transaction ID</th>
-                            <th>PayerID</th>
+<!--                            <th>PayerID</th>-->
                             <th>Payment type</th>
                             <th>Status</th>
                             <th>Amount</th>
@@ -75,7 +75,7 @@ include "studentSidebar.php";
                                 echo "<td>".$t->date."</td>";
                                 echo "<td>".$t->time."</td>";
                                 echo "<td>".$t->transactionID."</td>";
-                                echo "<td>".$t->payerID."</td>";
+//                                echo "<td>".$t->payerID."</td>";
                                 echo "<td>".$t->paymentType."</td>";
                                 echo "<td>".$t->statusDescription."</td>";
                                 echo "<td>".$t->amount."</td>";
