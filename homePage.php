@@ -63,7 +63,7 @@ if(isset($_POST['inlinesubmit'])) {
 ?>
 
 <div class="container-fluid backgroundImg">
-    <div class="container-fluid">
+    <div class="container">
     <br>
     <div class="col-xs-offset-5">
         <img src="images/ucsc.png" height="110px" >
@@ -71,11 +71,11 @@ if(isset($_POST['inlinesubmit'])) {
     <div class="col-xs-offset-3">
         <img src="images/logo.png" height="150px" >
     </div>
-    <div class="container col-xs-offset-4">
+    <div class="col-xs-offset-4">
         <h2><strong>Online Payment System</strong></h2>
     </div>
 
-</div>
+    </div>
 </div>
 <?php
 include "footer.php";
