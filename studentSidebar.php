@@ -22,12 +22,12 @@
                 <li>
                     <a href="update.php"><i class="fa fa-book fa-3x"></i> Update Details</a>
                 </li>
-                <li>
-                    <a href="changepassword.php"><i class="fa fa-lock fa-3x"></i> Change Password</a>
-                </li>
-                <li>
-                    <a href="changephonenumber.php"><i class="fa fa-phone fa-3x"></i> Change Phone Number</a>
-                </li>
+<!--                <li>-->
+<!--                    <a href="changepassword.php"><i class="fa fa-lock fa-3x"></i> Change Password</a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a href="changephonenumber.php"><i class="fa fa-phone fa-3x"></i> Change Phone Number</a>-->
+<!--                </li>-->
                 <li>
                     <a href="duepayments.php"><i class="fa fa-phone fa-3x"></i> Due Payments</a>
                 </li>

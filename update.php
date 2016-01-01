@@ -155,6 +155,15 @@ if(Input::exists()){
 
                  <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
              </form>
+             <br>
+             <div class="inline">
+             <div class="col-sm-6">
+                 <a href="changepassword.php"><strong>Change Password >></strong></a>
+             </div>
+             <div class="col-sm-6">
+                 <a href="changephonenumber.php"><strong>Change Mobile Number >></strong></a>
+             </div>
+             </div>
          </div>
      </div>
  </div>
