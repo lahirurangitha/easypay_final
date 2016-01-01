@@ -92,7 +92,7 @@ if($dayLimit<0){
     $_SESSION['type'] = 3;
     ?>
 
-    <form action="https://ipg.dialog.lk/ezCashIPGExtranet/servlet_sentinal" method="post">
+    <form action="https://ipg.dialog.lk/ezCashIPGExtranet/servlet_sentinal" method="post" target="_blank">
         <input class="btn btn-default" type="submit" value="Pay via eZcash">
         <input type="hidden" value='<?php echo $Invoice; ?>' name="merchantInvoice">
         <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
