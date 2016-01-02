@@ -52,6 +52,11 @@ class Validate {
                                 $this->addError("Your registration number is wrong.");
                             }
                             break;
+                        case 'regexIndexNumber':
+                            if(!preg_match('([0-9]{8})',$value)){
+                                $this->addError("Your index number is wrong.");
+                            }
+                            break;
                         case 'regexString':
                             if(!preg_match("/^[a-zA-Z]*$/", $value)){
                                 $this->addError("{$item} must be valid {$item}.");
