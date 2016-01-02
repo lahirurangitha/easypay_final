@@ -53,9 +53,12 @@ if(isset($_POST['inlinesubmit'])) {
 //                echo Hash::make($pass, $user->data()->salt);
         }
     } else {
-        foreach ($validation->errors() as $er) {
-            echo $er, '<\ br>';
+        $str = "";
+        foreach ($validation->errors() as $error) {
+            $str .= $error;
+            $str .= '\n';
         }
+        echo '<script type="text/javascript">alert("' . $str . '")</script>';
     }
 
 }
@@ -65,13 +68,13 @@ if(isset($_POST['inlinesubmit'])) {
 <div class="container-fluid backgroundImg">
     <div class="container">
     <br>
-    <div class="col-xs-offset-5">
+    <div class="col-sm-offset-5">
         <img src="images/ucsc.png" height="110px" >
     </div>
-    <div class="col-xs-offset-3">
+    <div class="col-sm-offset-3">
         <img src="images/logo.png" height="150px" >
     </div>
-    <div class="col-xs-offset-4">
+    <div class="col-sm-offset-4">
         <h2><strong>Online Payment System</strong></h2>
     </div>
 

@@ -27,7 +27,7 @@ require_once 'core/init.php';
             if(!isset($_SESSION['isLoggedIn'])|| $_SESSION['isLoggedIn']==false){
                 ?>
                 <div style="float: right">
-                    <form action="homePage.php" method="POST" class="form-inline gap">
+                    <form action="homePage.php" method="POST" class="form-inline">
                         <div class="form-group">
                             <input class="form-control" required id="username" type="text" name="username" autocomplete="off" placeholder="Username"/>
                         </div>
@@ -35,6 +35,10 @@ require_once 'core/init.php';
                             <input class="form-control" required id="password" type="password" name="password" autocomplete="off" placeholder="Enter password" size="25" maxlength="20"/>
                         </div>
                         <input class="btn btn-primary" type="submit" value="Sign in" name="inlinesubmit"/>
+                        <div class="">
+                            <input type="checkbox"  name="remember"/> Remember me
+                            <a href="forgetpass.php" title="To recover your password, click here" >Forgot password?</a>
+                        </div>
                     </form>
                 </div>
             <?php

@@ -58,6 +58,7 @@ if(Input::exists()){
                 $_SESSION['fname'] = escape($user->data()->fname);
                 $_SESSION['lname'] = escape($user->data()->lname);
                 $_SESSION['userid'] = $user->data()->id;
+//                $_SESSION['msgs'] = array(); //to store error msgs
                 if ($user->hasPermission('admin')) {
                     $_SESSION['admin']=true;
                     $_SESSION['student']=false;
@@ -75,9 +76,12 @@ if(Input::exists()){
 //                echo Hash::make($pass, $user->data()->salt);
             }
         } else {
-            foreach ($validation->errors() as $er) {
-                echo $er, '<\ br>';
+            $str = "";
+            foreach ($validation->errors() as $error) {
+                $str .= $error;
+                $str .= '\n';
             }
+            echo '<script type="text/javascript">alert("' . $str . '")</script>';
         }
     }
 }
