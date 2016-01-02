@@ -17,7 +17,7 @@
                     <a class="active-menu"  href="dashboard_student.php"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="paymentHome.php"><i class="fa fa-dollar fa-3x"></i> Make a Payment</a>
+                    <a href="payforme.php"><i class="fa fa-dollar fa-3x"></i> Make a Payment</a>
                 </li>
                 <li>
                     <a href="update.php"><i class="fa fa-book fa-3x"></i> Update Details</a>
