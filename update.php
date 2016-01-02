@@ -84,7 +84,7 @@ if(Input::exists()){
             try{
                 $user->update(array(
                     'username' => Input::get('username'),
-                    'regNumber' => Input::get('regNumber'),
+                    'indexNumber' => Input::get('indexNumber'),
                     'fname' => Input::get('fname'),
                     'lname' => Input::get('lname'),
 //                    'phone' => Input::get('phone'),
@@ -95,17 +95,17 @@ if(Input::exists()){
                 ));
 //                Session::flash('home', 'Your details have been updated.');
 //                Redirect::to('index.php');
-                echo "<script>alert('Your details updated successfully.');window.location.href='index.php'</script>";
+                echo "<script>alert('Your details updated successfully.');window.location.href='update.php'</script>";
             } catch(Exception $err) {
                 die($err->getMessage());
             }
         } else {
-            foreach ($validation->errors() as $er) {
-//                echo $er, '<br />';
-                ?>
-                <script type="text/javascript"> alert(" Sorry, Update failed. <?php echo $er ,'<br />';?>")</script>
- <?php
+            $str = "";
+            foreach ($validation->errors() as $error) {
+                $str .= $error;
+                $str .= '\n';
             }
+            echo '<script type="text/javascript">alert("' . $str . '")</script>';
         }
     }
 }
