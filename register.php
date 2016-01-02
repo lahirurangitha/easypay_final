@@ -61,7 +61,7 @@ if(Input::exists()){
         if($validation->passed()) {
 			$_SESSION['username'] = Input::get('username');
             $_SESSION['password'] = Input::get('password');
-            $_SESSION['regNo']    = Input::get('regNumber');
+            $_SESSION['indexNumber']    = Input::get('indexNumber');
             $_SESSION['name1']    = Input::get('name1');
             $_SESSION['name2']    = Input::get('name2');
             $_SESSION['email']    = Input::get('email');
@@ -120,7 +120,7 @@ if(Input::exists()){
             </div>
             <div class="gap">
                 <label>Index No</label><br>
-                <input class="form-control" id="indexNumber" type="text" name="indexNumber" placeholder="Index number" value="<?php echo escape(Input::get('indexNumber'));?>">
+                <input class="form-control" id="indexNumber" type="number" name="indexNumber" placeholder="Index number" value="<?php echo escape(Input::get('indexNumber'));?>">
             </div>
             <div class="gap">
                 <label>E-Mail</label><br>

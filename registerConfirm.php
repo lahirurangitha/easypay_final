@@ -43,7 +43,7 @@ $notification = new smsNotification();
 
 $var1 = $_SESSION['username'];
 $var2 = Hash::make($_SESSION['password']);
-$var3 = $_SESSION['regNo'];
+$var3 = $_SESSION['indexNumber'];
 $var4 = $_SESSION['name1'];
 $var5 = $_SESSION['name2'];
 $var6 = $_SESSION['email'];

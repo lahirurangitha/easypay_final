@@ -43,10 +43,10 @@ if(Input::exists()){
                 'min' => 2,
                 'max' => 50
            ),
-           'regNumber' => array(
-                'required' => true,
-                'regexRegistrationNumber' => 'regNumber',
-                'min' => 9
+           'indexNumber' => array(
+//                'required' => true,
+                'regexIndexNumber' => 'indexNumber',
+                'min' => 8
             ),
            'fname' => array(
                 'required' => true,
@@ -93,8 +93,9 @@ if(Input::exists()){
                     'dob' => Input::get('dob'),
                     'year' => Input::get('year')
                 ));
-                Session::flash('home', 'Your details have been updated.');
-                Redirect::to('index.php');
+//                Session::flash('home', 'Your details have been updated.');
+//                Redirect::to('index.php');
+                echo "<script>alert('Your details updated successfully.');window.location.href='index.php'</script>";
             } catch(Exception $err) {
                 die($err->getMessage());
             }
@@ -118,17 +119,17 @@ if(Input::exists()){
                      <input class="form-control" type="text" name="username"  value="<?php echo escape($user->data()->username); ?>">
                  </div>
                  <div class="gap">
-                     <label>Registration Number</label>
-                     <input class="form-control" type="string" name="regNumber" value="<?php echo escape($user->data()->regNumber); ?>">
+                     <label>Index Number</label>
+                     <input class="form-control" type="number" name="indexNumber" value="<?php echo escape($user->data()->indexNumber); ?>">
                  </div>
                  <div class="gap">
                      <label>First Name</label>
-                     <input class="form-control" type="string" name="fname" value="<?php echo escape($user->data()->fname); ?>">
+                     <input class="form-control" type="text" name="fname" value="<?php echo escape($user->data()->fname); ?>">
                  </div>
 
                  <div class="gap">
                      <label>Last Name</label>
-                     <input class="form-control" type="string" name="lname" value="<?php echo escape($user->data()->lname); ?>">
+                     <input class="form-control" type="text" name="lname" value="<?php echo escape($user->data()->lname); ?>">
                  </div>
 
                  <div class="gap">
@@ -138,7 +139,7 @@ if(Input::exists()){
 
                  <div class="gap">
                      <label>NIC</label>
-                     <input class="form-control" type="string" name="nic" value="<?php echo escape($user->data()->nic);?>">
+                     <input class="form-control" type="text" name="nic" value="<?php echo escape($user->data()->nic);?>">
                  </div>
 
                  <div class="gap">
@@ -148,7 +149,7 @@ if(Input::exists()){
 
                  <div class="gap">
                      <label>Academic Year</label>
-                     <input class="form-control" type="string" name="year" value="<?php echo escape($user->data()->year);?>">
+                     <input class="form-control" type="number" name="year" value="<?php echo escape($user->data()->year);?>">
                  </div>
 
                  <input class="btn btn-default" id="submit" type="submit" value="Update">
