@@ -7,7 +7,7 @@
  */
 
 require_once 'core/init.php';
-require_once 'dbcon.php';
+//require_once 'dbcon.php';
 
 require_once 'fpdf/fpdf.php';
 
@@ -22,18 +22,36 @@ require_once 'fpdf/fpdf.php';
 <?php
 $user = new User();
 $indexNo=$user->data()->indexNumber;
-$sql3="SELECT name_full,reg_no,years,semester,cs_is from u_student WHERE  index_no=$indexNo ";
-$resultz3=mysqli_query($conn,$sql3);
-$row3 = mysqli_fetch_assoc($resultz3);
-$name = $row3['name_full'];
-$reg = $row3['reg_no'];
-$years = $row3['years'];
-$years -=1;
-$sem = $row3['semester'];
-$deg=$row3['cs_is'];
-$degree='';
-$semester='';
-$year_word='';
+//$sql3="SELECT name_full,reg_no,years,semester,cs_is from u_student WHERE  index_no=$indexNo ";
+$details=DB::getInstance()->get2('u_student',array('index_no','=',$indexNo));
+if(!$details->count()){
+    echo 'No Records';
+}else{
+    foreach($details->results() as $stu){
+        $name = $stu->name_full;
+        $reg = $stu->reg_no;
+        $years =$stu->years;
+        $years -=1;
+        $sem = $stu->semester;
+        $deg=$stu->cs_is;
+        $degree='';
+        $semester='';
+        $year_word='';
+    }
+}
+
+//$resultz3=mysqli_query($conn,$sql3);
+//$row3 = mysqli_fetch_assoc($resultz3);
+//$name = $row3['name_full'];
+//$reg = $row3['reg_no'];
+//$years = $row3['years'];
+//$years -=1;
+//$sem = $row3['semester'];
+//$deg=$row3['cs_is'];
+//$degree='';
+//$semester='';
+//$year_word='';
+
 if($deg==1){
     $degree ='Computer Science';
 }
@@ -65,20 +83,19 @@ switch($years){
     //include "header.php";
     //Assuming that the subject code is passed through button pressing
 
-    $sql="SELECT sub_code,sub_name from results WHERE repeat_status=1 and index_no=$indexNo ";
-    $resultz=mysqli_query($conn,$sql); ?>
+    $subs=DB::getInstance()->query2('SELECT sub_code,sub_name from results WHERE repeat_status=1 and index_no=?',array($indexNo));
 
-                <?php
-                if(mysqli_num_rows($resultz)<1){
-                    echo "No results";
-                }
-                else {
-                    $subjects = array();
-                    while ($row = mysqli_fetch_assoc($resultz)) {
-                        $subject = $row['sub_code'];
-                        array_push($subjects, $subject);
-                    }
+if(!$subs->count()){
+    echo 'No Records';
+}else{
+    $subjects = array();
 
+foreach($subs->results() as $stu) {
+    $check=DB::getInstance()->query('SELECT subjectCode from repeat_exam WHERE subjectCode=? and paymentStatus=1 and adminStatus=1',array($stu->sub_code));
+    if ($check->count()){
+    $subject = $stu->sub_code;
+    array_push($subjects, $subject);}
+}
 
                     $examination = $year_word . " " . $semester . " " . $degree . " " . "Degree Programme";
                     $image = "images/ucsc.png";
@@ -166,39 +183,44 @@ switch($years){
                     $pdf->Cell(27, 10, " Date", 1, 0);
                     $pdf->Cell(28, 10, " Time", 1, 0);
                     $pdf->Cell(27, 10, " Subject", 1, 0);
-                    $pdf->Cell(28, 10, " Place", 1, 0);
+                  //  $pdf->Cell(28, 10, " Place", 1, 0);
                     $pdf->Cell(42, 10, " Candidate Signature", 1, 0);
                     $pdf->Cell(42, 10, " Supervisor Signature", 1, 1);
 
                     $pdf->SetFont("Arial", "B", 10);
+//changed here
+                    foreach ($subjects as $each_sub) {
+//                        $subcode=$stu->subcode;
+                        $sql2 = DB::getInstance()->query2('SELECT dates,times from exam_date_time WHERE sub_code=?',array($each_sub));
 
-                    foreach ($subjects as $sub) {
-                        //                            echo $sub;
-                        $sql2 = "SELECT dates,times,place from exam_date_time WHERE sub_code='$sub' ";
 
-                        $resultz2 = mysqli_query($conn, $sql2);
 
-                        if (!$resultz2) {
-                            echo "nothing selected";
-                        }
-                        $row2 = mysqli_fetch_assoc($resultz2);
+                        $sql2_res=$sql2->results();
 
-                        $date = $row2['dates'];
-                        $time = $row2['times'];
-                        $place = $row2['place'];
+                        $date = $sql2_res[0]->dates;
+                        $time = $sql2_res[0]->times;
+    //                    $place = $sql2_res->place;
 
                         $pdf->SetFont("Arial", "", 11);
+
                         $pdf->Cell(27, 10, $date, 1, 0);
                         $pdf->Cell(28, 10, $time, 1, 0);
-                        $pdf->Cell(27, 10, $sub, 1, 0);
-                        $pdf->Cell(28, 10, $place, 1, 0);
+                        $pdf->Cell(27, 10, $each_sub, 1, 0);
+                  //      $pdf->Cell(28, 10, $place, 1, 0);
                         $pdf->Cell(42, 10, "", 1, 0);
                         $pdf->Cell(42, 10, "", 1, 1);
                     }
                     $pdf->SetFont("Arial", "B", 10);
                     $pdf->Cell(1, 15, "    Warning: Students are not supposed to write anything other than their signature in this page or on the   ", 0, 1);
                     $pdf->Cell(1, 0, "                     reverse side.  ", 0, 1);
+
+                    $pdf->SetFont('Arial','B',15);
+                    $pdf->SetTextColor(255,192,203);
+
+                    $pdf->Text(10,10,"www.easypaysl.com");
+
                     $pdf->Output();
+
                     ob_end_clean();
                 }
 ?>
