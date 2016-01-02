@@ -50,25 +50,28 @@ if(Input::exists()){
             $user->update(array(
                 'password' => Hash::make(Input::get('password_new'))
                 ),$id1);
+            $_SESSION['s3']=0;
             echo "<script>alert('Password Changed Successfully.');window.location.href='login.php';</script>";
 //            Redirect::to('login.php');
 //            Session::flash('home', 'Your password has been changed.');
-            }
-
-        } else {
-            foreach ($validation->errors() as $error) {
-                echo $error, '<br />';
+            }else {
+                $str = "";
+                foreach ($validation->errors() as $error) {
+                    $str .= $error;
+                    $str .= '\n';
+                }
+                echo '<script type="text/javascript">alert("' . $str . '")</script>';
             }
         }
 }
 ?>
-
+        <h3>Forget Password</h3>
         <form action="" method="post">
-            <div class="field">
+            <div class="gap">
                 <label for="Password_new">Enter new password</label>
                 <input class="form-control" type="password" name="password_new" id="password_new">
             </div>
-            <div class="field">
+            <div class="gap">
                 <label for="Password_new_again">Re-enter password</label>
                 <input class="form-control" type="password" name="password_new_again" id="password_new_again">
             </div>

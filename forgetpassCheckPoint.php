@@ -60,15 +60,17 @@ if(!isset($_POST['data'])){
 //                Session::flash('home', 'you enter wrong key code.');
 //                Redirect::to('index.php');
                 echo "<script>alert('Invalid key code. Please try again');</script>";
-                Redirect::to('forgetpassCheckPoint.php');
+//                Redirect::to('forgetpassCheckPoint.php');
+            }else{
+                echo "<script>alert('Invalid key code. Please try again');</script>";
             }
         } else {
-            $errorStr="";
+            $str = "";
             foreach ($validation->errors() as $error) {
-                $errorStr.=$error;
-                echo $error . '<br />';
+                $str .= $error;
+                $str .= '\n';
             }
-            echo "<script>alert($errorStr);</script>";
+            echo '<script type="text/javascript">alert("' . $str . '")</script>';
         }
     }
 }
@@ -83,8 +85,11 @@ if(!isset($_POST['data'])){
 
             </div>
         </form>
-
-
+        <?php
+        if(isset($_SESSION['s3']) && $_SESSION['s3']==1){
+            echo "<div class='text text-warning'><strong>Verification code has been sent to your mobile.</strong></div><br>";
+        }
+        ?>
 
         <form name="data" action="" method="post">
             <div class="field">
