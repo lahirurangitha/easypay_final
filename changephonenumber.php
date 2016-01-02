@@ -55,10 +55,12 @@ if(Input::exists()){
                 Redirect::to('confirmPNum.php');
                 }
         } else {
+            $str = "";
             foreach ($validation->errors() as $error) {
-//                echo  "<script type='text/javascript'>alert('$error');</script>";
-                echo "<div class='alert alert-danger'>$error</div>";
+                $str .= $error;
+                $str .= '\n';
             }
+            echo '<script type="text/javascript">alert("' . $str . '")</script>';
         }
     }
 }
