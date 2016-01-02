@@ -100,9 +100,12 @@ if(!isset($_POST['data'])){
 //                echo "<script>alert('Invalid key code.');</script>";
             }
         } else {
+            $str = "";
             foreach ($validation->errors() as $error) {
-                echo $error, '</ br>';
+                $str .= $error;
+                $str .= '\n';
             }
+            echo '<script type="text/javascript">alert("' . $str . '")</script>';
         }
     }
 }
