@@ -32,11 +32,12 @@ class Notification {
         }
 
     }
-
+    //develop this to with repeat database
     public function getRepeatStudent(){
         //$field = (is_numeric($user)) ? 'id' : 'username';
-        $data = $this->_Ndb->getID('users', array('year' , '=' , 1))->results();
-
+//        $data = $this->_Ndb->getID2('results', array('repeat_status' , '=' , 1))->results();
+        $sqlLine = "SELECT index_no FROM results WHERE repeat_status = 1 GROUP BY index_no";
+        $data = $this->_Ndb->query2($sqlLine)->results();
         return $data;
     }
 
@@ -47,6 +48,11 @@ class Notification {
         return $data;
     }
 
+    public function getUserID($index){
+        return $this->_Ndb->getID('users',array('indexNumber' , '=' , $index))->results();
+
+    }
+
     public function assignBatch($fields=array()){
         if(!$this->_Ndb->insert('user_notification', $fields)){
             //throw new Exception('There was a problem in connection');
@@ -55,6 +61,25 @@ class Notification {
             $tmpUser = new User();
             $tmpUser->find($x);
             echo "<div class='alert alert-danger'>This notification has been already send to " . $tmpUser->data()->username . "</div>";
+        }
+    }
+
+    public function insertUN($fields){
+        if(!$this->_Ndb->insert('user_notification', $fields)){
+            //throw new Exception('There was a problem sending a notification.');
+            $userID = $fields['uID'];
+            $tmpUser = new User();
+            $tmpUser->find($userID);
+            echo "<div class='alert alert-danger alert-dismissible'>This notification has been already send to " . $tmpUser->data()->username . "<button type = 'button' class = 'close' data-dismiss = 'alert' aria-hidden = 'true'>
+      &times;
+   </button></div>";
+        } else {
+            $userID = $fields['uID'];
+            $tmpUser = new User();
+            $tmpUser->find($userID);
+            echo "<div class='alert alert-success alert-dismissible'>This notification was send successfully to " . $tmpUser->data()->username . "<button type = 'button' class = 'close' data-dismiss = 'alert' aria-hidden = 'true'>
+      &times;
+   </button></div>";
         }
     }
 
