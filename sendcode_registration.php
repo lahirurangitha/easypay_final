@@ -25,7 +25,7 @@ if(!isset($_POST['sending3'])){
     $message = $messageArray[0];
     $var = $notification->send($from,$to,$message ." ". $randomValue ,$pass);
 }
-$_SESSION['s1']=1;
+$_SESSION['s1']=1;//to check verification sended or not
 Redirect::to('registerConfirm.php');
 
 ?>
