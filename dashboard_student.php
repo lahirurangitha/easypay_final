@@ -113,61 +113,74 @@ include "studentSidebar.php";
 //                        echo "<p>".$row['detail']."</p>";
 //                    }
 //                    mysqli_close($conn);
-                    $conn = mysqli_connect("localhost","root","","easypay_db");
-                    mysqli_select_db($conn,"easypay_db");
 
-                    $user_id = $_SESSION["userid"]; // store the user id into session
-
-                    $sql1 = "SELECT * FROM user_notification";
-                    $result1 = mysqli_query($conn,$sql1);
-
-                    while($row1 = mysqli_fetch_assoc($result1)){
-                        if($row1['uID']==$user_id) {
-
-                            $sql2 = "SELECT * FROM notification";
-                            $result2 = mysqli_query($conn,$sql2);
-
-                            while($row2 = mysqli_fetch_assoc($result2)) {
-                                if ($row2['nID'] == $row1['nID']) {
-                                    switch($row2['nID']) {
-                                        case 2:
-                                            ?>
-                                            <a href="p_repeatExamForm.php">
-                                            <?php
-                                            echo "<p>"."<b>".$row2['topic']."</b>"."</p>";
-                                            echo "<p>".$row2['detail']."</p>";
-                                            ?>
-                                            </a>
-                                            <?php
-                                            break;
-                                        case 3:
-                                            ?>
-                                            <a href="p_UCSCregistration.php">
-                                                <?php
-                                            echo "<p>"."<b>".$row2['topic']."</b>"."</p>";
-                                            echo "<p>".$row2['detail']."</p>";
-                                                ?>
-                                            </a>
-                                            <?php
-                                            break;
-                                        case 4:
-                                            ?>
-                                            <a href="p_newAcaYear.php">
-                                                <?php
-                                            echo "<p>"."<b>".$row2['topic']."</b>"."</p>";
-                                            echo "<p>".$row2['detail']."</p>";
-                                                ?>
-                                            </a>
-                                            <?php
-                                            break;
-                                        default: echo "system error"; break;
-                                    }
-                                }
-                            }
-                        }
+                    $user = new user();
+                    $user_id = $user->data()->id;
+//                    echo $user_id;
+                    $userNotificationDet = DB::getInstance();
+                    $userNotificationDet->query('SELECT * FROM notification n, user_notification un WHERE un.uID = ? and n.nID = un.nID',array($user_id));
+//                    print_r($userNotificationDet->results());
+                    $resultSet = $userNotificationDet->results();
+                    foreach($resultSet as $n ){
+                        echo "<a href='#'><strong>$n->topic</strong> <br> $n->detail</a><br>";
                     }
 
-                    mysqli_close($conn);
+
+//                    $conn = mysqli_connect("localhost","root","","easypay_db");
+//                    mysqli_select_db($conn,"easypay_db");
+//
+//                    $user_id = $_SESSION["userid"]; // store the user id into session
+//
+//                    $sql1 = "SELECT * FROM user_notification";
+//                    $result1 = mysqli_query($conn,$sql1);
+//
+//                    while($row1 = mysqli_fetch_assoc($result1)){
+//                        if($row1['uID']==$user_id) {
+//
+//                            $sql2 = "SELECT * FROM notification";
+//                            $result2 = mysqli_query($conn,$sql2);
+//
+//                            while($row2 = mysqli_fetch_assoc($result2)) {
+//                                if ($row2['nID'] == $row1['nID']) {
+//                                    switch($row2['nID']) {
+//                                        case 2:
+//                                            ?>
+<!--                                            <a href="p_repeatExamForm.php">-->
+<!--                                            --><?php
+//                                            echo "<p>"."<b>".$row2['topic']."</b>"."</p>";
+//                                            echo "<p>".$row2['detail']."</p>";
+//                                            ?>
+<!--                                            </a>-->
+<!--                                            --><?php
+//                                            break;
+//                                        case 3:
+//                                            ?>
+<!--                                            <a href="p_UCSCregistration.php">-->
+<!--                                                --><?php
+//                                            echo "<p>"."<b>".$row2['topic']."</b>"."</p>";
+//                                            echo "<p>".$row2['detail']."</p>";
+//                                                ?>
+<!--                                            </a>-->
+<!--                                            --><?php
+//                                            break;
+//                                        case 4:
+//                                            ?>
+<!--                                            <a href="p_newAcaYear.php">-->
+<!--                                                --><?php
+//                                            echo "<p>"."<b>".$row2['topic']."</b>"."</p>";
+//                                            echo "<p>".$row2['detail']."</p>";
+//                                                ?>
+<!--                                            </a>-->
+<!--                                            --><?php
+//                                            break;
+//                                        default: echo "system error"; break;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    mysqli_close($conn);
 
                     ?>
 
