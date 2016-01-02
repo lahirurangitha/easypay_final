@@ -79,7 +79,7 @@ if($dayLimit<0){
 //    echo "You have {$dayLimit} days for this payment." . '<br />';
     echo "<div class='alert alert-info'>You have {$dayLimit} days for this payment.</div>";
     $uID = $user->data()->id;
-    $uRegID = $user->data()->regNumber;
+    $uRegID = $user->data()->indexNumber;
 
     if(!$uRegID){
 //        echo "You have not submitted your registration number." . '<br />';
@@ -87,7 +87,7 @@ if($dayLimit<0){
     //    echo $uRegID . '<br />';
     } else {
 //        echo "Your registration number is " . $uRegID . '<br />';
-        echo "<div class='alert alert-info'>Your registration number is $uRegID</div>";
+        echo "<div class='alert alert-info'>Your index number is $uRegID</div>";
     }
 //    echo "You have to pay Rs.600 for register." . '<br />';
     echo "<div class='alert alert-info'>You have to pay Rs.600 for register</div>";
