@@ -69,6 +69,7 @@ if(Input::exists()){
             $_SESSION['nic']      = Input::get('nic');
             $_SESSION['dob']      = Input::get('dob');
             $_SESSION['year']     = Input::get('year');
+            $_SESSION['msgFlag'] = 1;
             Redirect::to('registerConfirm.php');
         } else {
             $str = "";
@@ -118,8 +119,8 @@ if(Input::exists()){
                 <input class="form-control" id="name2" type="text" name="name2" placeholder="Your last name" value="<?php echo escape(Input::get('name2')); ?>">
             </div>
             <div class="gap">
-                <label>UCSC Registration No</label><br>
-                <input class="form-control" id="regNumber" type="text" name="regNumber" placeholder="UCSC registration number" value="<?php echo escape(Input::get('regNumber'));?>">
+                <label>Index No</label><br>
+                <input class="form-control" id="indexNumber" type="text" name="indexNumber" placeholder="Index number" value="<?php echo escape(Input::get('indexNumber'));?>">
             </div>
             <div class="gap">
                 <label>E-Mail</label><br>
