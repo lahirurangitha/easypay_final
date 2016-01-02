@@ -55,22 +55,25 @@ if(Input::exists()){
 
         if($validation->passed()){
             if( Hash::make(Input::get('password_current')) !== $user->data()->password ){
-//                echo 'Your current password is wrong';
-                echo "<div class='alert alert-danger'>Current password entered is wrong</div>";
+//                echo "<div class='alert alert-danger'>Current password is invalid. Please try again.</div>";
+                echo "<script>alert('Current password is invalid. Please try again.');window.location.href='changepassword.php';</script>";
             } else {
                 $user->update(array(
                    'password' => Hash::make(Input::get('password_new'))
                 ));
-                Session::flash('home', 'Your password has been changed.');
-                Redirect::to('index.php');
+//                Session::flash('home', 'Your password has been changed.');
+//                Redirect::to('index.php');
+                echo "<script>alert('Your password has been changed.');window.location.href='update.php';</script>";
 
             }
 
         } else {
+            $str = "";
             foreach ($validation->errors() as $error) {
-//                echo $error, '<br />';
-                echo "<div class='alert alert-danger'>$error</div>";
+                $str .= $error;
+                $str .= '\n';
             }
+            echo '<script type="text/javascript">alert("' . $str . '")</script>';
         }
     }
 }
