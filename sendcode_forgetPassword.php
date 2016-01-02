@@ -19,6 +19,7 @@ if(!isset($_POST['sending'])){
     $to = '94'.substr($pNum,1,9);
     $notification->send($detailArray[0], $to, $messageArray[2] . " " . $randomValue, $detailArray[1]);
 }
+$_SESSION['s3']=1;//to check verification sended or not
 Redirect::to('forgetpassCheckPoint.php');
 
 ?>
