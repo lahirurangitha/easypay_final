@@ -74,6 +74,8 @@ include "adminSidebar.php";
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h5><strong>All Transactions</strong></h5>
+                            <input type="button" value="Download PDF"
+                                   onclick="window.open('transactionPDF.php')">
                         </div>
                         <div class="panel-body">
                     <div class="pre-scrollable">

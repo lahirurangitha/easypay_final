@@ -10,6 +10,7 @@ require_once 'core/init.php';
 
 if(isset($_POST['searchVal'])) {
     $date = $_POST['searchVal'];
+    $_SESSION['date1']=$date;//search date
 //        echo"<label>Transactions on $date</label><br>";
         $DayTra = DB::getInstance()->get('transaction', array('date', '=', $date));
         //foreach($MonthTra->results() as $res){
@@ -26,6 +27,8 @@ if(isset($_POST['searchVal'])) {
                 <?php
                 echo"<label>Transactions on $date</label><br>";
                 ?>
+                <input type="button" value="Download PDF"
+                       onclick="window.open('transactionDatePDF.php')">
             </div>
             <div class="panel-body">
             <div class="pre-scrollable">
