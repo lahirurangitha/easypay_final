@@ -49,6 +49,7 @@ if($_SESSION['admin']==false){
 ?>
 
     <div class="jumbotron col-lg-6 col-lg-offset-1">
+        <h4>Enter Username To Search</h4>
         <div class="col-lg-6">
             <input class="form-control" type="text" id="search" placeholder="Enter username to search" autocomplete="off" name="search" value="<?php echo Input::get('search')?>" onkeyup="autoSuggest('result','search.php');"  />
             <div>

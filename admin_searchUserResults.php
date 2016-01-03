@@ -61,7 +61,8 @@ $result = $userDet->results()[0];
                 <p>User ID:<?php echo "\t".$result->id;?></p>
                 <p>Username:<?php echo "\t".$result->username;?></p>
                 <!--    <p>Password:--><?php //echo "\t".$result->password;?><!--</p>-->
-                <p>Registration No:<?php echo "\t".$result->regNumber;?></p>
+                <p>Index No:<?php echo "\t".$result->indexNumber;?></p>
+<!--                <p>Registration No:--><?php //echo "\t".$result->regNumber;?><!--</p>-->
                 <p>First Name:<?php echo "\t".$result->fname;?></p>
                 <p>Last Name:<?php echo "\t".$result->lname;?></p>
                 <p>NIC No:<?php echo "\t".$result->nic;?></p>
