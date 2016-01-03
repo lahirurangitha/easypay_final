@@ -21,11 +21,11 @@ require_once 'core/init.php';
 include "adminSidebar.php";
 ?>
     <br>
-    <div class="col-sm-9">
+    <div class="col-md-9 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4>Notification Forum</h4>
-                <a class="col-sm-offset-9" href="notif_add_topic.php"><strong>Create New Notification</strong></a>
+                <a class="col-lg-offset-9" href="notif_add_topic.php"><strong>Create New Notification</strong></a>
             </div>
 
 <?php
@@ -41,8 +41,7 @@ if ($user->hasPermission('admin')) {
 <table class="table table-striped table-bordered table-hover " width="90%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CCCCCC">
     <?php
     //$user_id = $_SESSION['userid'];   // get usr id
-//    $notification = DB::getInstance()->getAll('SELECT *','notification','ASC');
-    $notification = DB::getInstance()->query('SELECT * FROM notification ORDER BY datetime ASC ',array());
+    $notification = DB::getInstance()->getAll('SELECT *','notification','DESC');
     if(!$notification->count()){
         echo 'No notifications';
     }else{
@@ -70,9 +69,9 @@ if ($user->hasPermission('admin')) {
         echo "<td width=10% align=center bgcolor=#E6E6E6>".$t->topic."</td>";
         echo "<td width=20% align=center bgcolor=#E6E6E6>".$t->detail."</td>";
         echo "<td width=5% align=center bgcolor=#E6E6E6>".$t->datetime."</td>";
-//        $_SESSION['dID'] = $t->nID;
+        $_SESSION['dID'] = $t->nID;
         echo "<td width=5% align=center bgcolor=#E6E6E6 data-color='red'><a href=notif_delete.php?id=$id>Clear</a><br>
-<a href='notif_assign_users.php'>Assign users</a>
+<a href='notif_assign_users.php?id=$id'>Assign users</a><br><a href='notif_remove_user.php?id=$id'>Remove users</a>
         </td>";
 
         echo "</tr>";

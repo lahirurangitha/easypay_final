@@ -33,7 +33,10 @@ $send_date = date("d/m/y h:i:s");
 if(!$user->isLoggedIn()){Redirect::to('index.php');}
 //check for admin
 if (!$user->hasPermission('admin')) {Redirect::to('index.php');}
-$myNotifyID = $_SESSION['dID'];
+$myNotifyID = $_GET['id'];
+$_SESSION['notfID'] = $myNotifyID;
+$oldID = $notification->getLastNotificationID();
+$newID = $oldID+1;
 
 if(!isset($_POST['batch'])){
     $Syear = Input::get('Nyear');
@@ -41,6 +44,7 @@ if(!isset($_POST['batch'])){
         $dataSt = $notification->getBatch($y);
         foreach((array)$dataSt as $d){
             $userID = $d->id;
+            //$newID=$newID+1;
             $notification->insertUN(array(
                     'nID'=> $myNotifyID,
                     'uID' => $userID,
@@ -60,6 +64,7 @@ if(Input::get('Submit-repeat-all-student')){
             $userObjet = $notification->getUserID($index);
             foreach((array)$userObjet as $uo){
                 $userID = $uo->id;
+                $newID=$newID+1;
 //            echo $userID."<br />";
               $notification->insertUN(array(
                     'nID'=> $myNotifyID,
