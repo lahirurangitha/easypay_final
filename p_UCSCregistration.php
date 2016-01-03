@@ -88,7 +88,7 @@ if($dayLimit<0){
 
 //        echo "Your nic number is " . $uNIC . '<br /><br />';
         echo "<div class='alert alert-info'>Your nic number is $uNIC </div>";
-        $uRegID = $user->data()->regNumber;
+        $uRegID = $user->data()->indexNumber;
         if(!$uRegID){
 //            echo "You have not submitted your registration number." . '<br />';
             echo "<div class='alert alert-danger'>You have not submitted your registration number.</div>";
