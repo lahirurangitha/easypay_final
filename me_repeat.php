@@ -1,7 +1,6 @@
 <?php
 
 require_once 'core/init.php';
-
 require 'Files/accessFile.php';
 require_once 'dbcon.php';
 ?>
@@ -16,8 +15,12 @@ require_once 'dbcon.php';
 
 <?php
 include "header.php";
+?>
+<div class="container backgroundImg">
+<?php
+include "studentSidebar.php";
 //This for catching the subject code for each button press on due payments
-$tmp_sub= $_POST['subject'];
+$tmp_sub= $_GET['var'];
 //echo $tmp_sub;
 
 //This is for catching required data fields from education department dadatabase
@@ -32,9 +35,9 @@ $sub_name=$row["sub_name"];
 //$resultz2=mysqli_query($conn,$sql2);
 //$num=mysqli_num_rows($resultz2);
 ?>
-<div class="container backgroundImg">
+
     <br>
-    <div class="jumbotron col-lg-5 col-lg-offset-3">
+    <div class="jumbotron col-sm-5 col-sm-offset-1">
         <?php
 
         $user = new User();
@@ -62,17 +65,22 @@ $sub_name=$row["sub_name"];
             echo "payment is closed!";
         }else {
         $uID = $user->data()->id;
-        $uRegID = $user->data()->regNumber;
+        $uRegID = $user->data()->indexNumber;
 
         if(!$uRegID){
-//    echo "You have not submitted your registration number." . '<br />';
-            echo "<div class='alert alert-danger'>You have not submitted your registration number.</div>";
+            echo "<div class='text text-danger'><strong>You have not submitted your registration number.</strong></div>";
         } else {
-//    echo "Your registration number is " . $uRegID . '<br />';
-            echo "<div class='alert alert-info'>Your registration number is $uRegID </div>";
+            echo "<div class='text text-info'><strong>Your registration number is $uRegID</strong> </div>";
         }
-        //echo "You have to pay Rs.25 per paper." . '<br />';
-        echo "<div class='alert alert-info'>You have to pay Rs.25 per paper. </div>";
+        //get data from repeat exam file
+        $payInfo = fopen("Files/data_repeatExam", "r") or die("Unable to open file!");
+        while(!feof($payInfo)) {
+            $line = fgets($payInfo);
+            $det = explode(' ',trim($line));
+        }
+        fclose($payInfo);
+        //get data from repeat exam file-end
+        echo "<div class='text text-info'><strong>You have to pay Rs.$det[0] per paper.</strong> </div>";
         $de_transactionID = $tra->decodeEasyID($transactionID);
         $_SESSION['deID'] = $de_transactionID;
 
@@ -105,14 +113,6 @@ $sub_name=$row["sub_name"];
                         'gradeThird'=>$gradeThird[$i]
                     );
                 }
-
-//        ////printing subject array///
-//        for($i=0;$i<$numForms;$i++){
-//            $j=$i+1;
-//            print_r(${"subject$j"});
-//            echo "<br>";
-//        }
-
                 /////////////////////// creating transaction array and insert data////////////////
                 for ($i = 0; $i < $numForms; $i++) {
                     $j = $i + 1;
