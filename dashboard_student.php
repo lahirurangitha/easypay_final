@@ -1,5 +1,6 @@
 <?php
 require_once 'core/init.php';
+require 'Files/accessFile.php';
 if(!$_SESSION['isLoggedIn']) {
     Redirect::to('index.php');
 }
@@ -25,13 +26,36 @@ if($_SESSION['admin']){
 <div class="backgroundImg container-fluid">
 <?php
 include "studentSidebar.php";
+$fileObject = new accessFile();
+$dataArray = $fileObject->read('Files/admissionActivate');
+$user = new User();
+$startDate = $dataArray[0];
+$endDate   = $dataArray[1];
+date_default_timezone_set("Asia/Colombo");
+$curDate=date("Y-m-d");
 ?>
 <!-- /. NAV SIDE  -->
 <div class="container col-sm-9 " id="page-wrapper" >
     <div class="row">
         <div class="col-sm-12">
-            <h2>Student Dashboard</h2>
-            <h5>Welcome <?php echo $_SESSION['fname']." ".$_SESSION['lname']?></h5>
+            <div class="col-sm-8">
+                <h2>Student Dashboard</h2>
+                <h5>Welcome <?php echo $_SESSION['fname']." ".$_SESSION['lname']?></h5>
+            </div>
+            <br>
+            <!--Start: give this to lahiru-->
+            <?php
+            if($startDate<$curDate and $curDate<$endDate){
+                ?>
+                <div class="col-sm-4 alert alert-success alert-dismissible" style="float: right">
+                    <label class="label label-default">Click to Download Admission card</label>
+                    <input class="btn btn-primary btn-xs" type="button" value="Download" onclick="window.open('pdftest.php')">
+                    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                </div>
+            <?php
+            }
+            ?>
+            <!--            end-->
         </div>
     </div>
     <hr />
