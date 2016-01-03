@@ -12,7 +12,7 @@ if(isset($_POST['searchVal'])) {
     $date = $_POST['searchVal'];
     $_SESSION['date1']=$date;//search date
 //        echo"<label>Transactions on $date</label><br>";
-        $DayTra = DB::getInstance()->get('transaction', array('date', '=', $date));
+        $DayTra = DB::getInstance()->query('SELECT * From transaction t,users u WHERE t.date = ? and t.payerID = u.id', array($date));
         //foreach($MonthTra->results() as $res){
         //    print_r($res);
         //    echo"<br>";
@@ -31,7 +31,7 @@ if(isset($_POST['searchVal'])) {
                        onclick="window.open('transactionDatePDF.php')">
             </div>
             <div class="panel-body">
-            <div class="pre-scrollable">
+            <div class="pre-scrollable" style="max-height: 400px">
             <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
@@ -39,7 +39,8 @@ if(isset($_POST['searchVal'])) {
             <th>Date</th>
             <th>Time</th>
             <th>Transaction ID</th>
-            <th>PayerID</th>
+<!--            <th>PayerID</th>-->
+            <th>Username</th>
             <th>Payment type</th>
             <th>Status</th>
             <th>Amount</th>
@@ -57,7 +58,9 @@ if(isset($_POST['searchVal'])) {
             echo "<td>" . $t->date . "</td>";
             echo "<td>" . $t->time . "</td>";
             echo "<td>" . $t->transactionID . "</td>";
-            echo "<td>" . $t->payerID . "</td>";
+//            echo "<td>" . $t->payerID . "</td>";
+
+            echo "<td>" . $t->username . "</td>";
             echo "<td>" . $t->paymentType . "</td>";
             echo "<td>" . $t->statusDescription . "</td>";
             echo "<td>" . $t->amount . "</td>";
