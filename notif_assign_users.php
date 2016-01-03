@@ -13,6 +13,9 @@ require_once 'core/init.php';
     <head>
         <title>Notification | Page</title>
         <?php include 'headerScript.php'?>
+        <script type="text/javascript">
+
+        </script>
     </head>
 <body>
     <div id="wrapper">
@@ -25,7 +28,8 @@ require_once 'core/init.php';
 include "adminSidebar.php";
 ?>
     <br>
-<div class="container col-lg-9">
+<div class="container col-sm-9">
+    <div class="pre-scrollable" style="max-height: 200px">
 <?php
 $user = new User();
 $notification = new Notification();
@@ -40,6 +44,7 @@ $newID = $oldID+1;
 
 if(!isset($_POST['batch'])){
     $Syear = Input::get('Nyear');
+//    print_r($Syear);
     foreach((array)$Syear as $y){
         $dataSt = $notification->getBatch($y);
         foreach((array)$dataSt as $d){
@@ -88,55 +93,56 @@ if(isset($_GET['user'])){
 }
 
 ?>
-    <div class="container col-lg-12">
-        <label for="text1">Send to<br></label>
     </div>
-<div class="container col-lg-3">
-    <?php
-
-    ?>
-    <form name="batch" action="" method="post">
-        <h4> Year wise </h4>
-        <li><input type="checkbox" name="Nyear[]" value="<? echo escape('1')?>" /> First Years <br></li>
-        <li><input type="checkbox" name="Nyear[]" value="<? echo escape('2')?>" /> Second Years <br></li>
-        <li><input type="checkbox" name="Nyear[]" value="<? echo escape('3')?>" /> Third Years <br></li>
-        <li><input type="checkbox" name="Nyear[]" value="<? echo escape('4')?>" /> Fourth Years <br></li>
-        <input type = "hidden" name="token_batch" value="<?php echo Token::generate(); ?>">
-        <input class="btn btn-default" type="submit" name="Submit-batch" value="Submit" />
-    </form>
-</div>
-
-    <div class="container col-lg-3">
-        <form name="repeat-all-student" action="" method="post">
-            <h4>All repeat students: </h4>
-            <li><input type="checkbox" name="repStu" value="<? echo escape('1')?>" />All repeat students<br></li>
-            <input type = "hidden" name="token_repeat-all" value="<?php echo Token::generate(); ?>">
-            <input class="btn btn-default" type="submit" name="Submit-repeat-all-student" value="Submit" />
-        </form>
-    </div>
-    <div class="container col-lg-4 ">
-
-    <form name="selected-student" action="" method="post">
-        <h4>Selected student</h4>
-        <div>
-            <div>
-                <input class="form-control" type="text" id="search" placeholder="Enter username to search" autocomplete="off" name="search" value="<?php echo Input::get('search')?>" onkeyup="autoSuggest('result','search_for_notification.php');"  />
-                <div>
-                    <ul id="result" class="nav navbar" ></ul>
-                </div>
+    <br>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>Send To</h4>
+        </div>
+        <div class="panel-body">
+            <div class="col-sm-4">
+                <form name="batch" action="" method="post">
+                    <h4>Select Year wise </h4>
+                    <input type="checkbox" name="Nyear[]" value="1" /> First Years <br>
+                    <input type="checkbox" name="Nyear[]" value="2" /> Second Years <br>
+                    <input type="checkbox" name="Nyear[]" value="3" /> Third Years <br>
+                    <input type="checkbox" name="Nyear[]" value="4" /> Fourth Years <br>
+                    <input type = "hidden" name="token_batch" value="<?php echo Token::generate(); ?>">
+                    <input class="btn btn-default" type="submit" name="Submit-batch" value="Submit" />
+                </form>
             </div>
-            <div>
-                <?php
-                if(isset($msg)){
-                    echo "<div class='alert alert-danger'>$msg</div>";
-                }
-                ?>
+            <div class="container col-sm-4">
+                <form name="repeat-all-student" action="" method="post">
+                    <h4>All Repeat Students</h4>
+                    <input type="checkbox" name="repStu" value="<? echo escape('1')?>" />All repeat students<br>
+                    <input type = "hidden" name="token_repeat-all" value="<?php echo Token::generate(); ?>">
+                    <input class="btn btn-default" type="submit" name="Submit-repeat-all-student" value="Submit" />
+                </form>
+            </div>
+            <div class="container col-sm-4">
+                <form name="selected-student" action="" method="post">
+                    <h4>Selected Student</h4>
+                    <div>
+                        <div>
+                            <input class="form-control" type="text" id="search" placeholder="Enter username to search" autocomplete="off" name="search" value="<?php echo Input::get('search')?>" onkeyup="autoSuggest('result','search_for_notification.php');"  />
+                            <div>
+                                <ul id="result" class="nav" ></ul>
+                            </div>
+                        </div>
+                        <div>
+                            <?php
+                            if(isset($msg)){
+                                echo "<div class='alert alert-danger'>$msg</div>";
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <input type = "hidden" name="token_selected_student" value="<?php echo Token::generate(); ?>">
+                </form>
             </div>
         </div>
-        <input type = "hidden" name="token_selected_student" value="<?php echo Token::generate(); ?>">
-    </form>
     </div>
-    </div>
+</div>
 </div>
 
 <?php

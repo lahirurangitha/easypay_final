@@ -25,7 +25,7 @@ include "adminSidebar.php";
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4>Notification Forum</h4>
-                <a class="col-lg-offset-9" href="notif_add_topic.php"><strong>Create New Notification</strong></a>
+                <a class="col-lg-offset-9" href="notif_add_topic.php"><strong>Create New Notification >></strong></a>
             </div>
 
 <?php
@@ -38,17 +38,18 @@ if(!$user->isLoggedIn()){
 //check for admin
 if ($user->hasPermission('admin')) {
 ?>
+            <div class="pre-scrollable" style="min-height: 100px">
 <table class="table table-striped table-bordered table-hover " width="90%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CCCCCC">
     <?php
     //$user_id = $_SESSION['userid'];   // get usr id
-    $notification = DB::getInstance()->getAll('SELECT *','notification','DESC');
+    $notification = DB::getInstance()->query('SELECT * FROM notification ORDER BY nID DESC ',array());
     if(!$notification->count()){
-        echo 'No notifications';
+        echo "<br><div class='alert alert-info alert-dismissible'>No notifications found.<button type = 'button' class = 'close' data-dismiss = 'alert' aria-hidden = 'true'>&times;</button></div>";
     }else{
     ?>
     <thead>
     <tr>
-        <th>#</th>
+        <th>Notification ID</th>
         <th>Topic</th>
         <th>Details</th>
         <th>Date and time</th>
@@ -79,11 +80,8 @@ if ($user->hasPermission('admin')) {
     }
     ?>
     </tbody>
-
-
-
-
 </table>
+            </div>
         </div>
     </div>
 <!--    <div id="assignUser" class="modal fade" role="dialog">-->
