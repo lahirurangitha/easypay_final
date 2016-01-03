@@ -58,7 +58,17 @@ include "adminSidebar.php";
                     </div>
                 </a>
             </div>
+<!--      chart      -->
+            <div class="d_icon">
+                <a href="line_html.php">
+                    <img src="images/chart.png" height="120px">
 
+                    <div>
+                        <label>Stat</label>
+                    </div>
+                </a>
+            </div>
+<!-- chart end-->
         </div>
         <div id="nPanel" class="container col-lg-4">
 
