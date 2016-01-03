@@ -37,11 +37,12 @@ if($_SESSION['student']){
     <br>
         <div id="appTable" class="container col-lg-12 ">
             <div class="panel panel-default">
-                <div class="pannel-heading text-center">
+                <div class="panel-heading text-center">
                     <h4>Repeat Exam Applications</h4>
                 </div>
+                <div class="panel-body">
                 <div class="pre-scrollable">
-                    <table class="table table-hover table-striped">
+                    <table class="table table-striped table-bordered table-hover">
 
                         <?php
                         $appDet = DB::getInstance()->get('repeat_exam',array('adminStatus','=',0));
@@ -81,6 +82,7 @@ if($_SESSION['student']){
                         </tbody>
                     </table>
                     </div>
+                </div>
 
             </div>
         </div>
