@@ -26,6 +26,9 @@
                 <a href="editPayment.php"><i class=""></i>Update Payment Details</a>
             </li>
             <li>
+                <a href="edit_admissionActivation.php"><i class=""></i>Update Admission Details</a>
+            </li>
+            <li>
                 <a href="notif_main_forum.php"><i class=""></i>Notification Forum</a>
             </li>
             <li>

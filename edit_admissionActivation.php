@@ -16,14 +16,13 @@ require 'Files/accessFile.php';
     <?php include 'headerScript.php'?>
 </head>
 <body>
-
 <?php
 include "header.php";
 ?>
-<?php include 'adminSidebar.php'?>
 <div class="backgroundImg container-fluid">
+<?php include 'adminSidebar.php'?>
     <br>
-    <div class="jumbotron col-lg-5 col-lg-offset-1">
+    <div class="jumbotron col-sm-5 col-sm-offset-1">
         <?php
 
         $user = new User();
@@ -50,15 +49,15 @@ include "header.php";
             }
         }
         ?>
-
+        <h4>Update Admission Details</h4>
         <form action="" method="post">
             <div class="field">
-                <label>Enter the new date</label>
+                <label>Starting Date</label>
                 <input class="form-control" type="date" name="date1" id="date1" value="<?php echo($inDate1)?>">
             </div>
 
             <div class="field">
-                <label>Enter the new amount</label>
+                <label>Closing Date</label>
                 <input class="form-control" type="date" name="date2" id="date2" value="<?php echo($inDate2)?>" >
             </div>
 
