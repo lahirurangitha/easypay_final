@@ -19,106 +19,88 @@ require_once 'dbcon.php';
 <?php
 include "header.php";
 ?>
-    <div class="container-fluid backgroundImg">
-        <div class="container col-lg-12 ">
-<!--            nav-side-->
-            <nav class="navbar-default navbar-side col-lg-3" role="navigation">
-                <div class="sidebar-collapse">
-                    <ul class="nav" id="main-menu">
-                        <li class="text-center">
-                            <img src="images/User.png" class="user-image " height="150px"/>
-                        </li>
-                        <li>
-                            <a class="active-menu"  href="dashboard_student.php"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="paymentHome.php"><i class="fa fa-dollar fa-3x"></i> Make a Payment</a>
-                        </li>
-                        <li>
-                            <a href="update.php"><i class="fa fa-book fa-3x"></i> Update Details</a>
-                        </li>
-                        <li>
-                            <a href="changepassword.php"><i class="fa fa-lock fa-3x"></i> Change Password</a>
-                        </li>
-                        <li>
-                            <a href="changephonenumber.php"><i class="fa fa-phone fa-3x"></i> Change Phone Number</a>
-                        </li>
-                        <li>
-                            <a href="duepayments.php"><i class="fa fa-phone fa-3x"></i> Due Payments</a>
-                        </li>
-                    </ul>
-
-                </div>
-
-            </nav>
-            <!-- /. NAV SIDE  -->
-            <br>
-            <div class="jumbotron col-lg-8 gap">
+<div class="backgroundImg container-fluid">
     <?php
+    include "studentSidebar.php";
+    ?>
+            <br>
+    <div class="container col-sm-9">
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h4>Due Payments</h4>
+                </div>
+                <div class="panel-body pre-scrollable">
 
+    <?php
+// start here
     $user = new User();
     $indexNo=$user->data()->indexNumber;
-//    echo $indexNo;
-    $sql="SELECT sub_code,sub_name,aca_year,aca_sem from results WHERE repeat_status=1 and index_no=$indexNo ";
-    $resultz=mysqli_query($conn,$sql); ?>
-    <div class="panel-body">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover">
-                        <?php
-                        if(mysqli_num_rows($resultz)<1){
-                            echo "No results";
 
-                        }
-                        else{
-                            ?>
-                        <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Subject Code</th>
-                            <th>Subject Name</th>
-                            <th>Academic Year</th>
-                            <th>Semester</th>
+    $sql=DB::getInstance()->query2('SELECT sub_code,sub_name,aca_year,aca_sem from results WHERE index_no=? and repeat_status=1',array($indexNo));
 
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
+    if (!$sql->count()){
+        echo "<div class='alert alert-info'>No payments due</div>";
+    }
+// end here
+    else{ ?>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Subject Code</th>
+                                <th>Subject Name</th>
+                                <th>Academic Year</th>
+                                <th>Semester</th>
 
-                            $count=0;
-                            while($row=mysqli_fetch_assoc($resultz)){
-                                $count +=1;
-                                $subject=$row["sub_code"];
-                                echo"<tr>";
-                                echo "<td>".$count."</td>";
-                                echo "<td>".$row["sub_code"]."</td>";
-                                echo "<td>".$row["sub_name"]."</td>";
-                                echo "<td>".$row["aca_year"]."</td>";
-                                echo "<td>".$row["aca_sem"]."</td>";
-                                echo "<td>"."<form action='me_repeat.php' method='POST'><button type='submit' value='{$subject}' name='subject'>Pay</button></form>"; ?><?php "</td>";
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            //this is for check whether specific payment has already been made by the student
+//start: edited here
+                            $count = 0;
+                            foreach ($sql->results() as $res) {
+                                $sql2 = DB::getInstance()->query('SELECT * FROM repeat_exam WHERE indexNumber=? and subjectCode=? and (adminStatus=0 or adminStatus=1)', array($indexNo, $res->sub_code));
+                                if (!$sql2->count()) {
+                                    $count += 1;
+                                    $subject = $res->sub_code;
+                                    echo "<tr>";
+                                    echo "<td>" . $count . "</td>";
+                                    echo "<td>" . $res->sub_code . "</td>";
+                                    echo "<td>" . $res->sub_name . "</td>";
+                                    echo "<td>" . $res->aca_year . "</td>";
+                                    echo "<td>" . $res->aca_sem . "</td>";
+                                    //  echo "<td>" . "<form action='me_repeat.php' method='POST'><button type='submit' value='{$subject}' name='subject'>Pay</button></form>";
+                                    ?><?php "</td>";
+                                    echo "<td>" . "<a href='me_repeat.php?var=$subject'><button class=\"btn btn-default col-sm-12\">Pay</button></a>";
+//end here
 
-
+                                }
                             }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        }
-
-?>
-                        </tbody>
-                    </table>
                 </div>
-        <input type="button" value="Get Admission"
-               onclick="window.open('pdftest.php')">
-    </div>
-  </div>
-</div>
-                        <?php
-    mysqli_close($conn);
-
-
-?>
+            </div>
         </div>
+        <?php
+
+
+        }
+?>
+</div>
+        </div>
+<?php
+include "footer.php";
+?>
+
+
+
 </body>
 </html>
-
 
 
 
