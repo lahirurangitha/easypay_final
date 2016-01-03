@@ -35,7 +35,12 @@ include "header.php";
     ?>
     <br>
     <div class="jumbotron col-sm-6 col-sm-offset-1">
+        <div class="gap">
 <?php
+//payfor other person check
+if(isset($_SESSION['p4o']) && $_SESSION['p4o']==1){
+    echo "<div class='alert alert-info'>You are paying for ".$_SESSION['payeeName']."<button class=\"btn btn-default btn-xs\" style=\"float:right\"><a href='payForOtherRemove.php' title='Click here to remove other person.'>Remove</a></button></div> ";
+}
 
 $encryptObject = new encrypt();
 $tra = new Transaction();
@@ -109,9 +114,12 @@ if($dayLimit<0){
         <input type="hidden" value='<?php echo $Invoice; ?>' name="merchantInvoice">
         <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
     </form>
+
 <?php
 }
 ?>
+    </div>
+        <button class="btn btn-primary btn-xs col-sm-2" style="float: right" onclick="window.location.href='payforme.php'"><< Back</button>
     </div>
     </div>
 
