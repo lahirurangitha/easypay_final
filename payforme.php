@@ -30,21 +30,22 @@ require_once 'core/init.php';
 <!--      pay for other person check  -->
         <?php
         if(!isset($_SESSION['p4o']) || $_SESSION['p4o']==0){
-            echo "<div><a href='payForOther.php' onclick=\"return confirm('Are you sure?')\">Pay For Other >></a></div>";
+            echo "<div style='float: right'><a href='payForOther.php' onclick=\"return confirm('Are you sure?')\">Pay For Other >></a></div>";
         }
         if(isset($_SESSION['p4o']) && $_SESSION['p4o']==1){
             echo "<div class='alert alert-info'>You are paying for ".$_SESSION['payeeName']."<button class=\"btn btn-default btn-xs\" style=\"float:right\"><a href='payForOtherRemove.php' title='Click here to remove other person.'>Remove</a></button></div> ";
         }
         ?>
 <!--        /payfor other person check-->
-        <h3><strong>Select your Payment</strong></h3>
-        <div>
-            <a  href="p_UCSCregistration.php">Register to UCSC</a>
-            <br><br>
-            <a href="p_newAcaYear.php">Register for new Academic year</a>
-            <br><br>
-            <a href="p_repeatExamForm.php">Pay Repeat Exam Fees</a>
+        <h3><strong>Payment Options</strong></h3>
+        <div class="gap">
+            <ul>
+                <li><a  href="p_UCSCregistration.php">Register to UCSC</a></li>
+                <li><a href="p_newAcaYear.php">Register for new Academic year</a></li>
+                <li><a href="p_repeatExamForm.php">Pay Repeat Exam Fees</a></li>
+            </ul>
         </div>
+        <button class="btn btn-primary btn-xs col-sm-4" style="float: right" onclick="window.location.href='index.php'"><< Back to Dashboard</button>
     </div>
 </div>
 

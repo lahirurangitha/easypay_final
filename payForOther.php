@@ -102,6 +102,7 @@ if(Input::exists()){
                 <input class="btn btn-default" type="submit" value="Submit">
             </div>
         </form>
+        <button class="btn btn-primary btn-xs col-sm-2" style="float: right" onclick="window.location.href='payforme.php'"><< Back</button>
     </div>
 
 </div>

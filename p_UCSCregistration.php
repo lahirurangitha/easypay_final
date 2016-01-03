@@ -35,7 +35,15 @@ include "header.php";
     ?>
     <br>
     <div class="jumbotron col-sm-6 col-sm-offset-1">
+        <h4>UCSC Registration</h4>
+        <div class="gap">
+        <span class="redColor">*This will not available for undergraduates who already registered with UCSC.</span>
 <?php
+//payfor other person check
+if(isset($_SESSION['p4o']) && $_SESSION['p4o']==1){
+    echo "<div class='alert alert-info'>You are paying for ".$_SESSION['payeeName']."<button class=\"btn btn-default btn-xs\" style=\"float:right\"><a href='payForOtherRemove.php' title='Click here to remove other person.'>Remove</a></button></div> ";
+}
+
 
 $encryptObject = new encrypt();
 $tra = new Transaction();
@@ -56,7 +64,7 @@ $dayLimit = floor($dayLimit/(60*60*24));
 
 if($dayLimit<0){
 //    echo "payment is closed!";
-    echo "<div class='alert alert-danger'>Payment is closed</div>";
+    echo "<div class='alert alert-danger'>Payment is closed.</div>";
 }else {
     if($user->data()->year == 1){
 //        echo "You have {$dayLimit} days for this payment." . '<br />';
@@ -121,6 +129,8 @@ if($dayLimit<0){
     }
 }
     ?>
+        </div>
+        <button class="btn btn-primary btn-xs col-sm-2" style="float: right" onclick="window.location.href='payforme.php'"><< Back</button>
     </div>
 </div>
 <?php

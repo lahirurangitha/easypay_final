@@ -340,6 +340,7 @@ if(Input::exists()) {
 <?php
 }
 ?>
+        <button class="btn btn-primary btn-xs col-sm-2" style="float: right" onclick="window.location.href='payforme.php'"><< Back</button>
 </div>
 </div>
 
