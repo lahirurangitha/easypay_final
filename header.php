@@ -127,8 +127,9 @@ require_once 'core/init.php';
                         </li>
                     </div>
                 </ul>
-
-
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.php"><span class="glyphicon glyphicon-user"></span> <?php echo $user->data()->username?></a></li>
+                </ul>
             <?php
             }
             ?>
