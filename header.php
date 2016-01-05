@@ -5,7 +5,7 @@
  * Date: 10/28/2015
  * Time: 10:41 AM
  */
-
+ob_start();
 require_once 'core/init.php';
 ?>
 
