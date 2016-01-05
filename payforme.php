@@ -33,7 +33,7 @@ require_once 'core/init.php';
             echo "<div style='float: right'><a href='payForOther.php' onclick=\"return confirm('Are you sure?')\">Pay For Other >></a></div>";
         }
         if(isset($_SESSION['p4o']) && $_SESSION['p4o']==1){
-            echo "<div class='alert alert-info'>You are paying for ".$_SESSION['payeeName']."<button class='btn btn-default btn-xs' style=\"float:right\"><a href='payForOtherRemove.php' title='Click here to remove other person.'>Remove</a></button></div> ";
+            echo "<div class='text text-info'><strong>You are paying for ".$_SESSION['payeeName'].". </strong><button class='btn btn-default btn-xs'><a href='payForOtherRemove.php' title='Click here to remove other person.'>I have changed my mind</a></button></div> ";
         }
         ?>
 <!--        /payfor other person check-->

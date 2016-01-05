@@ -35,15 +35,18 @@ include "header.php";
     ?>
     <br>
     <div class="jumbotron col-sm-6 col-sm-offset-1">
-        <h4>UCSC Registration</h4>
-        <div class="gap">
-        <span class="redColor">*This will not available for undergraduates who already registered with UCSC.</span>
-<?php
-//payfor other person check
-if(isset($_SESSION['p4o']) && $_SESSION['p4o']==1){
-    echo "<div class='alert alert-info'>You are paying for ".$_SESSION['payeeName']."<button class=\"btn btn-default btn-xs\" style=\"float:right\"><a href='payForOtherRemove.php' title='Click here to remove other person.'>Remove</a></button></div> ";
-}
+        <h3><strong>UCSC Registration</strong></h3>
+        <?php
+        //payfor other person check
+        if(isset($_SESSION['p4o']) && $_SESSION['p4o']==1){
+            echo "<div class='text text-info'><strong>You are paying for ".$_SESSION['payeeName'].". </strong><button class='btn btn-default btn-xs'><a href='payForOtherRemove.php' title='Click here to remove other person.'>I have changed my mind</a></button></div> ";
+        }
 
+        ?>
+
+        <div class="gap">
+        <span class="redColor"><strong>* This will not available for undergraduates who already registered with UCSC.</strong></span>
+<?php
 
 $encryptObject = new encrypt();
 $tra = new Transaction();
@@ -68,7 +71,7 @@ if($dayLimit<0){
 }else {
     if($user->data()->year == 1){
 //        echo "You have {$dayLimit} days for this payment." . '<br />';
-        echo "<div class='alert alert-info'>You have {$dayLimit} days for this payment</div>";
+        echo "<div class='text text-info'>* You have {$dayLimit} days for this payment.</div>";
         $prefix = 'easyID_';
         $lastID = (integer)$tra->lastID();
         $newID = $lastID + 1;
@@ -87,19 +90,25 @@ if($dayLimit<0){
         $_SESSION['type'] = 1;
 
 //        echo "Your nic number is " . $uNIC . '<br /><br />';
-        echo "<div class='alert alert-info'>Your nic number is $uNIC </div>";
+        echo "<div class='text text-info'>* Your nic number is $uNIC .</div>";
         $uRegID = $user->data()->indexNumber;
         if(!$uRegID){
 //            echo "You have not submitted your registration number." . '<br />';
-            echo "<div class='alert alert-danger'>You have not submitted your registration number.</div>";
+            echo "<div class='alert alert-danger'>* You have not submitted your registration number.</div>";
         } else {
 //            echo "Your registration number is " . $uRegID . '<br />';
-            echo "<div class='alert alert-info'>Your registration number is $uRegID </div>";
+            echo "<div class='text text-info'>* Your registration number is $uRegID.</div>";
         }
 //        echo "You pay for {$regYear}." . '<br />';
-        echo "<div class='alert alert-info'>You pay for {$regYear}</div>";
+        echo "<div class='text text-info'>* You are paying for {$regYear}.</div>";
 //        echo "You have to pay Rs.2500 for register." . '<br />';
-        echo "<div class='alert alert-info'>You have to pay Rs.2500 for register.</div>";
+        $myfile = fopen("Files/data_UCSCregistration", "r") or die("Unable to open file!");
+        while(!feof($myfile)) {
+            $line = fgets($myfile);
+        $arr = explode(' ',trim($line));
+        }
+        fclose($myfile);
+        echo "<div class='text text-info'>* You have to pay Rs.$arr[0] for register.</div>";
         //$_SESSION['nic'] = $uNIC;
         //$_SESSION['reg'] = $uRegID;
 
@@ -115,9 +124,10 @@ if($dayLimit<0){
 
 
         <form action="https://ipg.dialog.lk/ezCashIPGExtranet/servlet_sentinal" method="post" target="_blank">
-            <input type="submit" value="Pay via eZcash">
+            <br>
+            <input class="btn btn-default btn-lg" type="submit" value="Pay via eZcash">
             <input type="hidden" value='<?php echo $Invoice; ?>' name="merchantInvoice">
-            <input class="btn btn-default" type="hidden" name="token" value="<?php echo Token::generate(); ?>">
+            <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
         </form>
 
 

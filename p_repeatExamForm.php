@@ -20,15 +20,12 @@ include "header.php";
     ?>
     <br>
     <div class="jumbotron col-sm-6 col-sm-offset-1">
+        <h3><strong>Repeat Exam Form</strong></h3>
         <?php
         //payfor other person check
         if(isset($_SESSION['p4o']) && $_SESSION['p4o']==1){
-            echo "<div class='alert alert-info'>You are paying for ".$_SESSION['payeeName']."<button class=\"btn btn-default btn-xs\" style=\"float:right\"><a href='payForOtherRemove.php' title='Click here to remove other person.'>Remove</a></button></div> ";
-        }
-        ?>
-        <div>
-            <h3>Repeat Exam Form</h3>
-        </div>
+            echo "<div class='text text-info'><strong>You are paying for ".$_SESSION['payeeName'].". </strong><button class='btn btn-default btn-xs'><a href='payForOtherRemove.php' title='Click here to remove other person.'>I have changed my mind</a></button></div> ";
+        }?>
 <?php
 
 $user = new User();
@@ -61,7 +58,7 @@ $uRegID = $user->data()->indexNumber;
 if(!$uRegID){
     echo "<div class='alert alert-danger'>You have not submitted your registration number.</div>";
 } else {
-    echo "<div class='text text-info gap'><strong>Your registration number is $uRegID. </strong></div>";
+    echo "<div class='text text-info gap'><strong>* Your registration number is $uRegID. </strong></div>";
 }
     //get data from repeat exam file
     $payInfo = fopen("Files/data_repeatExam", "r") or die("Unable to open file!");
@@ -71,7 +68,7 @@ if(!$uRegID){
     }
     fclose($payInfo);
     //get data from repeat exam file-end
-    echo "<div class='text text-info gap'><strong>You have to pay Rs.$det[0] per paper. </strong></div>";
+    echo "<div class='text text-info gap'><strong>* You have to pay Rs.$det[0] per paper. </strong></div>";
 $de_transactionID = $tra->decodeEasyID($transactionID);
 $_SESSION['deID'] = $de_transactionID;
 
@@ -177,7 +174,7 @@ if(Input::exists()) {
 <form action="" method="post" class="form-horizontal">
     <div id="f1">
         <div class="redColor">
-            <h5><strong>*Please fill the form below accurately to continue.</strong></h5>
+            <h5><strong>* Please fill the form below accurately to continue.</strong></h5>
         </div>
         <div class="col-sm-6">
             <?php
