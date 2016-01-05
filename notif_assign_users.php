@@ -97,12 +97,12 @@ if(isset($_GET['user'])){
     <br>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4>Send To</h4>
+            <h3><strong>Assign Users</strong></h3>
         </div>
         <div class="panel-body">
             <div class="col-sm-4">
                 <form name="batch" action="" method="post">
-                    <h4>Select Year wise </h4>
+                    <h4><strong>Select Year Wise</strong></h4>
                     <input type="checkbox" name="Nyear[]" value="1" /> First Years <br>
                     <input type="checkbox" name="Nyear[]" value="2" /> Second Years <br>
                     <input type="checkbox" name="Nyear[]" value="3" /> Third Years <br>
@@ -113,7 +113,7 @@ if(isset($_GET['user'])){
             </div>
             <div class="container col-sm-4">
                 <form name="repeat-all-student" action="" method="post">
-                    <h4>All Repeat Students</h4>
+                    <h4><strong>All Repeat Students</strong></h4>
                     <input type="checkbox" name="repStu" value="<? echo escape('1')?>" />All repeat students<br>
                     <input type = "hidden" name="token_repeat-all" value="<?php echo Token::generate(); ?>">
                     <input class="btn btn-default" type="submit" name="Submit-repeat-all-student" value="Submit" />
@@ -121,11 +121,11 @@ if(isset($_GET['user'])){
             </div>
             <div class="container col-sm-4">
                 <form name="selected-student" action="" method="post">
-                    <h4>Selected Student</h4>
+                    <h4><strong>Select Specific Student</strong></h4>
                     <div>
                         <div>
                             <input class="form-control" type="text" id="search" placeholder="Enter username to search" autocomplete="off" name="search" value="<?php echo Input::get('search')?>" onkeyup="autoSuggest('result','search_for_notification.php');"  />
-                            <div>
+                            <div class="pre-scrollable" style="max-height: 200px">
                                 <ul id="result" class="nav" ></ul>
                             </div>
                         </div>

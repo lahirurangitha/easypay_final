@@ -37,8 +37,8 @@ if($_SESSION['student']){
     <br>
         <div id="appTable" class="container col-lg-12 ">
             <div class="panel panel-default">
-                <div class="panel-heading text-center">
-                    <h4>Repeat Exam Applications</h4>
+                <div class="panel-heading">
+                    <h3><strong>Repeat Exam Applications</strong></h3>
                 </div>
                 <div class="panel-body">
                 <div class="pre-scrollable">

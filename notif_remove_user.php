@@ -36,11 +36,11 @@ $notifyID = $_GET['id'];
         <br>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4>Remove User From Notification</h4>
+                <h3><strong>Remove Assigned Users From Notification</strong></h3>
 <!--                <button class="btn btn-primary btn-xs col-sm-1" style="float: right" onclick="window.location.href='notif_main_forum.php'"><< Back</button>-->
             </div>
             <div class="panel-body">
-                <div class="pre-scrollable">
+                <div class="pre-scrollable" style="max-height: 400px">
                 <table class="table table-striped table-bordered table-hover ">
 
                     <?php
@@ -80,7 +80,7 @@ $notifyID = $_GET['id'];
                             echo "<td width=20% align=center bgcolor=#E6E6E6>".$topic."</td>";
                             echo "<td width=20% align=center bgcolor=#E6E6E6>".$date."</td>";
 
-                            echo "<td width=5% align=center bgcolor=#E6E6E6 data-color='red'><a onclick='return confirm(\"Are you sure?\")' href=notif_disAllowUser.php?nid=$notid&uid=$userid>Clear</a>
+                            echo "<td width=5% align=center bgcolor=#E6E6E6 data-color='red'><a onclick='return confirm(\"Are you sure?\")' href=notif_disAllowUser.php?nid=$notid&uid=$userid>Remove</a>
                   </td>";
 
                             echo "</tr>";

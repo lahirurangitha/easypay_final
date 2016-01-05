@@ -49,14 +49,14 @@ include "header.php";
             }
         }
         ?>
-        <h4>Update Admission Details</h4>
+        <h3><strong>Update Admission Details</strong></h3>
         <form action="" method="post">
-            <div class="field">
+            <div class="gap">
                 <label>Starting Date</label>
                 <input class="form-control" type="date" name="date1" id="date1" value="<?php echo($inDate1)?>">
             </div>
 
-            <div class="field">
+            <div class="gap">
                 <label>Closing Date</label>
                 <input class="form-control" type="date" name="date2" id="date2" value="<?php echo($inDate2)?>" >
             </div>

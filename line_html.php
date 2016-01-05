@@ -34,7 +34,7 @@ if(!$user->hasPermission('admin')){Redirect::to('index.php');}
     <div class="col-sm-9">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h4 class="box-title">Payment Statistics</h4>
+                <h3 class="box-title"><strong>Payment Statistics</strong></h3>
             </div>
             <div class="box-body">
                 <div align="center">

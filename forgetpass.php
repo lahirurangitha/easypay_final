@@ -41,7 +41,7 @@ if(Input::exists()){
         $user1 = new User();
         if($user1->find($uname)){
 //            echo "User exist";
-            echo "<div class='text text-info'>User Found. Click on your username to continue.</div>";
+            echo "<div class='text text-info'><strong>User Found. Click on your username to continue.</strong></div>";
         ?>
             <p> <a href="forgetpassCheckPoint.php" onclick="return confirm('Are you sure?')"> <?php echo escape($user1->data()->username); ?> </a> </p>
         <?php
@@ -73,7 +73,7 @@ if(Input::exists()){
 <!--    <input type="hidden" name="token" value="--><?php //echo Token::generate(); ?><!--">-->
 <!--</form>-->
 
-        <h3>Forget Password</h3>
+        <h3><strong>Recover Password</strong></h3>
         <form action="" method="POST" class="form-horizontal">
             <label>Enter Your Username</label>
             <div class="gap ">

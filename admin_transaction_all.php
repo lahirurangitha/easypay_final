@@ -42,7 +42,7 @@ include "adminSidebar.php";
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="list-inline">
-                            <h4>Transaction History</h4>
+                            <h3>Transaction History</h3>
                             <div class="col-lg-offset-8">
                                 <label>Search</label>
                                 <input type="date" name="search" onchange="autoSuggest('byDate','admin_searchTransaction.php')">

@@ -53,7 +53,7 @@ if ($user->hasPermission('admin')) {
 ?>
 
 <form action="" method="post">
-    <h4>Update Repeat Exam  </h4>
+    <h3><strong>Update Repeat Exam</strong></h3>
     <div class="gap">
         <label>Closing Date</label>
         <input class="form-control" type="date" name="date" id="date" value="<?php echo($inData)?>">

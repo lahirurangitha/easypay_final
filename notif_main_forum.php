@@ -25,7 +25,7 @@ include "adminSidebar.php";
     <div class="col-sm-9">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4>Notification Forum</h4>
+                <h3><strong>Notification Forum</strong></h3>
                 <a class="col-sm-offset-9" href="notif_add_topic.php"><strong>Create New Notification >></strong></a>
             </div>
             <div class="panel-body">
@@ -53,7 +53,7 @@ if ($user->hasPermission('admin')) {
     <tr>
         <th>Notification ID</th>
         <th>Topic</th>
-        <th>Details</th>
+        <th>Description</th>
         <th>Date and time</th>
         <th>Settings</th>
     </tr>

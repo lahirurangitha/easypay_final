@@ -54,7 +54,7 @@ if ($user->hasPermission('admin')) {
 ?>
 
 <form action="" method="post">
-    <h4>Update New Academic Year Registration </h4>
+    <h3><strong>Update New Academic Year Registration</strong></h3>
     <div class="gap">
         <label>Closing Date</label>
         <input class="form-control" type="date" name="date" id="date" value="<?php echo($inData)?>">

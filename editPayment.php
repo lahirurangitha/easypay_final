@@ -36,7 +36,7 @@ if ($user->hasPermission('admin')) {
 ?>
     <br>
     <div class="jumbotron col-sm-5 col-sm-offset-1">
-        <h4>Update Payment Details</h4>
+        <h3><strong>Update Payment Details</strong></h3>
         <div class="gap">
             <ul>
                 <li><a href="edit_UCSCregistration.php">Register to UCSC</a></li>

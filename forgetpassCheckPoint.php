@@ -25,6 +25,7 @@ require 'Files/accessFile.php';
 <div class="backgroundImg container-fluid">
     <br>
     <div class="jumbotron col-sm-6 col-sm-offset-3">
+        <h3><strong>Recover Password</strong></h3>
 <?php
 
 $user = new User();
@@ -76,7 +77,7 @@ if(!isset($_POST['data'])){
 }
 ?>
         <form name="sending" action="sendcode_forgetPassword.php"  method="post">
-            <div class="alert alert-info">
+            <div>
                 <div class='text text-info'><strong>Your phone number is *******<?php echo substr($pNum,7 , 9); ?></strong></div>
 
                 <div class="text text-info"><strong>Click here to send your verification code.</strong>

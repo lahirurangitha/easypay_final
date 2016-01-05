@@ -98,6 +98,8 @@ if(!isset($_POST['data'])){
 //                Session::flash('home', 'you enter wrong key code.');
 //                Redirect::to('index.php');
 //                echo "<script>alert('Invalid key code.');</script>";
+            }else{
+                echo "<script>alert('Invalid verification code.');</script>";
             }
         } else {
             $str = "";
@@ -113,9 +115,9 @@ if(!isset($_POST['data'])){
 ?>
 
         <form name="sending3" action="sendcode_registration.php"  method="post">
-            <div class="alert alert-info">
+            <div>
 <!--                <div class='alert alert-info'>Your phone number is *******--><?php //echo substr($pNum,7 , 9); ?><!--</div>-->
-                <div class="text text-info"><strong>Click here to send your verification code.</strong>
+                <div class="text text-info"><strong>Click on send button to send your verification code. </strong>
                     <input class="btn btn-info btn-xs" type="submit" value="Send" name="s1">
                 </div>
             </div>
@@ -126,7 +128,7 @@ if(!isset($_POST['data'])){
         }
         ?>
         <form name="data" action="" method="post">
-            <label>Enter verification code </label>
+            <label>Enter verification code</label>
             <div class="gap">
                 <input class="form-control" type="number" name="rand_number" id="rand_number">
             </div>

@@ -23,6 +23,7 @@ require_once 'core/init.php';
 <div class="backgroundImg container-fluid">
     <br>
     <div class="jumbotron col-sm-6 col-sm-offset-3">
+        <h3><strong>Recover Password</strong></h3>
 <?php
 
 $user = new User();
@@ -65,7 +66,7 @@ if(Input::exists()){
         }
 }
 ?>
-        <h3>Forget Password</h3>
+
         <form action="" method="post">
             <div class="gap">
                 <label for="Password_new">Enter new password</label>
