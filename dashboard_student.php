@@ -47,10 +47,10 @@ $curDate=date("Y-m-d");
             <?php
             if($startDate<$curDate and $curDate<$endDate){
                 ?>
-                <div class="col-sm-4 alert alert-success alert-dismissible" style="float: right">
-                    <label class="label label-default">Click to Download Admission card</label>
+                <div class="col-sm-3" style="float: right">
+                    <span class="redColor"><strong>* Admission is available</strong></span>
                     <input class="btn btn-primary btn-xs" type="button" value="Download" onclick="window.open('pdftest.php')">
-                    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+<!--                    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>-->
                 </div>
             <?php
             }
@@ -72,7 +72,7 @@ $curDate=date("Y-m-d");
                         $user_id = $_SESSION['userid'];   // get usr id
                         $transaction = DB::getInstance()->get('transaction',array('payerID','=',$user_id));
                         if(!$transaction->count()){
-                            echo 'No transactions';
+                            echo '<div class="text text-info"><strong>No transactions</strong></div>';
                         }else{
                         ?>
                         <thead>
