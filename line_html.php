@@ -11,6 +11,35 @@ $transaction = new Transaction();
 
 if(!$user->isLoggedIn()){Redirect::to('index.php');}
 if(!$user->hasPermission('admin')){Redirect::to('index.php');}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin | Dashboard</title>
+    <?php include 'headerScript.php'?>
+    <script src="js/Chart.js"></script>
+</head>
+<body>
+<div id="wrapper">
+    <?php
+    include "header.php";
+    ?>
+</div>
+<div class="backgroundImg container-fluid">
+    <?php
+    include "adminSidebar.php";
+    ?>
+    <br>
+    <div class="col-sm-9">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h4 class="box-title">Payment Statistics</h4>
+            </div>
+            <div class="box-body">
+                <div align="center">
+
+<?php
 $sql = "SELECT * FROM transaction";
 $traData = DB::getInstance()->query($sql);
 //print_r($traData);
@@ -40,57 +69,57 @@ $cnt = array_replace($cnt,$tmp);
 //print_r($arr);
 
 ?>
-<!doctype html>
-<html>
-<head>
-    <title>Line Chart</title>
-    <script src="js/Chart.js"></script>
-</head>
-<body>
-<div style="width:30%">
-    <div>
-        <canvas id="canvas" height="450" width="600"></canvas>
-    </div>
-</div>
+        <div style="width:50%">
+            <div>
+                <canvas id="canvas" height="450" width="600"></canvas>
+            </div>
+        </div>
 
-<script>
-    var phpCnt = <?php echo json_encode($cnt); ?>;
-    var randomScalingFactorDB = function(i){ return phpCnt[i]};
-    var randomScalingFactor = function(){ return Math.round(Math.random()*10)};
-    var lineChartData = {
-        labels : ["January","February","March","April","May","June","July","August","September","October","November","December"],
-        datasets : [
-            {
-                label: "My First dataset",
-                fillColor : "rgba(151,187,205,0.2)",
-                strokeColor : "rgba(151,187,205,1)",
-                pointColor : "rgba(151,187,205,1)",
-                pointStrokeColor : "#fff",
-                pointHighlightFill : "#fff",
-                pointHighlightStroke : "rgba(151,187,205,1)",
-                data : [randomScalingFactorDB("01"), //jan
-                    randomScalingFactorDB("02"), //feb
-                    randomScalingFactorDB("03"), //march
-                    randomScalingFactorDB("04"), //april
-                    randomScalingFactorDB("05"), //may
-                    randomScalingFactorDB("06"), //june
-                    randomScalingFactorDB("07"), //jule
-                    randomScalingFactorDB("08"), //aug
-                    randomScalingFactorDB("09"), //sept
-                    randomScalingFactorDB("10"), //oct
-                    randomScalingFactorDB("11"), //nov
-                    randomScalingFactorDB("12")] //dec
+        <script>
+            var phpCnt = <?php echo json_encode($cnt); ?>;
+            var randomScalingFactorDB = function(i){ return phpCnt[i]};
+            var randomScalingFactor = function(){ return Math.round(Math.random()*10)};
+            var lineChartData = {
+                labels : ["January","February","March","April","May","June","July","August","September","October","November","December"],
+                datasets : [
+                    {
+                        label: "My First dataset",
+                        fillColor : "rgba(151,187,205,0.2)",
+                        strokeColor : "rgba(151,187,205,1)",
+                        pointColor : "rgba(151,187,205,1)",
+                        pointStrokeColor : "#fff",
+                        pointHighlightFill : "#fff",
+                        pointHighlightStroke : "rgba(151,187,205,1)",
+                        data : [randomScalingFactorDB("01"), //jan
+                            randomScalingFactorDB("02"), //feb
+                            randomScalingFactorDB("03"), //march
+                            randomScalingFactorDB("04"), //april
+                            randomScalingFactorDB("05"), //may
+                            randomScalingFactorDB("06"), //june
+                            randomScalingFactorDB("07"), //jule
+                            randomScalingFactorDB("08"), //aug
+                            randomScalingFactorDB("09"), //sept
+                            randomScalingFactorDB("10"), //oct
+                            randomScalingFactorDB("11"), //nov
+                            randomScalingFactorDB("12")] //dec
+                    }
+                ]
+
             }
-        ]
+            window.onload = function(){
+                var ctx = document.getElementById("canvas").getContext("2d");
+                window.myLine = new Chart(ctx).Line(lineChartData, {
+                    responsive: true
+                });
+            }
 
-    }
-    window.onload = function(){
-        var ctx = document.getElementById("canvas").getContext("2d");
-        window.myLine = new Chart(ctx).Line(lineChartData, {
-            responsive: true
-        });
-    }
+        </script>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+<body>
 
-</script>
 </body>
 </html>

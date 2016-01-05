@@ -64,7 +64,7 @@ include "adminSidebar.php";
                     <img src="images/chart.png" height="120px">
 
                     <div>
-                        <label>Stat</label>
+                        <label>Payment Statistics</label>
                     </div>
                 </a>
             </div>
