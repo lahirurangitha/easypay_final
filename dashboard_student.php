@@ -114,105 +114,35 @@ $curDate=date("Y-m-d");
         </div>
     </div>
 <!--    nadeesh-->
-    <div id="nPanel" class="container col-sm-3">
-        <div id="paymentNotification" class="panel panel-default">
-            <div class="box-header with-border">
-                <div class="box-title">
-                    <h4 class="col-sm-offset-1"> Notifications</h4>
-                    <div class="box-tools pull-right ">
-                        <button class="btn btn-info" data-widget="collapse" data-toggle="collapse" data-target="#nBox" title="Collapse"  style="margin-top:-65px;margin-left:-35px;"><i class="fa fa-plus"></i></button>
-                    </div>
-                </div>
-                <div id="nBox" class="container col-sm-12 box-body alert-info pre-scrollable" style="max-height:250px;">
-
-                    <?php
-//                    $conn = mysqli_connect("localhost","root","","easypay_db");
-//                    mysqli_select_db($conn,"easypay_db");
-//                    $sql = "SELECT * FROM notification";
-//                    $result = mysqli_query($conn,$sql);
-//                    $data = mysqli_fetch_assoc($result);
+<!--    <div id="nPanel" class="container col-sm-3">-->
+<!--        <div id="paymentNotification" class="panel panel-default">-->
+<!--            <div class="box-header with-border">-->
+<!--                <div class="box-title">-->
+<!--                    <h4 class="col-sm-offset-1"> Notifications</h4>-->
+<!--                    <div class="box-tools pull-right ">-->
+<!--                        <button class="btn btn-info" data-widget="collapse" data-toggle="collapse" data-target="#nBox" title="Collapse"  style="margin-top:-65px;margin-left:-35px;"><i class="fa fa-plus"></i></button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div id="nBox" class="container col-sm-12 box-body alert-info pre-scrollable" style="max-height:250px;">-->
+<!---->
+<!--                    --><?php
 //
-//                    while($row = mysqli_fetch_assoc($result)){
-//                        echo "<p>"."<b>".$row['topic']."</b>"."</p>";
-//                        echo "<p>".$row['detail']."</p>";
-//                    }
-//                    mysqli_close($conn);
-
-                    $user = new user();
-                    $user_id = $user->data()->id;
-//                    echo $user_id;
-                    $userNotificationDet = DB::getInstance();
-                    $userNotificationDet->query('SELECT * FROM notification n, user_notification un WHERE un.uID = ? and n.nID = un.nID',array($user_id));
-//                    print_r($userNotificationDet->results());
-                    $resultSet = $userNotificationDet->results();
-                    foreach($resultSet as $n ){
-                        echo "<a href='#'><strong>$n->topic</strong> <br> $n->detail</a><br>";
-                    }
-
-
-//                    $conn = mysqli_connect("localhost","root","","easypay_db");
-//                    mysqli_select_db($conn,"easypay_db");
-//
-//                    $user_id = $_SESSION["userid"]; // store the user id into session
-//
-//                    $sql1 = "SELECT * FROM user_notification";
-//                    $result1 = mysqli_query($conn,$sql1);
-//
-//                    while($row1 = mysqli_fetch_assoc($result1)){
-//                        if($row1['uID']==$user_id) {
-//
-//                            $sql2 = "SELECT * FROM notification";
-//                            $result2 = mysqli_query($conn,$sql2);
-//
-//                            while($row2 = mysqli_fetch_assoc($result2)) {
-//                                if ($row2['nID'] == $row1['nID']) {
-//                                    switch($row2['nID']) {
-//                                        case 2:
-//                                            ?>
-<!--                                            <a href="p_repeatExamForm.php">-->
-<!--                                            --><?php
-//                                            echo "<p>"."<b>".$row2['topic']."</b>"."</p>";
-//                                            echo "<p>".$row2['detail']."</p>";
-//                                            ?>
-<!--                                            </a>-->
-<!--                                            --><?php
-//                                            break;
-//                                        case 3:
-//                                            ?>
-<!--                                            <a href="p_UCSCregistration.php">-->
-<!--                                                --><?php
-//                                            echo "<p>"."<b>".$row2['topic']."</b>"."</p>";
-//                                            echo "<p>".$row2['detail']."</p>";
-//                                                ?>
-<!--                                            </a>-->
-<!--                                            --><?php
-//                                            break;
-//                                        case 4:
-//                                            ?>
-<!--                                            <a href="p_newAcaYear.php">-->
-<!--                                                --><?php
-//                                            echo "<p>"."<b>".$row2['topic']."</b>"."</p>";
-//                                            echo "<p>".$row2['detail']."</p>";
-//                                                ?>
-<!--                                            </a>-->
-<!--                                            --><?php
-//                                            break;
-//                                        default: echo "system error"; break;
-//                                    }
-//                                }
-//                            }
-//                        }
+//                    $user = new user();
+//                    $user_id = $user->data()->id;
+//                    $userNotificationDet = DB::getInstance();
+//                    $userNotificationDet->query('SELECT * FROM notification n, user_notification un WHERE un.uID = ? and n.nID = un.nID',array($user_id));
+//                    $resultSet = $userNotificationDet->results();
+//                    foreach($resultSet as $n ){
+//                        echo "<a href='#'><strong>$n->topic</strong> <br> $n->detail</a><br>";
 //                    }
 //
-//                    mysqli_close($conn);
-
-                    ?>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
+//                    ?>
+<!---->
+<!--                </div>-->
+<!---->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 <!--    /nadeesh-->
 </div>
 </div>
