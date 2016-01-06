@@ -10,6 +10,7 @@ require_once 'core/init.php';
 $id = $_GET['id'];
 $subCode=$_GET['subCode'];
 $subName=$_GET['subName'];
+$username=$_GET['username'];
 $subject="Regarding to repeat Application";
 
 $mailObject =new Mail();
@@ -17,8 +18,10 @@ $acceptMSG= "Dear Student, Your Repeat Examination application on"." ". $subCode
 $ignoreMSG= "Dear Student, Your Repeat Examination application on"." ". $subCode." ". $subName. " " . " has been ignored. Please meet your course coordinator";
 
 
+$catchMail=DB::getInstance()->get('users',array('username','=',$username));
+$res=$catchMail->results()[0];
 $user = new User();
-$mail= $user->data()->email;
+$mail= $res->email;
 
 $id = $_GET['id'];
 if(isset($_GET['accept'])){

@@ -68,6 +68,7 @@ if($_SESSION['student']){
     //                                                           echo'<br>';
                             $counter+=1;
                             $id = $t->id;
+                            $username = $t->username;
                             echo"<tr>";
                             echo "<td>".$counter."</td>";
                             echo "<td>".$t->indexNumber."</td>";
@@ -76,7 +77,7 @@ if($_SESSION['student']){
                             echo "<td>".$t->AssignmentComplete."</td>";
     //                        echo "<td><button><a>".$t->adminStatus."</a></button></td>";
 //                            echo "<td><a href='admin_repeatExamStatusUpdater.php?id=".$id."&accept=true' onclick='return confirm(\"You are accepting this application. Are you sure?\");'><button class='btn btn-primary'>Accept</button></a> <a href='admin_repeatExamStatusUpdater.php?id=".$id."&reject=true' onclick='return confirm(\"You are rejecting this application. Are you sure?\");'><button class='btn btn-danger'>Reject</button></a></td>";
-                            echo "<td><a href='admin_repeatExamStatusUpdater.php?subCode=$t->subjectCode&subName=$t->subjectName&id=".$id."&accept=true' onclick='return confirm(\"You are accepting this application. Are you sure?\");'><button class='btn btn-primary'>Accept</button></a> <a href='admin_repeatExamStatusUpdater.php?id=".$id."&reject=true' onclick='return confirm(\"You are rejecting this application. Are you sure?\");'><button class='btn btn-danger'>Reject</button></a></td>";
+                            echo "<td><a href='admin_repeatExamStatusUpdater.php?username=".$username."&subCode=$t->subjectCode&subName=$t->subjectName&id=".$id."&accept=true' onclick='return confirm(\"You are accepting this application. Are you sure?\");'><button class='btn btn-primary'>Accept</button></a> <a href='admin_repeatExamStatusUpdater.php?username=".$username."&subCode=$t->subjectCode&subName=$t->subjectName&id=".$id."&reject=true' onclick='return confirm(\"You are rejecting this application. Are you sure?\");'><button class='btn btn-danger'>Reject</button></a></td>";
                             echo "</tr>";
                         }
                         }?>

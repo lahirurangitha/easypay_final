@@ -265,8 +265,8 @@ if(Input::exists()) {
                     <div>
                         <label>Assignment Completed?</label>
                         <select class="form-control" name="assignmentCom[]" required="true">
-                            <option value="<?php echo "yes"; ?>">Yes</option>
-                            <option value="<?php echo "no"; ?>" >No</option>
+                            <option value="<?php echo "Completed"; ?>">Yes</option>
+                            <option value="<?php echo "Not Completed"; ?>" >No</option>
                         </select>
                     </div>
                 </div>
