@@ -37,8 +37,7 @@ if(isset($_SESSION['date1'])) {
     $pdf->SetFont("Arial", "", "9");
 
 
-    $pdf->Cell(0, 5, "Date: " . $date_now, 0, 1);
-    $pdf->Cell(0, 5, "Time: " . $time_now, 0, 0);
+    $pdf->Cell(0, 5, "Issued Date: " . $date_now."     Time: ".$time_now, 0, 1);
 
 //    if (Input::exists()) {
 //        if ($y = Input::get('year')) {
@@ -91,7 +90,7 @@ if(isset($_SESSION['date1'])) {
                 $pdf->Cell(28, 10, $time, 1, 0);
                 $pdf->Cell(35, 10, $paymentType, 1, 0);
                 $pdf->Cell(25, 10, $status, 1, 0);
-                $pdf->Cell(25, 10, $amount, 1, 1);
+                $pdf->Cell(25, 10, "Rs.".$amount.".00", 1, 1);
             }
 
         }

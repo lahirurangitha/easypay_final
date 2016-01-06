@@ -27,7 +27,7 @@ if(isset($_POST['searchVal2']) && $_POST['searchVal2']!= null) {
             echo"<label>Transactions  done by <i>$name</i></label><br>";
             ?>
             <input type="button" value="Download PDF"
-                   onclick="window.open('')">
+                   onclick="window.open('transactionNamePDF.php')">
         </div>
         <div class="panel-body">
         <div class="pre-scrollable" style="max-height: 400px">
