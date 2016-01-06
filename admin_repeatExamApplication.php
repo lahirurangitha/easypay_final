@@ -45,9 +45,10 @@ if($_SESSION['student']){
                     <table class="table table-striped table-bordered table-hover">
 
                         <?php
-                        $appDet = DB::getInstance()->get('repeat_exam',array('adminStatus','=',0));
+//                        $appDet = DB::getInstance()->get('repeat_exam',array('adminStatus','=',0));
+                        $appDet = DB::getInstance()->query('SELECT * FROM repeat_exam WHERE adminStatus = 0 AND paymentStatus = 1',array());
                         if(!$appDet->count()){
-                        echo '<div class="alert alert-info">No transactions</div>';
+                        echo '<div class="alert alert-info">No applications found</div>';
                         }else{
                         ?>
                         <thead>
