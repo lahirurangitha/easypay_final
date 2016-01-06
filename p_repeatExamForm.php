@@ -52,7 +52,7 @@ $dayLimit = floor($dayLimit/(60*60*24));
 if($dayLimit<0){
     echo "<div class='alert alert-danger'>payment is closed!</div>";
 }else{
-    if(isset($_SESSION['payeeName'])){
+    if(isset($_SESSION['p4o']) && $_SESSION['p4o']==1){
         $uID = $_SESSION['payeeID'];
         $uRegID = $_SESSION['o_indexNumber'];
         $username = $_SESSION['payeeName'];
