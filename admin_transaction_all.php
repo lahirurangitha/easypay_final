@@ -44,8 +44,12 @@ include "adminSidebar.php";
                         <div class="list-inline">
                             <h3>Transaction History</h3>
                             <div class="col-lg-offset-8">
-                                <label>Search</label>
+                                <label>Search by date</label>
                                 <input type="date" name="search" onchange="autoSuggest('byDate','admin_searchTransaction.php')">
+                            </div>
+                            <div class="col-lg-offset-8">
+                                <label>Search by username</label>
+                                <input type="text" name="search2" onkeyup="autoSuggest2('byName','admin_searchTransactionByName.php')">
                             </div>
 
                         </div>
@@ -67,7 +71,11 @@ include "adminSidebar.php";
                     <div id="byDate">
 
                     </div>
+<!-- search results end-->
+                        <!-- search results-->
+                    <div id="byName">
 
+                    </div>
 <!-- search results end-->
 
                     <!--                all transactions-->

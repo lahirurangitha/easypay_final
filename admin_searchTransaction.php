@@ -8,7 +8,7 @@
 
 require_once 'core/init.php';
 
-if(isset($_POST['searchVal'])) {
+if(isset($_POST['searchVal']) && $_POST['searchVal']!= null) {
     $date = $_POST['searchVal'];
     $_SESSION['date1']=$date;//search date
 //        echo"<label>Transactions on $date</label><br>";
