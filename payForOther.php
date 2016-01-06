@@ -36,10 +36,12 @@ if(Input::exists()){
                     //getting other person's userId
                     $opUserId = $user->data()->id;
                     $opUserName = $user->data()->username;
+                    $opUserIndexNumber = $user->data()->indexNumber;
                     //echo '<br>'.$opUserId;
                     $_SESSION['payeeID'] = $opUserId;
                     $_SESSION['p4o']=1;
                     $_SESSION['payeeName'] = $opUserName;
+                    $_SESSION['o_indexNumber'] = $opUserIndexNumber;
                     //get other person's name
 //                    $name2 = $user->data()->regNumber;
 //                    $_SESSION['name2'] = $name2;

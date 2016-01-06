@@ -51,9 +51,17 @@ $dayLimit = floor($dayLimit/(60*60*24));
 
 if($dayLimit<0){
     echo "<div class='alert alert-danger'>payment is closed!</div>";
-}else {
-$uID = $user->data()->id;
-$uRegID = $user->data()->indexNumber;
+}else{
+    if(isset($_SESSION['payeeName'])){
+        $uID = $_SESSION['payeeID'];
+        $uRegID = $_SESSION['o_indexNumber'];
+        $username = $_SESSION['payeeName'];
+    }else{
+        $uID = $user->data()->id;
+        $uRegID = $user->data()->indexNumber;
+        $username = $user->data()->username;
+    }
+
 
 if(!$uRegID){
     echo "<div class='alert alert-danger'>You have not submitted your registration number.</div>";
@@ -153,7 +161,8 @@ if(Input::exists()) {
                 'gradeSecond' => ${"subject$j"}['gradeSecond'],
                 'gradeThird' => ${"subject$j"}['gradeThird'],
                 'paymentStatus' => 0,
-                'adminStatus' => 0
+                'adminStatus' => 0,
+                'username'=>$username
             ));
         }
         $_SESSION['num'] = $numForms;
