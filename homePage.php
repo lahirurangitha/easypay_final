@@ -40,8 +40,12 @@ if(isset($_POST['inlinesubmit'])) {
                 $_SESSION['admin']=true;
                 $_SESSION['student']=false;
                 Redirect::to('dashboard_admin.php');
-            }
-            else{
+            }elseif($user->hasPermission('coord')){
+                $_SESSION['admin']=false;
+                $_SESSION['coord']=true;
+                $_SESSION['student']=false;
+                Redirect::to('dashboard_coord.php');
+            }else{
                 $_SESSION['student']=true;
                 $_SESSION['admin']=false;
                 Redirect::to('dashboard_student.php');

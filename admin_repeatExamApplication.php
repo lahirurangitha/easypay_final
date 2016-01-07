@@ -7,12 +7,9 @@
  */
 require_once 'core/init.php';
 
-if(!$_SESSION['isLoggedIn']) {
-    Redirect::to('index.php');
-}
-if($_SESSION['student']){
-    Redirect::to('dashboard_student.php');
-}
+$user  = new User();
+if(!$user->isLoggedIn()){Redirect::to('index.php');}
+if(!$user->hasPermission('coord')){Redirect::to('index.php');}
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +28,11 @@ if($_SESSION['student']){
 </div>
 <div class="backgroundImg container-fluid">
     <?php
-    include "adminSidebar.php";
+    if($_SESSION['admin']){
+        include "adminSidebar.php";
+    }elseif($_SESSION['coord']){
+        include "coordinatorSidebar.php";
+    }
     ?>
     <div class="container col-lg-9">
     <br>
