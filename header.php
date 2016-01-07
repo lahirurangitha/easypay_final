@@ -86,7 +86,13 @@ ob_start();
             $user_id = $user->data()->id;
             $userNotificationDet = DB::getInstance();
             $userNotificationDet->query('SELECT * FROM notification n, user_notification un WHERE un.uID = ? and n.nID = un.nID ORDER BY n.nID DESC',array($user_id));
-            $count = $userNotificationDet->count();
+            $count1 = $userNotificationDet->count();
+            $resultSet1 = $userNotificationDet->results();
+            $userRepeatExamNotifDet = DB::getInstance();
+            $userRepeatExamNotifDet->query('SELECT * FROM repeatExam_notification WHERE uID = ?',array($user_id));
+            $count2 = $userRepeatExamNotifDet->count();
+            $resultSet2 = $userRepeatExamNotifDet->results();
+            $count = $count1 + $count2;
             ?>
                 <ul class="nav navbar-nav navbar-right" title="Notifications">
                     <div class="col-sm-2">
@@ -112,13 +118,20 @@ ob_start();
                             <ul class="dropdown-menu notifications navbar-default pre-scrollable" role="menu" aria-labelledby="dLabel" style="max-height: 300px;">
                                 <div class="col-sm-12 ">
                                     <?php
-                                    $resultSet = $userNotificationDet->results();
-                                    if($count>0){
-                                        foreach($resultSet as $n ){
-                                            echo "<div class=''><p><strong>$n->topic</strong></p><p>$n->detail</p></div>";
+
+                                    if($count1>0){
+                                        foreach($resultSet1 as $n1 ){
+                                            echo "<div class=''><p><strong>$n1->topic</strong></p><p>$n1->detail</p></div>";
                                         }
-                                    }else{
-                                        echo "<div class=''><p>No Notifications</p></div>";
+                                    }
+
+                                    if($count2>0){
+                                        foreach($resultSet2 as $n2 ){
+                                            echo "<div class=''><p><strong>$n2->topic</strong></p><p>$n2->description</p></div>";
+                                        }
+                                    }
+                                    if($count==0){
+                                        echo 'No Notifications';
                                     }
 
                                     ?>
