@@ -16,6 +16,8 @@
 <!-- jquery & javascript-->
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/functions.js"></script>
+<!--chart-->
+<script src="js/Chart.js"></script>
 
 <!--adminLte-->
 <!-- Bootstrap 3.3.5 -->
