@@ -18,13 +18,35 @@ require 'payment/decrypt.php';
 $user = new User();
 $dec = new decrypt();
 $transaction = new Transaction();
+$transaction_tmp = new Transaction();
 if(!$user->isLoggedIn()){
     Redirect::to('index.php');
 }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Dashboard</title>
+    <?php include 'headerScript.php'?>
+</head>
+
+<body>
+<div id="wrapper">
+    <?php
+    include "header.php";
+    ?>
+</div>
+<div class="backgroundImg container-fluid">
+    <?php
+    include "studentSidebar.php";
+    ?>
+    <div class="col-sm-9">
+<?php
 $encrypted = $_POST['merchantReciept'];
 $decryptObject = $dec->decode($encrypted);
+//print_r($decryptObject);
 $decArray = explode('|',$decryptObject);
-print_r($decArray);
+//print_r($decArray);
 
 //Declare and assign values to variables
 //data from ezcash server
@@ -61,32 +83,24 @@ $transaction->create(array(
     'statusDescription' => $statusDescription,
     'amount' => $transactionAmount
 ));
+
 switch($statusCode){
     case 2: //Completed transaction
     ////Type success code here
         $str = "transaction success";
         if($paymentType === 1){
                    //payment type = UCSC registration fee
-            $transaction->updateStatus('UCSC_Registration',array(
-                        //paymentstatuss
-                'paymentStatus' => 1
-            ),$de_transactionID);
+            $t = DB::getInstance()->query('UPDATE ucsc_registration SET paymentStatus = 1 WHERE transactionID = ?',array($de_transactionID));
         }
         elseif($paymentType === 2){
                     //payment type = New academic year fee
-            $transaction->updateStatus('New_Academic_Year',array(
-                        //paymentstatuss
-                'paymentStatus' => 1
-            ), $de_transactionID);
+            $t = DB::getInstance()->query('UPDATE new_academic_year SET paymentStatus = 1 WHERE transactionID = ?',array($de_transactionID));
         }
         elseif($paymentType === 3){
                     //payment type = Repeat exam fee
-            $transaction->updateStatus('Repeat_Exam',array(
-                        //paymentstatuss
-                'paymentStatus' => 1
-            ), $de_transactionID);
+            $t = DB::getInstance()->query('UPDATE repeat_exam SET paymentStatus = 1 WHERE transactionID = ?',array($de_transactionID));
         }
-        Redirect::to('index.php');
+//        Redirect::to('index.php');
         break;
     case 3: //Failed
         $str = "Transaction failed";
@@ -95,7 +109,7 @@ switch($statusCode){
         $str = "System error";
         break;
     case 5: //Invalid customer
-        $str = "tho horek";
+        $str = "User authentication failed";
         break;
     case 6: //invalid customer status
         $str = "Customer status invalid";
@@ -133,7 +147,18 @@ switch($statusCode){
         //    default:
         //        echo "Transaction failed";
 }
-Session::flash('home', $str);
-Redirect::to('index.php');
 
+echo "<div class='alert alert-success'>$str</div>";
 ?>
+        <a href="index.php"><button>Back</button></a>
+
+
+
+    </div>
+</div>
+<?php
+include "footer.php";
+?>
+
+</body>
+</html>

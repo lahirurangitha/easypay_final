@@ -64,7 +64,7 @@ function autoSuggest(dID,phpFile){
 function acceptApp(){
     var acc=0;
     if (confirm("Confirm Acceptance") == true) {
-        //httpGet('admin_repeatExamStatusUpdater.php?id=".$id."&accept=true');
+        //httpGet('coord_repeatExamStatusUpdater.php?id=".$id."&accept=true');
     }
 
 
@@ -73,7 +73,7 @@ function acceptApp(){
 function rejectApp(){
     var rej=0;
     if (confirm("Confirm Rejection") == true) {
-        //httpGet('admin_repeatExamStatusUpdater.php?id=".$id."&reject=true');
+        //httpGet('coord_repeatExamStatusUpdater.php?id=".$id."&reject=true');
     }
 
 }

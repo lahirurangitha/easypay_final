@@ -33,18 +33,18 @@ if($_SESSION['student']){
 <?php
 include "adminSidebar.php";
 ?>
-    <div class="container col-lg-9">
+    <div class="container col-sm-9">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-sm-6">
                 <h2>Admin Dashboard</h2>
                 <h5>Welcome <?php echo $_SESSION['fname']." ".$_SESSION['lname']?></h5>
             </div>
         </div>
 
         <hr />
-        <div id="rAppPanel" class="container col-lg-8">
+        <div id="rAppPanel" class="container col-sm-8">
             <div class="d_icon">
-                <a href="admin_repeatExamApplication.php">
+                <a href="coord_RejectedRepeatApplications.php">
                 <?php
                 $appCount = DB::getInstance()->get('repeat_exam',array('adminStatus','=',0));
                 $count = $appCount->count();
@@ -54,7 +54,7 @@ include "adminSidebar.php";
                     <img src="images/notification.png" height="100px">
 
                     <div>
-                        <label>Repeat Exam Applications</label>
+                        <label>Rejected Repeat Exam Applications</label>
                     </div>
                 </a>
             </div>
@@ -70,7 +70,7 @@ include "adminSidebar.php";
             </div>
 <!-- chart end-->
         </div>
-        <div id="nPanel" class="container col-lg-4">
+        <div id="nPanel" class="container col-sm-4">
 
         </div>
 

@@ -51,6 +51,20 @@ if(isset($_POST['searchVal2']) && $_POST['searchVal2']!= null) {
         foreach ($NameTra->results() as $t) {
 //                                       print_r($t);
 //                                        echo'<br>';
+            //payment type check
+            $p1 = DB::getInstance()->get('ucsc_registration',array('transactionID','=',$t->transactionID))->count();
+            $p2 = DB::getInstance()->get('new_academic_year',array('transactionID','=',$t->transactionID))->count();
+            $p3 = DB::getInstance()->get('repeat_exam',array('transactionID','=',$t->transactionID))->count();
+            if($p1>0){
+                $paymentType = 'UCSC Registration';
+            }elseif($p2>0){
+                $paymentType = 'New Academic Year';
+            }elseif($p3>0){
+                $paymentType = 'Repeat Exam';
+            }else{
+                $paymentType = 'Other';
+            }
+            //
             $counter += 1;
             echo "<tr>";
             echo "<td>" . $counter . "</td>";
@@ -60,7 +74,7 @@ if(isset($_POST['searchVal2']) && $_POST['searchVal2']!= null) {
 //            echo "<td>" . $t->payerID . "</td>";
 
             echo "<td>" . $t->username . "</td>";
-            echo "<td>" . $t->paymentType . "</td>";
+            echo "<td>" . $paymentType . "</td>";
             echo "<td>" . $t->statusDescription . "</td>";
             echo "<td>" . $t->amount . "</td>";
             echo "</tr>";

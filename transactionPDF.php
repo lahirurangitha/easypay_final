@@ -59,11 +59,25 @@ require_once 'fpdf/fpdf.php';
     }else {
         $counter = 0;
         foreach ($Alltransactions->results() as $t) {
+            //payment type check
+            $p1 = DB::getInstance()->get('ucsc_registration',array('transactionID','=',$t->transactionID))->count();
+            $p2 = DB::getInstance()->get('new_academic_year',array('transactionID','=',$t->transactionID))->count();
+            $p3 = DB::getInstance()->get('repeat_exam',array('transactionID','=',$t->transactionID))->count();
+            if($p1>0){
+                $paymentType = 'UCSC Registration';
+            }elseif($p2>0){
+                $paymentType = 'New Academic Year';
+            }elseif($p3>0){
+                $paymentType = 'Repeat Exam';
+            }else{
+                $paymentType = 'Other';
+            }
+            //
             $counter+=1;
             $date=$t->date;
             $time=$t->time;
             $transactionID=$t->transactionID;
-            $paymentType=$t->paymentType;
+//            $paymentType=$t->paymentType;
             $status=$t->statusDescription;
             $amount=$t->amount;
 

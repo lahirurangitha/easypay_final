@@ -44,7 +44,7 @@ include "coordinatorSidebar.php";
         <hr />
         <div id="rAppPanel" class="container col-lg-8">
             <div class="d_icon">
-                <a href="admin_repeatExamApplication.php">
+                <a href="coord_repeatExamApplication.php">
                 <?php
                 $appCount = DB::getInstance()->query('SELECT * FROM repeat_exam WHERE adminStatus = 0 AND paymentStatus = 1',array());
                 $count = $appCount->count();
