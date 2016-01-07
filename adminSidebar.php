@@ -32,7 +32,7 @@
                 <a href="notif_main_forum.php"><i class=""></i>Notification Forum</a>
             </li>
             <li>
-                <a href="admin_searchUser.php"><i class=""></i>Accounts Manager</a>
+                <a href="admin_enableDisableUser.php"><i class=""></i>Accounts Manager</a>
             </li>
         </ul>
 
