@@ -30,12 +30,15 @@ if(isset($_POST['inlinesubmit'])) {
         $remember = (Input::get('remember') === 'on') ? true : false;
 //            $pass = Input::get('password');
         $login = $user->login(Input::get('username'), Input::get('password'), $remember);
-        if($login){
+        if($login && $user->data()->active==1){
+            //activate status check
+//                Your Account is deactivated. Please contact system administrator.
             //setting session variables...
             $_SESSION['isLoggedIn'] = true;
             $_SESSION['fname'] = escape($user->data()->fname);
             $_SESSION['lname'] = escape($user->data()->lname);
             $_SESSION['userid'] = $user->data()->id;
+//                $_SESSION['msgs'] = array(); //to store error msgs
             if ($user->hasPermission('admin')) {
                 $_SESSION['admin']=true;
                 $_SESSION['student']=false;
@@ -45,11 +48,14 @@ if(isset($_POST['inlinesubmit'])) {
                 $_SESSION['coord']=true;
                 $_SESSION['student']=false;
                 Redirect::to('dashboard_coord.php');
-            }else{
+            } else{
                 $_SESSION['student']=true;
                 $_SESSION['admin']=false;
                 Redirect::to('dashboard_student.php');
             }
+        }elseif($login && $user->data()->active==0){
+            echo '<script type="text/javascript"> alert("Sorry, Your Account is deactivated. Please contact system administrator.")</script>';
+            $user->logout();
         } else {
             echo '<script type="text/javascript"> alert("Sorry, Invalid Username or Password. Please try again.")</script>';
 
