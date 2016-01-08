@@ -22,7 +22,7 @@ $id = $_GET['id'];
 if(isset($_GET['accept'])){
     if($_GET['accept']==true){
         $tdb1 = DB::getInstance()->update('repeat_exam',$id,array('adminStatus' => 1));
-        $tdb2 = DB::getInstance()->insert('repeatExam_notification',array('uID' => $uID,'topic' => 'Admission Accepted','description' => $acceptMSG));
+        $tdb2 = DB::getInstance()->insert('repeatExam_notification',array('uID' => $uID,'topic' => 'Application Accepted','description' => $acceptMSG));
         $mailObject ->sendMail($mail,$subject,$acceptMSG);
         Redirect::to('coord_repeatExamApplication.php');
     }
@@ -30,7 +30,7 @@ if(isset($_GET['accept'])){
 if(isset($_GET['reject'])){
     if($_GET['reject']==true){
         $tdb1 = DB::getInstance()->update('repeat_exam',$id,array('adminStatus' => 2));
-        $tdb2 = DB::getInstance()->insert('repeatExam_notification',array('uID' => $uID,'topic' => 'Admission Rejected','description' => $ignoreMSG));
+        $tdb2 = DB::getInstance()->insert('repeatExam_notification',array('uID' => $uID,'topic' => 'Application Rejected','description' => $ignoreMSG));
         $mailObject ->sendMail($mail,$subject,$ignoreMSG);
         Redirect::to('coord_repeatExamApplication.php');
     }
