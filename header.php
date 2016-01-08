@@ -27,7 +27,7 @@ $user = new user();
             <div class="collapse navbar-collapse"  id="navbar-1" >
                 <!--          inline form  -->
                 <?php
-                if(!isset($_SESSION['isLoggedIn'])|| $_SESSION['isLoggedIn']==false){
+                if(!$user->isLoggedIn()){
                     ?>
                     <div style="float: right">
                         <form action="homePage.php" method="POST" class="form-inline">
@@ -66,7 +66,7 @@ $user = new user();
                         </li>
                     <?php
                     }else{
-                        if($user->hasPermission('admin')){
+                        if($_SESSION['admin'] == true){
                             ?>
                             <li>
                                 <a href="dashboard_admin.php">DASHBOARD</a>

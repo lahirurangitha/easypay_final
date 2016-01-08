@@ -63,6 +63,7 @@ if(Input::exists()){
 //                $_SESSION['msgs'] = array(); //to store error msgs
                 if ($user->hasPermission('admin')) {
                     $_SESSION['admin']=true;
+                    $_SESSION['coord']=false;
                     $_SESSION['student']=false;
                     Redirect::to('dashboard_admin.php');
                 }elseif($user->hasPermission('coord')){
@@ -73,6 +74,7 @@ if(Input::exists()){
                 } else{
                     $_SESSION['student']=true;
                     $_SESSION['admin']=false;
+                    $_SESSION['coord']=false;
                     Redirect::to('dashboard_student.php');
                 }
             }elseif($login && $user->data()->active==0){

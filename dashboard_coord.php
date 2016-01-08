@@ -7,12 +7,9 @@
  */
 
 require_once 'core/init.php';
-if(!$_SESSION['isLoggedIn']) {
-    Redirect::to('index.php');
-}
-if($_SESSION['student']){
-    Redirect::to('dashboard_student.php');
-}
+$user  = new User();
+if(!$user->isLoggedIn()){Redirect::to('index.php');}
+if(!$user->hasPermission('coord')){Redirect::to('index.php');}
 ?>
 
 <!DOCTYPE html>
@@ -36,13 +33,13 @@ include "coordinatorSidebar.php";
     <div class="container col-lg-9">
         <div class="row">
             <div class="col-lg-6">
-                <h2>Coordinator Dashboard</h2>
+                <h2><strong>Coordinator Dashboard</strong></h2>
                 <h5>Welcome <?php echo $_SESSION['fname']." ".$_SESSION['lname']?></h5>
             </div>
         </div>
 
         <hr />
-        <div id="rAppPanel" class="container col-lg-8">
+        <div id="rAppPanel" class="container col-sm-8">
             <div class="d_icon">
                 <a href="coord_repeatExamApplication.php">
                 <?php

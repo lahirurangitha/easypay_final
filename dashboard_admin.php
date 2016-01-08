@@ -33,7 +33,7 @@ include "adminSidebar.php";
     <div class="container col-sm-9">
         <div class="row">
             <div class="col-sm-6">
-                <h2>Admin Dashboard</h2>
+                <h2><strong>Admin Dashboard</strong></h2>
                 <h5>Welcome <?php echo $_SESSION['fname']." ".$_SESSION['lname']?></h5>
             </div>
         </div>

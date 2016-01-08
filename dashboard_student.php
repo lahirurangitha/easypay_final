@@ -8,6 +8,7 @@ if($_SESSION['admin']){
     Redirect::to('dashboard_admin.php');
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +40,7 @@ $curDate=date("Y-m-d");
     <div class="row">
         <div class="col-sm-12">
             <div class="col-sm-8">
-                <h2>Student Dashboard</h2>
+                <h2><strong>Student Dashboard</strong></h2>
                 <h5>Welcome <?php echo $_SESSION['fname']." ".$_SESSION['lname']?></h5>
             </div>
             <br>
@@ -63,7 +64,7 @@ $curDate=date("Y-m-d");
     <div class="col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4>Transaction History Table</h4>
+                <h3><strong>Transaction History Table</strong></h3>
             </div>
             <div class="panel-body">
                 <div class="table-responsive pre-scrollable" style="max-height:200px;">
