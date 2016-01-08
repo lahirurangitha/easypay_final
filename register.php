@@ -154,7 +154,7 @@ if(Input::exists()){
             </div>
 
 			<div class="gap">
-                <input type="checkbox" name="accept" required> I agree to the <a href="">Terms and Conditions</a> and <a href="">Privacy Policy</a>
+                <input type="checkbox" name="accept" required> I agree to the <a  href="#"  data-toggle="modal" data-target="#myModal2">Terms and conditions</a> and <a href="#"  data-toggle="modal" data-target="#myModal1">Privacy Policy</a>
             </div>
             <input type = "hidden" name="token" value="<?php echo Token::generate(); ?>">
             <input class="btn btn-default" id="next" type="submit" value="Next">
