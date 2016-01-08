@@ -7,6 +7,10 @@
  */
 
 require_once 'core/init.php';
+ $user = new User();
+ if(!$user->isLoggedIn()){
+     Redirect::to('index.php');
+ }
  ?>
  <!DOCTYPE html>
  <html lang="en">
@@ -22,21 +26,55 @@ require_once 'core/init.php';
  ?>
  <div class="backgroundImg container-fluid">
      <?php
-     include "studentSidebar.php";
+     if($user->hasPermission('coord')){
+         include 'coordinatorSidebar.php';
+     }else{
+         include "studentSidebar.php";
+     }
+
      ?>
      <br>
      <div class="jumbotron col-sm-5 col-sm-offset-1">
          <?php
 
 //checking if the user already logged in
-$user = new User();
-if(!$user->isLoggedIn()){
-    Redirect::to('index.php');
-}
+
 
 if(Input::exists()){
     if(Token::check(Input::get('token'))){
         $validate = new Validate();
+        if($user->hasPermission('coord')){
+            $validation = $validate->check($_POST, array(
+                'username' => array(
+                    'required' => true,
+                    'min' => 2,
+                    'max' => 50
+                ),
+                'fname' => array(
+                    'required' => true,
+                    'regexString' => 'fname',
+                    'min' => 2,
+                    'max' => 20
+                ),
+                'lname' => array(
+                    'required' => true,
+                    'regexString' => 'lname',
+                    'min' => 2,
+                    'max' => 20
+                ),
+                'email' => array(
+                    'required' => true,
+                    'regexEmail' => 'email',
+                    'min' => 2,
+                    'max' => 100
+                ),
+                'nic' => array(
+                    'required' => true,
+                    'regexNic' => 'nic',
+                    'min' => 10
+                )
+            ));
+        }else{
         $validation = $validate->check($_POST, array(
            'username' => array(
                 'required' => true,
@@ -80,25 +118,48 @@ if(Input::exists()){
                 'min' => 1
            )
         ));
+        }
         if($validation->passed()){
-            try{
-                $user->update(array(
-                    'username' => Input::get('username'),
-                    'indexNumber' => Input::get('indexNumber'),
-                    'fname' => Input::get('fname'),
-                    'lname' => Input::get('lname'),
+            if($user->hasPermission('coord')){
+                try{
+                    $user->update(array(
+                        'username' => Input::get('username'),
+                        'indexNumber' => 0,
+                        'fname' => Input::get('fname'),
+                        'lname' => Input::get('lname'),
 //                    'phone' => Input::get('phone'),
-                    'email' => Input::get('email'),
-                    'nic' => Input::get('nic'),
-                    'dob' => Input::get('dob'),
-                    'year' => Input::get('year')
-                ));
+                        'email' => Input::get('email'),
+                        'nic' => Input::get('nic'),
+                        'dob' => 0,
+                        'year' => 0
+                    ));
 //                Session::flash('home', 'Your details have been updated.');
 //                Redirect::to('index.php');
-                echo "<script>alert('Your details updated successfully.');window.location.href='update.php'</script>";
-            } catch(Exception $err) {
-                die($err->getMessage());
+                    echo "<script>alert('Your details updated successfully.');window.location.href='update.php'</script>";
+                } catch(Exception $err) {
+                    die($err->getMessage());
+                }
+            }else{
+                try{
+                    $user->update(array(
+                        'username' => Input::get('username'),
+                        'indexNumber' => Input::get('indexNumber'),
+                        'fname' => Input::get('fname'),
+                        'lname' => Input::get('lname'),
+//                    'phone' => Input::get('phone'),
+                        'email' => Input::get('email'),
+                        'nic' => Input::get('nic'),
+                        'dob' => Input::get('dob'),
+                        'year' => Input::get('year')
+                    ));
+//                Session::flash('home', 'Your details have been updated.');
+//                Redirect::to('index.php');
+                    echo "<script>alert('Your details updated successfully.');window.location.href='update.php'</script>";
+                } catch(Exception $err) {
+                    die($err->getMessage());
+                }
             }
+
         } else {
             $str = "";
             foreach ($validation->errors() as $error) {
@@ -108,6 +169,7 @@ if(Input::exists()){
             echo '<script type="text/javascript">alert("' . $str . '")</script>';
         }
     }
+
 }
 ?>
 
@@ -118,10 +180,17 @@ if(Input::exists()){
                      <label>Username</label>
                      <input class="form-control" type="text" name="username"  value="<?php echo escape($user->data()->username); ?>">
                  </div>
-                 <div class="gap">
-                     <label>Index Number</label>
-                     <input class="form-control" type="number" name="indexNumber" value="<?php echo escape($user->data()->indexNumber); ?>">
-                 </div>
+                 <?php
+                 if(!$user->hasPermission('coord')) {
+                     ?>
+                     <div class="gap">
+                         <label>Index Number</label>
+                         <input class="form-control" type="number" name="indexNumber"
+                                value="<?php echo escape($user->data()->indexNumber); ?>">
+                     </div>
+                 <?php
+                 }
+                 ?>
                  <div class="gap">
                      <label>First Name</label>
                      <input class="form-control" type="text" name="fname" value="<?php echo escape($user->data()->fname); ?>">
@@ -141,7 +210,9 @@ if(Input::exists()){
                      <label>NIC</label>
                      <input class="form-control" type="text" name="nic" value="<?php echo escape($user->data()->nic);?>">
                  </div>
-
+                 <?php
+                 if(!$user->hasPermission('coord')) {
+                 ?>
                  <div class="gap">
                      <label>Date of birth</label>
                      <input class="form-control" type=date name="dob" value="<?php echo escape($user->data()->dob);?>">
@@ -151,6 +222,9 @@ if(Input::exists()){
                      <label>Academic Year</label>
                      <input class="form-control" type="number" name="year" value="<?php echo escape($user->data()->year);?>">
                  </div>
+                 <?php
+                 }
+                 ?>
 
                  <input class="btn btn-default" id="submit" type="submit" value="Update">
 
