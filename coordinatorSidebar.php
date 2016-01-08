@@ -19,6 +19,9 @@
             <li>
                 <a href="dashboard_coord.php"><i class="active"></i>Dashboard</a>
             </li>
+            <li>
+                <a href="update.php"><i class="active"></i>Update</a>
+            </li>
 
         </ul>
 

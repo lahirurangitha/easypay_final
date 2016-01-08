@@ -7,6 +7,7 @@
  */
 require_once 'core/init.php';
 ob_start();
+$user = new user();
 ?>
 
 
@@ -49,7 +50,7 @@ ob_start();
                 <!--           /inline form -->
                 <ul class="nav navbar-nav">
                     <?php
-                    if(!isset($_SESSION['isLoggedIn'])|| $_SESSION['isLoggedIn']==false){
+                    if(!$user->isLoggedIn()){
                         ?>
                         <li>
                             <a href="login.php">LOGIN</a>
@@ -65,10 +66,26 @@ ob_start();
                         </li>
                     <?php
                     }else{
+                        if($user->hasPermission('admin')){
+                            ?>
+                            <li>
+                                <a href="dashboard_admin.php">DASHBOARD</a>
+                            </li>
+                        <?php
+                        } elseif($user->hasPermission('coord')){
+                            ?>
+                            <li>
+                                <a href="dashboard_coord.php">DASHBOARD</a>
+                            </li>
+                        <?php
+                        }else{
+                            ?>
+                            <li>
+                                <a href="dashboard_student.php">DASHBOARD</a>
+                            </li>
+                        <?php
+                        }
                     ?>
-                    <li>
-                        <a href="dashboard_student.php">DASHBOARD</a>
-                    </li>
                     <li>
                         <a href="about.php">ABOUT</a>
                     </li>

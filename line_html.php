@@ -17,15 +17,15 @@ require_once 'core/init.php';
 </div>
 <div class="backgroundImg container-fluid">
     <?php
-    include "studentSidebar.php";
+    include "adminSidebar.php";
     ?>
     <br>
-    <div class="container col-sm-9" >
-        <div class="box box-primary">
+    <div class="container col-sm-5">
+        <div class="box box-primary col-sm-6">
             <div class="box-header with-border">
                 <h3 class="box-title"><strong>Payment Statistics</strong></h3>
             </div>
-            <div class="box-body" align="center">
+            <div class="box-body">
                 <?php
                 ///
                 $user  = new User();
@@ -67,7 +67,7 @@ require_once 'core/init.php';
                 $cnt = array_replace($cnt,$tmp1);
                 //    print_r($cnt);
                 ?>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <form name="data" action="" method="post">
                         <select name="selector" class="form-control" onchange="">
                             <?php
@@ -81,7 +81,7 @@ require_once 'core/init.php';
                     </form>
                 </div>
 
-                <div style="width:50%">
+                <div style="width:100%">
                     <div>
                         <canvas id="canvas" height="450" width="600"></canvas>
                     </div>
@@ -129,8 +129,76 @@ require_once 'core/init.php';
 
             </div>
         </div>
+        </div>
+    <!--        pie chart-->
+    <div class="col-sm-4">
 
+        <div class="box box-primary col-sm-4">
+            <div class="box-header with-border">
+                <h3 class="box-title"><strong>Total Payment Statistics</strong></h3>
+            </div>
+            <div class="box-body">
+                <?php
+
+                $sql1 = "SELECT count(*) as c FROM new_academic_year WHERE paymentStatus=1";
+                $new_aca_Data = DB::getInstance()->query($sql1);
+                $d1 = $new_aca_Data->results()[0]->c;
+                //echo($d1 . "<br />");
+
+                $sql2 = "SELECT count(*) as c FROM ucsc_registration WHERE paymentStatus=1";
+                $regis_Data = DB::getInstance()->query($sql2);
+                $d2 = $regis_Data->results()[0]->c;
+                //echo($d2 . "<br />");
+
+                $sql3 = "SELECT count(*) as c FROM repeat_exam WHERE paymentStatus=1";
+                $repeat_Data = DB::getInstance()->query($sql3);
+                $d3 = $repeat_Data->results()[0]->c;
+                //echo($d3 . "<br />");
+
+                $arr  = array();
+                array_push($arr,$d1);
+                array_push($arr,$d2);
+                array_push($arr,$d3);
+
+                //print_r($arr);
+
+                ?>
+
+
+                <div style="width:100%">
+                    <div>
+                        <canvas id="skills" width="300" height="300"></canvas>
+                    </div>
+                </div>
+
+                <script>
+                    var phpCnt = <?php echo json_encode($arr); ?>;
+                    var pieData = [
+                        {
+                            value: phpCnt[0],
+                            label: 'pay for new academic year',
+                            color: '#811BD6'
+                        },
+                        {
+                            value: phpCnt[1],
+                            label: 'pay for ucsc registration',
+                            color: '#6AE128'
+                        },
+                        {
+                            value: phpCnt[2],
+                            label: 'pay for repeat exams',
+                            color: '#D18177'
+                        }
+
+                    ];
+                    var context = document.getElementById('skills').getContext('2d');
+                    var skillsChart = new Chart(context).Pie(pieData);
+                </script>
+
+            </div>
+        </div>
     </div>
+
 </div>
 <?php
 include "footer.php";

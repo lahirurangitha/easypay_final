@@ -7,12 +7,9 @@
  */
 
 require_once 'core/init.php';
-if(!$_SESSION['isLoggedIn']) {
-    Redirect::to('index.php');
-}
-if($_SESSION['student']){
-    Redirect::to('dashboard_student.php');
-}
+$user  = new User();
+if(!$user->isLoggedIn()){Redirect::to('index.php');}
+if(!$user->hasPermission('admin')){Redirect::to('index.php');}
 ?>
 
 <!DOCTYPE html>
