@@ -34,6 +34,9 @@
             <li>
                 <a href="admin_enableDisableUser.php"><i class=""></i>Accounts Manager</a>
             </li>
+            <li>
+                <a href="email_notify.php"><i class=""></i>Email Inquiries</a>
+            </li>
         </ul>
 
     </div>
