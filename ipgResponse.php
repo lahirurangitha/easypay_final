@@ -110,7 +110,7 @@ $email = $user->data()->email;
                     $_SESSION['index'] = $index;
 
                     echo "$str";
-                    echo "<button class='btn btn-primary btn-xs' onclick='window.open('transactionReciept.php')' style='float: right'>Download Receipt</button>";
+                    echo "<button class='btn btn-primary btn-xs' onclick='window.open(\"transactionReciept.php\")' style='float: right'>Download Receipt</button>";
                     break;
                 case 3: //Failed
                     $str = "<div class='alert alert-error'>Transaction failed.</div>";
