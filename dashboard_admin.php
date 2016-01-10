@@ -39,7 +39,7 @@ include "adminSidebar.php";
         </div>
 
         <hr />
-        <div id="rAppPanel" class="container col-sm-8">
+        <div id="rAppPanel" class="container col-sm-12">
 <!--            <div class="d_icon">-->
 <!--                <a href="coord_RejectedRepeatApplications.php">-->
 <!--                --><?php
@@ -55,7 +55,35 @@ include "adminSidebar.php";
 <!--                    </div>-->
 <!--                </a>-->
 <!--            </div>-->
-<!--      chart      -->
+
+            <div class="d_icon">
+                <a href="email_notify.php">
+                    <img src="images/email.png" height="120px">
+
+                    <div>
+                        <label>Email Inquiries</label>
+                    </div>
+                </a>
+            </div>
+            <div class="d_icon">
+                <a href="admin_repeatExamApplicationTable.php">
+                    <img src="images/editApplications.png" height="120px">
+
+                    <div>
+                        <label>Edit Repeat Applications</label>
+                    </div>
+                </a>
+            </div>
+            <div class="d_icon">
+                <a href="admin_enableDisableUser.php">
+                    <img src="images/accountsManager.png" height="120px">
+
+                    <div>
+                        <label>Accounts Manager</label>
+                    </div>
+                </a>
+            </div>
+            <!--      chart      -->
             <div class="d_icon">
                 <a href="line_html.php">
                     <img src="images/chart.png" height="120px">
@@ -65,7 +93,8 @@ include "adminSidebar.php";
                     </div>
                 </a>
             </div>
-<!-- chart end-->
+            <!-- chart end-->
+
         </div>
         <div id="nPanel" class="container col-sm-4">
 

@@ -31,15 +31,15 @@
             <li>
                 <a href="notif_main_forum.php"><i class=""></i>Notification Forum</a>
             </li>
-            <li>
-                <a href="admin_enableDisableUser.php"><i class=""></i>Accounts Manager</a>
-            </li>
-            <li>
-                <a href="email_notify.php"><i class=""></i>Email Inquiries</a>
-            </li>
-            <li>
-                <a href="admin_repeatExamApplicationTable.php"><i class=""></i>Edit Rejected Applicattions</a>
-            </li>
+<!--            <li>-->
+<!--                <a href="admin_enableDisableUser.php"><i class=""></i>Accounts Manager</a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="email_notify.php"><i class=""></i>Email Inquiries</a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="admin_repeatExamApplicationTable.php"><i class=""></i>Edit Rejected Applicattions</a>-->
+<!--            </li>-->
         </ul>
 
     </div>
