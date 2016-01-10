@@ -5,7 +5,7 @@ require_once 'core/init.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>User Dashboard</title>
+    <title>Statistics | Page</title>
     <?php include 'headerScript.php'?>
 </head>
 

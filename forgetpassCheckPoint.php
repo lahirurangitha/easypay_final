@@ -13,7 +13,7 @@ require 'Files/accessFile.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login | page</title>
+    <title>Forgot password | page</title>
     <?php include 'headerScript.php'?>
 </head>
 <body>

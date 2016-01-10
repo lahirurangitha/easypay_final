@@ -31,6 +31,9 @@
                 <li>
                     <a href="duepayments.php"><i class="fa fa-phone fa-3x"></i> Due Payments</a>
                 </li>
+                <li>
+                    <a href="notif_repeat_exam_remove.php"><i class="fa fa-phone fa-3x"></i>Remove My Notifications</a>
+                </li>
             </ul>
 
         </div>

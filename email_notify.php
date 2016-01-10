@@ -5,7 +5,7 @@ require_once 'core/init.php';
     <html lang="en">
 
     <head>
-        <title>Emails | Page</title>
+        <title>Email | Page</title>
         <?php include 'headerScript.php'?>
     </head>
 <body>
@@ -15,13 +15,11 @@ require_once 'core/init.php';
     ?>
 </div>
 <div class="backgroundImg container-fluid">
-
-
 <?php
 include "adminSidebar.php";
 ?>
     <br>
-    <div class="col-md-9 col-sm-12 col-xs-12">
+    <div class="col-sm-9">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3><strong>Email Inquiries</strong></h3>

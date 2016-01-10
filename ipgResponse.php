@@ -64,6 +64,7 @@ $email = $user->data()->email;
             $f = $user->data()->fname;
             $l = $user->data()->lname;
             $name = $f." ".$l;
+            $index = $user->data()->indexNumber;
 
             if(isset($_SESSION['payeeID'])){
                 $payeeID = $_SESSION['payeeID'];
@@ -101,6 +102,15 @@ $email = $user->data()->email;
                         $type = "Repeat exam fee";
                         $t = DB::getInstance()->query('UPDATE repeat_exam SET paymentStatus = 1 WHERE transactionID = ?',array($de_transactionID));
                     }
+                    $_SESSION['traID'] = $transactionID;
+                    $_SESSION['sName'] = $name;
+                    $_SESSION['pType'] = $type;
+                    $_SESSION['stts'] = $statusDescription;
+                    $_SESSION['amnt'] = $transactionAmount;
+                    $_SESSION['index'] = $index;
+
+                    echo "$str";
+                    echo "<button class='btn btn-primary btn-xs' onclick='window.open('transactionReciept.php')' style='float: right'>Download Receipt</button>";
                     break;
                 case 3: //Failed
                     $str = "<div class='alert alert-error'>Transaction failed.</div>";
@@ -150,14 +160,7 @@ $email = $user->data()->email;
             /*
              * create session variables for receipt
              */
-            $_SESSION['traID'] = $transactionID;
-            $_SESSION['sName'] = $name;
-            $_SESSION['pType'] = $type;
-            $_SESSION['stts'] = $statusDescription;
-            $_SESSION['amnt'] = $transactionAmount;
 
-            echo "$str";
-            echo "<button class='btn btn-primary btn-xs' onclick='window.open('transactionReciept.php')' style='float: right'>Download Receipt</button>";
             ?>
             <!--                <a href="index.php"><button>Back to Dashboard</button></a>-->
 

@@ -15,7 +15,7 @@ if(!$user->hasPermission('admin')){Redirect::to('index.php');}
 <html lang="en">
 
 <head>
-    <title>Admin | Dashboard</title>
+    <title>Account Manager | Page</title>
     <?php include 'headerScript.php'?>
 </head>
 <body>
@@ -100,11 +100,11 @@ if(!$user->hasPermission('admin')){Redirect::to('index.php');}
 
 
                                 if($t->username == $user->data()->username){
-                                    echo "<td><a href='admin_updateUser.php?username=$t->username'>Update</a></td>";
+                                    echo "<td>-</td>";
                                 }elseif($t->active == 1){
-                                    echo "<td><a onclick='return confirm(\"You are deactivating this account. Are you sure?\")' href='admin_enableDisableUserStatusUpdater.php?username=$t->username&active=$t->active'>Deactivate</a> / <a href='admin_updateUser.php?username=$t->username'>Update</a></td>";
+                                    echo "<td><a onclick='return confirm(\"You are deactivating this account. Are you sure?\")' href='admin_enableDisableUserStatusUpdater.php?username=$t->username&active=$t->active'>Deactivate</a></td>";
                                 }else{
-                                    echo "<td><a onclick='return confirm(\"You are activating this account. Are you sure?\")' href='admin_enableDisableUserStatusUpdater.php?username=$t->username&active=$t->active'>Activate</a> / <a href='admin_updateUser.php?username=$t->username'>Update</a></td>";
+                                    echo "<td><a onclick='return confirm(\"You are activating this account. Are you sure?\")' href='admin_enableDisableUserStatusUpdater.php?username=$t->username&active=$t->active'>Activate</a></td>";
                                 }
                                 echo "</tr>";
                             }

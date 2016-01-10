@@ -12,7 +12,7 @@ require_once 'dbcon.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Due | Payments</title>
+    <title>Due Payments | Page</title>
     <?php include 'headerScript.php'?>
 </head>
 <body>
@@ -27,7 +27,7 @@ include "header.php";
     <div class="container col-sm-9">
             <div class="panel panel-default ">
                 <div class="panel-heading">
-                    <h4>Due Payments</h4>
+                    <h3><strong>Due Payments</strong></h3>
                 </div>
                 <div class="panel-body pre-scrollable">
 

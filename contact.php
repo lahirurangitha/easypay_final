@@ -16,6 +16,7 @@ include "header.php";
 <div class="container">
     <br>
     <div class="jumbotron col-sm-6">
+        <h3><strong>Contact Form</strong></h3>
     <form class="form-horizontal" id="contact_form" action="ContactFormHandler.php" method="POST" enctype="multipart/form-data">
 
         <label for="name">Name:</label>
@@ -47,9 +48,6 @@ include "header.php";
     </div>
 </div>
 </div>
-<!--<div class="col-xs-6 col-md-4">-->
-<!--    <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="400" height="443" src="https://maps.google.com/maps?hl=en&q=35 Philip Gunewardena Mawatha, Colombo, Sri Lanka&ie=UTF8&t=roadmap&z=16&iwloc=B&output=embed"><div><small><a href="http://embedgooglemaps.com">embedgooglemaps.com</a></small></div><div><small><a href="http://www.premiumlinkgenerator.com/">free link generators on premiumlinkgenerator.com</a></small></div></iframe>-->
-<!--</div>-->
 </div>
 <?php
 include "footer.php";
