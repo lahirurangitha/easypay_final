@@ -14,7 +14,7 @@ include "header.php";
 <div class="backgroundImg container-fluid">
 
 <?php
-if(isset($_POST['contact_submit'])){
+if(isset($_POST['Contact_submit'])){
     $contactName = $_POST["name"];
     $contactEmail = $_POST["email"];
     $contactMessage = $_POST["message"];
