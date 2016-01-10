@@ -7,11 +7,14 @@
  */
 require_once 'core/init.php';
 require_once 'fpdf/fpdf.php';
+//include("qr/qrcode.php");
+require_once 'qr/qrcode.php';
+$qr = new qrcode();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>All | transactions</title>
+    <title>Receipt</title>
 </head>
 </html>
 
@@ -31,9 +34,9 @@ $transID = "easyID_002";
 $studentName = "Lasith";
 $paymentType = "Repeat exam fee";
 $paymentStatus = "Completed";
-$amount = '100.00';
+$amount = '200.00';
+$index = '13000829';
 */
-
 $image = "images/ucsc.png";
 date_default_timezone_set("Asia/Colombo");
 $date_now = date("Y-m-d");
@@ -67,6 +70,13 @@ $pdf->Cell(40, 10, $index, 1, 0);
 $pdf->Cell(35, 10, $paymentType, 1, 0);
 $pdf->Cell(60, 10, $paymentStatus, 1, 0);
 $pdf->Cell(20, 10, "Rs.".$amount, 1, 1);
+
+
+$str = "Transaction ID = $transID \n Student Index Number = $index \n Payment type = $paymentType \n Amount = $amount \n Payment Status = $paymentStatus \n ";
+$qr->text($str);
+$file = $qr->get_image();
+$qr->save_image($file,'images/QR.png');
+$pdf->Image('images/QR.png',175, 12, 20);
 
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->SetTextColor(255, 192, 203);
