@@ -991,7 +991,7 @@ function Output($name='', $dest='')
 		if($name=='')
 		{
 			ob_end_clean();
-			$name = 'Admission.pdf';
+			$name = 'Easypay.pdf';
 			$dest = 'I';
 		}
 		else
