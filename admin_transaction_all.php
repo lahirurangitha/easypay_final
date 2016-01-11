@@ -91,7 +91,7 @@ include "adminSidebar.php";
                             <table class="table table-striped table-bordered table-hover">
                                 <?php
 //                                $Alltransactions = DB::getInstance()->get('transaction',array(1,'=',1));
-                                $Alltransactions = DB::getInstance()->query('SELECT * From transaction t,users u WHERE t.payerID = u.id',array());
+                                $Alltransactions = DB::getInstance()->query('SELECT * From transaction t,users u WHERE t.payerID = u.id ORDER BY transactionID DESC',array());
 
                                 //foreach($Alltransactions->results() as $res){
                                 //    print_r($res);
@@ -103,12 +103,13 @@ include "adminSidebar.php";
                                 ?>
                                 <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>No</th>
                                     <th>Date</th>
                                     <th>Time</th>
                                     <th>Transaction ID</th>
 <!--                                    <th>PayerID</th>-->
-                                    <th>Username</th>
+                                    <th>Payed By</th>
+                                    <th>Pay For</th>
                                     <th>Payment type</th>
                                     <th>Status</th>
                                     <th>Amount</th>
@@ -142,6 +143,8 @@ include "adminSidebar.php";
                                     echo "<td>".$t->transactionID."</td>";
 //                                    echo "<td>".$t->payerID."</td>";
                                     echo "<td>".$t->username."</td>";
+                                    $PayeeName = DB::getInstance()->get('users',array('id','=',$t->payeeID))->results()[0]->username;
+                                    echo "<td>".$PayeeName."</td>";
                                     echo "<td>".$paymentType."</td>";
                                     echo "<td>".$t->statusDescription."</td>";
                                     echo "<td>".$t->amount."</td>";

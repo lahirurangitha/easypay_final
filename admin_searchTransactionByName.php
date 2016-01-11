@@ -11,7 +11,7 @@ if(isset($_POST['searchVal2']) && $_POST['searchVal2']!= null) {
     $name = $_POST['searchVal2'];
     $_SESSION['name1']=$name;//search date
 //        echo"<label>Transactions on $date</label><br>";
-    $NameTra = DB::getInstance()->query('SELECT * From transaction t,users u WHERE u.username = ? and t.payerID = u.id',array($name));
+    $NameTra = DB::getInstance()->query('SELECT * From transaction t,users u WHERE u.username = ? and t.payerID = u.id ORDER BY transactionID DESC',array($name));
 //    foreach($MonthTra->results() as $res){
 //        print_r($res);
 //        echo"<br>";
@@ -34,12 +34,13 @@ if(isset($_POST['searchVal2']) && $_POST['searchVal2']!= null) {
         <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
-            <th>#</th>
+            <th>No</th>
             <th>Date</th>
             <th>Time</th>
             <th>Transaction ID</th>
             <!--            <th>PayerID</th>-->
-            <th>Username</th>
+            <th>Payed By</th>
+            <th>Pay For</th>
             <th>Payment type</th>
             <th>Status</th>
             <th>Amount</th>
@@ -74,6 +75,8 @@ if(isset($_POST['searchVal2']) && $_POST['searchVal2']!= null) {
 //            echo "<td>" . $t->payerID . "</td>";
 
             echo "<td>" . $t->username . "</td>";
+            $PayeeName = DB::getInstance()->get('users',array('id','=',$t->payeeID))->results()[0]->username;
+            echo "<td>".$PayeeName."</td>";
             echo "<td>" . $paymentType . "</td>";
             echo "<td>" . $t->statusDescription . "</td>";
             echo "<td>" . $t->amount . "</td>";
