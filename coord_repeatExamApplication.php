@@ -16,7 +16,7 @@ if(!$user->hasPermission('coord')){Redirect::to('index.php');}
 <html lang="en">
 
 <head>
-    <title>Repeat applications | page</title>
+    <title>Repeat Exam Applications | page</title>
     <?php include 'headerScript.php'?>
 
 </head>

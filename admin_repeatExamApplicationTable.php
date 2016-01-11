@@ -15,7 +15,7 @@ if(!$user->hasPermission('admin')){Redirect::to('index.php');}
 <html lang="en">
 
 <head>
-    <title>Admin | Dashboard</title>
+    <title>Repeat Exam Application | Page</title>
     <?php include 'headerScript.php'?>
 
 </head>

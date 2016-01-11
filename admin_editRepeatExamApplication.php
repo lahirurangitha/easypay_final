@@ -11,7 +11,7 @@ require_once 'core/init.php';
     <html lang="en">
 
     <head>
-        <title>Admin | Dashboard</title>
+        <title>Repeat Exam Application | page</title>
         <?php include 'headerScript.php'?>
 
     </head>

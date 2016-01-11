@@ -12,7 +12,7 @@ require 'Files/accessFile.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Change Admission appearing Date</title>
+    <title>Update Admission Details | Page</title>
     <?php include 'headerScript.php'?>
 </head>
 <body>

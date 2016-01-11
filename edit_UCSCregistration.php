@@ -12,7 +12,7 @@ require 'Files/accessFile.php';
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        <title>UCSC Registration</title>
+        <title>Update UCSC Registration | Page</title>
         <?php include 'headerScript.php'?>
     </head>
 <body>
