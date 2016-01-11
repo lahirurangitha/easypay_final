@@ -16,7 +16,7 @@ if(!$user->hasPermission('coord')){Redirect::to('index.php');}
 <html lang="en">
 
 <head>
-    <title>Admin | Dashboard</title>
+    <title>Repeat Applications | Page</title>
     <?php include 'headerScript.php'?>
 
 </head>
