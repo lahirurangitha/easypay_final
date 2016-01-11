@@ -26,6 +26,12 @@ if(isset($_SESSION['date1'])) {
     $pdf = new FPDF();
     $pdf->AddPage();
     $pdf->Image($image, 90, 7.5, 23);
+    $pdf->SetFont('Arial','B',15);
+    $pdf->SetTextColor(255,192,203);
+
+    $pdf->Text(150,10,"www.easypaysl.com");
+    $pdf->SetFont('Arial','B',15);
+    $pdf->SetTextColor(0,0,0);
     $pdf->SetFont("Arial", "B", "15");
     $pdf->Cell(0, 60, "University of Colombo School of Computing", 0, 1, "C");
     $pdf->SetY(50);
@@ -97,7 +103,7 @@ if(isset($_SESSION['date1'])) {
     }
     $pdf->SetFont('Arial', 'B', 10);
     $pdf->SetTextColor(255, 192, 203);
-    $pdf->Text(160, 10, "www.easypaysl.com");
+
     $pdf->Output();
     ob_end_clean();
 }
