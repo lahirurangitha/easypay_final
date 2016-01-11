@@ -14,8 +14,12 @@ $subCode=$_GET['subCode'];
 $subName=$_GET['subName'];
 $username=$_GET['username'];
 $subjectTitle="Regarding to repeat Application";
-$acceptMSG= "Dear Student,<br> Your Repeat Examination Application on<strong>"." ". $subCode." ". $subName. " " . "</strong>has been <strong>Accepted</strong>.";
-$ignoreMSG= "Dear Student,<br>Your Repeat Examination Application on<strong>"." ". $subCode." ". $subName. " " . "</strong>has been <strong>Rejected</strong>. Please meet your course coordinator";
+$acceptMSG= "Dear Student,Your Repeat Examination Application on"." ". $subCode." ". $subName. " " . "has been Accepted.";
+$ignoreMSG= "Dear Student,Your Repeat Examination Application on"." ". $subCode." ". $subName. " " . "has been Rejected. Please meet your course coordinator.";
+$acceptEmail= "Dear Student,<br>Your Repeat Examination Application on<strong>"." ". $subCode." ". $subName. " " . "</strong>has been <strong>Accepted</strong>.";
+$ignoreEmail= "Dear Student,<br>Your Repeat Examination Application on<strong>"." ". $subCode." ". $subName. " " . "</strong>has been <strong>Rejected</strong>. Please meet your course coordinator.";
+
+
 $catchMail=DB::getInstance()->get('users',array('username','=',$username));
 $res=$catchMail->results()[0];
 $uID = $res->id;
@@ -69,7 +73,7 @@ if(isset($_GET['accept'])){
 
 //Subject - Body :
         $mailer->Subject        = $subject;
-        $mailer->Body           = $acceptMSG;
+        $mailer->Body           = $acceptEmail;
         $mailer->isHTML(true); //Mail body contains HTML tags
 
 //Check if mail is sent :
@@ -131,7 +135,7 @@ if(isset($_GET['reject'])){
 
 //Subject - Body :
         $mailer->Subject        = $subject;
-        $mailer->Body           = $ignoreMSG;
+        $mailer->Body           = $ignoreEmail;
         $mailer->isHTML(true); //Mail body contains HTML tags
 
 //Check if mail is sent :
