@@ -39,7 +39,7 @@ if(isset($_POST['Contact_submit'])){
 			NOW()
 			)");
         if($stmt->execute()){
-            echo "<script>alert('Your information saved successfully.');window.location.href='contact.php'</script>";
+            echo "<script>alert('Your message was submitted.');window.location.href='contact.php'</script>";
         }
     }
     catch(PDOException $e)
