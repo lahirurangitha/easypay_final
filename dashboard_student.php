@@ -47,6 +47,14 @@ $curDate=date("Y-m-d");
             <!--Start: give this to lahiru-->
             <?php
             if($startDate<$curDate and $curDate<$endDate){
+//
+            $indexNo = $user->data()->indexNumber;
+            $subs=DB::getInstance()->query2('SELECT sub_code,sub_name from results WHERE repeat_status=1 and index_no=?',array($indexNo));
+            if($subs->count()){
+                foreach($subs->results() as $stu) {
+                    $check=DB::getInstance()->query('SELECT subjectCode from repeat_exam WHERE subjectCode=? and paymentStatus=1 and adminStatus=1',array($stu->sub_code));
+                    if ($check->count()){
+//
                 ?>
                 <div class="col-sm-3" style="float: right">
                     <span class="redColor"><strong>* Admission is available</strong></span>
@@ -54,7 +62,8 @@ $curDate=date("Y-m-d");
 <!--                    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>-->
                 </div>
             <?php
-            }
+
+            }}}}
             ?>
             <!--            end-->
         </div>
