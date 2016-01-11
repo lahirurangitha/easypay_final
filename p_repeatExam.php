@@ -77,7 +77,7 @@ while(!feof($myfile)) {
 fclose($myfile);
 $sb = $_SESSION['num'];
 $amt = floatval($sb*$arr[0]);
-    echo "<div class='text text-info'>* You have applyed for $sb subjects. Total amount is Rs.$amt.00.</div>";
+    echo "<div class='text text-info'>* You have applyed for $sb subject(s). Total amount is Rs.$amt.00.</div>";
     $prefix = 'easyID_';
     $lastID = (integer)$tra->lastID();
     $newID = $lastID + 1;

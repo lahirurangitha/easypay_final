@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.14
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2016 at 08:32 AM
--- Server version: 5.6.26
--- PHP Version: 5.6.12
+-- Generation Time: Jan 11, 2016 at 04:42 PM
+-- Server version: 10.1.8-MariaDB
+-- PHP Version: 5.6.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,11 +26,11 @@ SET time_zone = "+00:00";
 -- Table structure for table `groups`
 --
 
-CREATE TABLE IF NOT EXISTS `groups` (
+CREATE TABLE `groups` (
   `id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
   `permissions` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `groups`
@@ -38,7 +38,36 @@ CREATE TABLE IF NOT EXISTS `groups` (
 
 INSERT INTO `groups` (`id`, `name`, `permissions`) VALUES
 (1, 'Standard user', ''),
-(2, 'Administrator', '{"admin": 1}');
+(2, 'Administrator', '{"admin": 1}'),
+(3, 'Coordinator', '{"coord": 2}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mycontacts`
+--
+
+CREATE TABLE `mycontacts` (
+  `ContactID` int(11) NOT NULL,
+  `ContactName` varchar(100) DEFAULT NULL,
+  `ContactEmail` varchar(100) DEFAULT NULL,
+  `contactMessage` varchar(700) DEFAULT NULL,
+  `ContactDateCreated` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `mycontacts`
+--
+
+INSERT INTO `mycontacts` (`ContactID`, `ContactName`, `ContactEmail`, `contactMessage`, `ContactDateCreated`) VALUES
+(40, 'lahiru', 'lahirupathiranalr@gmail.com', 'test', '2016-01-09 21:23:57'),
+(41, 'nadeesh', 'nadeesh@gmail.com', 'test2', '2016-01-09 21:29:36'),
+(42, 'nadeesh', 'lahirurangithalr@gmail.com', 'test3', '2016-01-09 21:36:17'),
+(43, 'lahiru', 'lahirupathiranalr@gmail.com', '12345', '2016-01-10 22:56:18'),
+(44, 'lahiru', 'lahirupathiranalr@gmail.com', 'qwerty', '2016-01-10 17:37:53'),
+(45, 'Thisumi', 'thisumi29upendra@gmail.com', 'eZ pay', '2016-01-10 19:39:59'),
+(46, 'Thisumi', 'thisumi29upendra@gmail.com', 'ez pay', '2016-01-11 05:07:48'),
+(47, 'Thisumi', 'thisumiupendra@gmail.com', 'Hello', '2016-01-11 05:08:52');
 
 -- --------------------------------------------------------
 
@@ -46,7 +75,7 @@ INSERT INTO `groups` (`id`, `name`, `permissions`) VALUES
 -- Table structure for table `new_academic_year`
 --
 
-CREATE TABLE IF NOT EXISTS `new_academic_year` (
+CREATE TABLE `new_academic_year` (
   `transactionID` int(10) NOT NULL,
   `acaYear` int(4) NOT NULL,
   `paymentStatus` int(1) NOT NULL
@@ -141,7 +170,20 @@ INSERT INTO `new_academic_year` (`transactionID`, `acaYear`, `paymentStatus`) VA
 (222, 2016, 0),
 (223, 2016, 0),
 (224, 2016, 0),
-(225, 2016, 0);
+(225, 2016, 0),
+(252, 2016, 0),
+(266, 2016, 0),
+(268, 2016, 0),
+(272, 2016, 0),
+(275, 2016, 0),
+(277, 2016, 0),
+(278, 2016, 1),
+(279, 2016, 0),
+(80, 2016, 0),
+(284, 2016, 0),
+(286, 2016, 0),
+(287, 2016, 0),
+(289, 2016, 1);
 
 -- --------------------------------------------------------
 
@@ -149,12 +191,12 @@ INSERT INTO `new_academic_year` (`transactionID`, `acaYear`, `paymentStatus`) VA
 -- Table structure for table `notification`
 --
 
-CREATE TABLE IF NOT EXISTS `notification` (
+CREATE TABLE `notification` (
   `nID` int(5) NOT NULL,
   `topic` varchar(255) NOT NULL,
   `detail` longtext NOT NULL,
   `datetime` varchar(25) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='table for notifications';
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='table for notifications';
 
 --
 -- Dumping data for table `notification`
@@ -170,21 +212,19 @@ INSERT INTO `notification` (`nID`, `topic`, `detail`, `datetime`) VALUES
 -- Table structure for table `repeatexam_notification`
 --
 
-CREATE TABLE IF NOT EXISTS `repeatexam_notification` (
+CREATE TABLE `repeatexam_notification` (
   `nID` int(11) NOT NULL,
   `uID` int(11) NOT NULL,
-  `topic` varchar(30) DEFAULT NULL,
-  `description` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `topic` varchar(100) DEFAULT NULL,
+  `description` varchar(300) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `repeatexam_notification`
 --
 
 INSERT INTO `repeatexam_notification` (`nID`, `uID`, `topic`, `description`) VALUES
-(1, 3, 'Admission Accepted', 'Dear Student, Your Repeat Examination application on SCS1101 Data Structures   has been Accepted'),
-(2, 3, 'Admission Accepted', 'Dear Student, Your Repeat Examination application on SCS1103 Database I  has been Accepted'),
-(3, 3, 'Admission Rejected', 'Dear Student, Your Repeat Examination application on SCS1102 Programming I  has been Rejected. Pleas');
+(2, 3, 'Application Rejected', 'Dear Student,Your Repeat Examination Application on SCS1101 Data Structures  has been Rejected. Please meet your course coordinator.');
 
 -- --------------------------------------------------------
 
@@ -192,7 +232,7 @@ INSERT INTO `repeatexam_notification` (`nID`, `uID`, `topic`, `description`) VAL
 -- Table structure for table `repeat_exam`
 --
 
-CREATE TABLE IF NOT EXISTS `repeat_exam` (
+CREATE TABLE `repeat_exam` (
   `id` int(11) NOT NULL,
   `transactionID` int(10) NOT NULL,
   `Year` int(4) NOT NULL,
@@ -210,34 +250,23 @@ CREATE TABLE IF NOT EXISTS `repeat_exam` (
   `paymentStatus` int(1) NOT NULL,
   `adminStatus` int(1) NOT NULL,
   `username` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COMMENT='For repeat exam fees';
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='For repeat exam fees';
 
 --
 -- Dumping data for table `repeat_exam`
 --
 
 INSERT INTO `repeat_exam` (`id`, `transactionID`, `Year`, `Semester`, `subjectCode`, `indexNumber`, `nameWithInitials`, `fullName`, `fixedPhone`, `subjectName`, `AssignmentComplete`, `gradeFirst`, `gradeSecond`, `gradeThird`, `paymentStatus`, `adminStatus`, `username`) VALUES
-(1, 247, 1, 'FYS1', 'SCS1101', '13000111', 'HVGN Dilanga', 'nadeesh dilanga', '0412225683', 'Data Structures & Algorithms I', 'Completed', 'D+', 'C+', '-', 1, 1, 'nadeesh'),
+(1, 247, 1, 'FYS1', 'SCS1101', '13000276', 'HVGN Dilanga', 'nadeesh dilanga', '0412225683', 'Data Structures & Algorithms I', 'Completed', 'D+', 'C+', '-', 1, 1, 'nadeesh'),
 (2, 247, 1, 'FYS1', 'SCS1103', '13000111', 'HVGN Dilanga', 'nadeesh dilanga', '0412225683', 'Database I', 'Completed', 'C-', '-', '-', 1, 1, 'nadeesh'),
-(3, 248, 1, 'FYS1', 'SCS1101', '13000888', 'NPLR Pathirana', 'lahiru pathirana', '0332293329', 'Data Structures & Algorithms I', 'Completed', 'C', 'C-', '-', 1, 0, 'lahiru'),
-(4, 248, 1, 'FYS1', 'SCS1102', '13000888', 'NPLR Pathirana', 'lahiru pathirana', '0332293329', 'Programming I', 'Completed', 'D+', '-', '-', 1, 0, 'lahiru'),
-(5, 248, 1, 'FYS1', 'SCS1101', '13000888', 'NPLR Pathirana', 'lahiru pathirana', '0332293329', 'Data Structures & Algorithms I', 'Completed', 'D-', 'C+', '-', 1, 0, 'lahiru'),
 (6, 249, 1, 'FYS1', 'SCS1101', '13000111', 'HVGN Dilanga', 'nadeesh dilanga', '0412225683', 'Data Structures & Algorithms I', 'Completed', '-', '-', '-', 0, 0, 'nadeesh'),
-(7, 50, 1, 'FYS1', 'SCS1102', '13000111', 'HVGN Dilanga', 'nadeesh dilanga', '0412225683', 'Programming I', 'Not Completed', '-', '-', '-', 1, 2, 'nadeesh');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `results`
---
-
-CREATE TABLE IF NOT EXISTS `results` (
-  `regNumber` varchar(9) NOT NULL,
-  `year` int(1) NOT NULL,
-  `subjectCode` varchar(7) NOT NULL,
-  `semester` int(1) NOT NULL,
-  `result` varchar(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='This is for integrate exam results with easypaysl.com ';
+(7, 50, 1, 'FYS1', 'SCS1102', '13000111', 'HVGN Dilanga', 'nadeesh dilanga', '0412225683', 'Programming I', 'Not Completed', '-', '-', '-', 1, 2, 'nadeesh'),
+(8, 264, 1, 'FYS1', 'SCS1101', '13000111', 'H.V.G.N Dilanga', 'Nadeesh Dilanga', '0112837662', 'Data Structures & Algorithms I', 'Completed', 'C-', '-', '-', 1, 2, 'nadeesh'),
+(9, 70, 1, 'FYS1', 'SCS1106', '13000111', 'H.V.G.N Dilanga', 'nadeesh dilanga', '0112837662', 'Algo', 'no', 'C', '-', '-', 0, 0, NULL),
+(10, 274, 2, 'FYS1', 'SCS1111', '13000276', 'H.V.G.N Dilanga', 'nadeesh dilanga', '0112837662', 'Algo', 'yes', 'D+', '-', '-', 1, 1, 'nadeesh'),
+(11, 281, 2, 'FYS1', 'SCS1101', '11120567', 'qwertgyhg', 'waasedrgfthyg', '0112238383', 'Data Structures & Algorithms I', 'Completed', 'C', '-', '-', 0, 0, 'nadeesh'),
+(12, 285, 1, 'FYS1', 'SCS1105', '13000111', 'N.Dilanga', 'nadeesh dilanga', '-', 'Computer Systems', 'Completed', 'C-', '-', '-', 0, 0, 'nadeesh'),
+(13, 288, 1, 'FYS1', 'SCS1105', '13000111', 'N.Dilanga', 'nadeesh dilanga', '-', 'Computer Systems', 'Completed', 'C-', '-', '-', 0, 0, 'nadeesh');
 
 -- --------------------------------------------------------
 
@@ -245,43 +274,50 @@ CREATE TABLE IF NOT EXISTS `results` (
 -- Table structure for table `transaction`
 --
 
-CREATE TABLE IF NOT EXISTS `transaction` (
+CREATE TABLE `transaction` (
   `transactionID` int(10) NOT NULL,
   `payeeID` int(5) NOT NULL,
   `payerID` int(5) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
-  `paymentType` varchar(20) NOT NULL,
   `statusCode` int(2) NOT NULL,
   `walletRefID` int(20) NOT NULL,
   `statusDescription` varchar(200) NOT NULL,
   `amount` double NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `transaction`
 --
 
-INSERT INTO `transaction` (`transactionID`, `payeeID`, `payerID`, `date`, `time`, `paymentType`, `statusCode`, `walletRefID`, `statusDescription`, `amount`) VALUES
-(1, 2, 2, '2015-09-03', '01:25:22', 'Repeat Exam', 2, 55555, 'good', 10),
-(2, 3, 3, '2015-09-20', '01:10:22', 'Repeat Exam', 2, 55555, 'good', 3500),
-(3, 1, 1, '2015-09-09', '01:25:22', 'Repeat Exam', 2, 21474, 'good', 20),
-(4, 0, 3, '2015-10-03', '06:22:00', 'Repeat Exam', 2, 32434, 'good', 20),
-(5, 0, 3, '2015-10-07', '05:27:30', 'Repeat Exam', 2, 57567, 'good', 20),
-(6, 10, 3, '2015-10-03', '06:22:00', 'Repeat Exam', 2, 32434, 'good', 20),
-(7, 11, 3, '2015-10-07', '05:27:30', 'Repeat Exam', 2, 57567, 'good', 20),
-(8, 11, 3, '2015-01-07', '05:27:30', 'Repeat Exam', 2, 57567, 'good', 20),
-(9, 11, 3, '2015-02-07', '05:27:30', 'Repeat Exam', 2, 57567, 'good', 20),
-(10, 11, 3, '2015-03-07', '05:27:30', 'Repeat Exam', 2, 57567, 'good', 20),
-(12, 11, 3, '2015-04-07', '05:27:30', 'Repeat Exam', 2, 57567, 'good', 20),
-(13, 11, 3, '2015-05-07', '05:27:30', 'Repeat Exam', 2, 57567, 'good', 20),
-(14, 11, 3, '2015-06-07', '05:27:30', 'Repeat Exam', 2, 57567, 'good', 20),
-(15, 11, 3, '2015-07-07', '05:27:30', 'Repeat Exam', 2, 57567, 'good', 20),
-(16, 11, 3, '2015-06-07', '05:27:30', 'Repeat Exam', 2, 57567, 'good', 20),
-(17, 11, 3, '2015-07-07', '05:27:30', 'Repeat Exam', 2, 57567, 'good', 20),
-(18, 11, 3, '2015-08-07', '05:27:30', 'Repeat Exam', 2, 57567, 'good', 20),
-(20, 11, 3, '2016-01-07', '05:27:30', 'Repeat Exam', 2, 57567, 'good', 20),
-(21, 11, 3, '2016-02-07', '08:27:30', 'Repeat Exam', 2, 57567, 'good', 20);
+INSERT INTO `transaction` (`transactionID`, `payeeID`, `payerID`, `date`, `time`, `statusCode`, `walletRefID`, `statusDescription`, `amount`) VALUES
+(2, 3, 3, '2015-09-20', '01:10:22', 2, 55555, 'Transaction is completed', 20),
+(4, 3, 3, '2015-10-03', '06:22:00', 2, 32434, 'Transaction is completed', 20),
+(5, 3, 3, '2015-10-07', '05:27:30', 2, 57567, 'Transaction is completed', 20),
+(6, 10, 3, '2015-10-03', '06:22:00', 2, 32434, 'Transaction is completed', 20),
+(7, 11, 3, '2015-10-07', '05:27:30', 2, 57567, 'Transaction is completed', 20),
+(8, 11, 3, '2015-01-07', '05:27:30', 2, 57567, 'Transaction is completed', 20),
+(9, 11, 3, '2015-02-07', '05:27:30', 2, 57567, 'Transaction is completed', 20),
+(10, 11, 3, '2015-03-07', '05:27:30', 2, 57567, 'Transaction is completed', 20),
+(12, 11, 3, '2015-04-07', '05:27:30', 2, 57567, 'Transaction is completed', 20),
+(13, 11, 3, '2015-05-07', '05:27:30', 2, 57567, 'Transaction is completed', 20),
+(14, 11, 3, '2015-06-07', '05:27:30', 2, 57567, 'Transaction is completed', 20),
+(15, 11, 3, '2015-07-07', '05:27:30', 2, 57567, 'Transaction is completed', 20),
+(16, 11, 3, '2015-06-07', '05:27:30', 2, 57567, 'Transaction is completed', 20),
+(17, 11, 3, '2015-07-07', '05:27:30', 2, 57567, 'Transaction is completed', 20),
+(18, 11, 3, '2015-08-07', '05:27:30', 2, 57567, 'Transaction is completed', 20),
+(20, 11, 3, '2016-01-07', '05:27:30', 2, 57567, 'Transaction is completed', 20),
+(253, 3, 3, '2016-01-07', '10:37:58', 2, 2147483647, 'Transaction is completed', 10),
+(254, 3, 3, '2016-01-07', '10:48:24', 2, 2147483647, 'Transaction is completed', 10),
+(258, 3, 3, '2016-01-07', '11:15:09', 2, 2147483647, 'Transaction is completed', 10),
+(259, 3, 3, '2016-01-07', '11:31:46', 2, 2147483647, 'Transaction is completed', 10),
+(261, 3, 3, '2016-01-07', '11:46:16', 2, 2147483647, 'Transaction is completed', 10),
+(262, 3, 3, '2016-01-07', '11:51:32', 2, 2147483647, 'Transaction is completed', 10),
+(263, 3, 3, '2016-01-07', '12:24:58', 2, 2147483647, 'Transaction is completed', 10),
+(264, 3, 3, '2016-01-07', '12:29:17', 2, 2147483647, 'Transaction is completed', 10),
+(274, 3, 3, '2016-01-08', '08:58:40', 2, 2147483647, 'Transaction is completed', 10),
+(278, 10, 3, '2016-01-10', '12:34:44', 2, 2147483647, 'Transaction is completed', 10),
+(289, 3, 3, '2016-01-11', '07:07:47', 2, 2147483647, 'Transaction is completed', 10);
 
 -- --------------------------------------------------------
 
@@ -289,10 +325,10 @@ INSERT INTO `transaction` (`transactionID`, `payeeID`, `payerID`, `date`, `time`
 -- Table structure for table `transaction_temp`
 --
 
-CREATE TABLE IF NOT EXISTS `transaction_temp` (
+CREATE TABLE `transaction_temp` (
   `traID` int(20) NOT NULL,
   `userID` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=251 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `transaction_temp`
@@ -548,7 +584,52 @@ INSERT INTO `transaction_temp` (`traID`, `userID`) VALUES
 (247, 3),
 (248, 3),
 (249, 3),
-(250, 3);
+(250, 3),
+(251, 3),
+(252, 3),
+(253, 3),
+(254, 3),
+(255, 3),
+(256, 3),
+(257, 3),
+(258, 3),
+(259, 3),
+(260, 3),
+(261, 3),
+(262, 3),
+(263, 3),
+(264, 3),
+(265, 3),
+(266, 3),
+(267, 3),
+(268, 3),
+(269, 3),
+(270, 3),
+(271, 3),
+(272, 3),
+(273, 3),
+(274, 3),
+(275, 29),
+(276, 30),
+(277, 30),
+(278, 3),
+(279, 3),
+(280, 3),
+(281, 3),
+(282, 3),
+(283, 3),
+(284, 3),
+(285, 3),
+(286, 3),
+(287, 3),
+(288, 3),
+(289, 3),
+(290, 33),
+(291, 33),
+(292, 33),
+(293, 33),
+(294, 33),
+(295, 33);
 
 -- --------------------------------------------------------
 
@@ -556,7 +637,7 @@ INSERT INTO `transaction_temp` (`traID`, `userID`) VALUES
 -- Table structure for table `ucsc_registration`
 --
 
-CREATE TABLE IF NOT EXISTS `ucsc_registration` (
+CREATE TABLE `ucsc_registration` (
   `transactionID` int(10) NOT NULL,
   `regYear` int(4) NOT NULL,
   `paymentStatus` int(1) NOT NULL
@@ -641,7 +722,25 @@ INSERT INTO `ucsc_registration` (`transactionID`, `regYear`, `paymentStatus`) VA
 (213, 2017, 0),
 (214, 2017, 0),
 (217, 2017, 0),
-(241, 2017, 0);
+(241, 2017, 0),
+(251, 2017, 0),
+(253, 2017, 0),
+(254, 2017, 0),
+(255, 2017, 0),
+(256, 2017, 0),
+(257, 2017, 0),
+(258, 2017, 0),
+(259, 2017, 0),
+(60, 2017, 0),
+(261, 2017, 0),
+(262, 2017, 1),
+(263, 2017, 1),
+(265, 2017, 0),
+(267, 2017, 0),
+(269, 2017, 0),
+(271, 2017, 0),
+(273, 2017, 0),
+(276, 2017, 0);
 
 -- --------------------------------------------------------
 
@@ -649,7 +748,7 @@ INSERT INTO `ucsc_registration` (`transactionID`, `regYear`, `paymentStatus`) VA
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(64) NOT NULL,
@@ -661,30 +760,28 @@ CREATE TABLE IF NOT EXISTS `users` (
   `nic` varchar(10) NOT NULL,
   `dob` date NOT NULL,
   `year` int(2) NOT NULL,
-  `group` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+  `group` int(11) NOT NULL,
+  `active` int(1) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `indexNumber`, `fname`, `lname`, `email`, `phone`, `nic`, `dob`, `year`, `group`) VALUES
-(1, 'lasith', '98f7494c30aaa7c55d7c8cad6d04cb0c08c93295310d6931c33a89dda28a47a3', NULL, 'lasith', 'niroshan', 'lasith2013.l2n@gmail', '0712837662', '923342699V', '1992-11-29', 1, 2),
-(2, 'shanika', '98f7494c30aaa7c55d7c8cad6d04cb0c08c93295310d6931c33a89dda28a47a3', NULL, 'shanika', 'surangi', 'sse@gmail.com', '0722235502', '923565488V', '1992-06-29', 2, 2),
-(3, 'nadeesh', '8412850906603b50d968536a6c0b1da6c1f52ae947e917e62de4f4662a62dce9', '13000111', 'nadeesh', 'dilanga', 'nadeesh@gmail.com', '0770294331', '922970988v', '1992-10-14', 1, 1),
-(4, 'student1', '509e87a6c45ee0a3c657bf946dd6dc43d7e5502143be195280f279002e70f7d9', NULL, 'student', 'student', 'student1@gmail.com', '0712837662', '9233426992', '1992-06-29', 2, 1),
-(9, 'student2', 'eb4b3111401df980f14f28ad6804ae096df1e1c6963c51eab4140be226f8c94c', NULL, 'student2', 'student2', 'student2@gmail.com', '0712837662', '9233426992', '1992-10-14', 1, 1),
-(10, 'anjana', '8182e42c77b763a311306c7de924279ad89ddff152f003898c6ce100699f2610', NULL, 'anjana', 'nisal', 'anjana@gmail.com', '0770336863', '9233426992', '1992-06-29', 2, 1),
-(11, 'lahiru', '0edf2f04a578ad4c1d44ccf0b5a1367b237b431d0fb2c309c11f642c6aa8feb2', '13000888', 'lahiru', 'rangitha', 'lahiru@gmail.com', '0715721241', '923342699V', '1992-06-29', 4, 1),
-(12, 'pushpika', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', NULL, 'pushpika', 'wanniachchi', 'pushpika@gmail.com', '0715721241', '921601883v', '1992-06-08', 2, 1),
-(13, 'hasantha', '75155c02717e90650b6aa692391ff81cbaf08f46f7d1bce7e2c4bf444485c380', NULL, 'hasantha', 'lakshan', 'hasantha@gmail.com', '0715721241', '921601883v', '1992-06-08', 2, 1),
-(14, 'nimal', 'ad27266cd9aa5c55922c709207cfe69ae0544af6c66bb739fa76271481f5b904', NULL, 'nimal', 'nandana', 'nimal@gmail.com', '0715721241', '931601883v', '1985-12-31', 2, 1),
-(15, 'testuser', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', NULL, 'test', 'user', 'lahirupathiranalr@gmail.com', '0715721241', '921601883v', '1990-12-27', 2, 1),
-(20, 's1', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', '', 'std', 'std', 'lahirupathiranalr@gmail.com', '0715721241', '921601883v', '2016-01-06', 1, 1),
-(21, 's2', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', '', 'std', 'std', 'lahirupathiranalr@gmail.com', '0715721241', '921601883v', '2016-01-04', 1, 1),
-(22, 'st2', 'ee79976c9380d5e337fc1c095ece8c8f22f91f306ceeb161fa51fecede2c4ba1', '', 'std', 'std', 'lahirupathiranalr@gmail.com', '0715721241', '921601883v', '2016-01-04', 1, 1),
-(23, 'rangitha', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', '13000888', 'lahiru', 'rangitha', 'lahirupathiranalr@gmail.com', '0715721241', '921601883v', '2016-01-20', 1, 1),
-(24, 'nalinda', '8bb0cf6eb9b17d0f7d22b456f121257dc1254e1f01665370476383ea776df414', '', '', '', 'lahirupathiranalr@gmail.com', '0715721241', '921601883v', '0000-00-00', 1, 1);
+INSERT INTO `users` (`id`, `username`, `password`, `indexNumber`, `fname`, `lname`, `email`, `phone`, `nic`, `dob`, `year`, `group`, `active`) VALUES
+(1, 'lasith', '98f7494c30aaa7c55d7c8cad6d04cb0c08c93295310d6931c33a89dda28a47a3', NULL, 'lasith', 'niroshan', 'lasith2013.l2n@gmail', '0712837662', '923342699V', '1992-11-29', 1, 2, 1),
+(2, 'shanika', '98f7494c30aaa7c55d7c8cad6d04cb0c08c93295310d6931c33a89dda28a47a3', NULL, 'shanika', 'surangi', 'sse@gmail.com', '0722235502', '923565488V', '1992-06-29', 2, 2, 1),
+(3, 'nadeesh', '8412850906603b50d968536a6c0b1da6c1f52ae947e917e62de4f4662a62dce9', '13000276', 'nadeesh', 'dilanga', 'dinuka098perera@gmail.com', '0770294331', '923342699v', '1992-10-14', 2, 1, 1),
+(10, 'anjana', '8182e42c77b763a311306c7de924279ad89ddff152f003898c6ce100699f2610', '13000837', 'anjana', 'nisal', 'anjana@gmail.com', '0770336863', '9233426992', '1992-06-29', 2, 1, 1),
+(11, 'lahiru', '0edf2f04a578ad4c1d44ccf0b5a1367b237b431d0fb2c309c11f642c6aa8feb2', '13000888', 'lahiru', 'rangitha', 'lahirupathiranalr@gmail.com', '0715721241', '923342699V', '1992-06-29', 4, 1, 0),
+(12, 'pushpika', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', NULL, 'pushpika', 'wanniachchi', 'pushpika@gmail.com', '0715721241', '921601883v', '1992-06-08', 2, 1, 1),
+(23, 'rangitha', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', '13000888', 'lahiru', 'rangitha', 'lahirupathiranalr@gmail.com', '0715721241', '921601883v', '2016-01-20', 1, 1, 1),
+(25, 'coordinator1', '0edf2f04a578ad4c1d44ccf0b5a1367b237b431d0fb2c309c11f642c6aa8feb2', NULL, 'lahiru', 'rangitha', 'lahiru@gmail.com', '0715721241', '923342699V', '1992-06-29', 1, 3, 1),
+(26, 'janeesha', '65e9407ededbcd6f1bb4ecf6f00f5493c076f48e04125ebc0414fdcabdef4ac4', '13020112', 'Janeesha', 'Lakshani', 'shanika.edirisinghe@gmail.com', '0712837662', '926529573V', '1992-05-12', 2, 1, 0),
+(28, 'surangi', '6a334ab6e9906b4c82e74accd71739238bf7e6d25cd31356a2c5cc85f3495553', '13020332', 'surangi', 'silva', 'lasith2013.l2n@gmail.com', '0712837662', '923342699v', '1992-11-29', 2, 1, 1),
+(29, 'sunimal', 'e04206e1e3ae563af3a4c033ae1d89f8519c6e831ceaa7a81e40ec229502d501', '13000111', 'sunimal', 'sunimal', 'lasith2013.l2n@gmail.com', '0712837662', '923342689V', '1992-01-29', 2, 1, 1),
+(30, 'Thisumi', '9a6e2170cf38e0419ce6212ab28f31bfdd7af18ee68fe4f509760c7c621c5477', '', '', '', 'thisumi29upendra@gmail.com', '0773693689', '927235667V', '0000-00-00', 1, 1, 1),
+(32, 'viboda', '7234e8f5354c61eb4def57f8c6c94642562739b71590e0d04e03a545e74b5014', '13000122', 'Vibodha', 'Balalla', 'anjanagnet@gmail.com', '0770336863', '930145258v', '1993-02-14', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -692,18 +789,11 @@ INSERT INTO `users` (`id`, `username`, `password`, `indexNumber`, `fname`, `lnam
 -- Table structure for table `users_session`
 --
 
-CREATE TABLE IF NOT EXISTS `users_session` (
+CREATE TABLE `users_session` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `hash` varchar(64) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `users_session`
---
-
-INSERT INTO `users_session` (`id`, `user_id`, `hash`) VALUES
-(1, 1, '6039c184a8667a2dd2f19f7de111c9b001bf4a4874904283d1936e2f3e6714b6');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -711,7 +801,7 @@ INSERT INTO `users_session` (`id`, `user_id`, `hash`) VALUES
 -- Table structure for table `user_notification`
 --
 
-CREATE TABLE IF NOT EXISTS `user_notification` (
+CREATE TABLE `user_notification` (
   `nID` int(5) NOT NULL,
   `uID` int(11) NOT NULL,
   `send_date` date NOT NULL
@@ -722,7 +812,27 @@ CREATE TABLE IF NOT EXISTS `user_notification` (
 --
 
 INSERT INTO `user_notification` (`nID`, `uID`, `send_date`) VALUES
-(2, 3, '2007-01-16');
+(2, 3, '2007-01-16'),
+(2, 4, '2007-01-16'),
+(2, 10, '2007-01-16'),
+(2, 12, '2007-01-16'),
+(2, 13, '2007-01-16'),
+(2, 14, '2007-01-16'),
+(2, 15, '2007-01-16'),
+(3, 3, '2008-01-16'),
+(5, 1, '2008-01-16'),
+(5, 2, '2008-01-16'),
+(5, 10, '2008-01-16'),
+(5, 11, '2008-01-16'),
+(5, 12, '2008-01-16'),
+(5, 13, '2008-01-16'),
+(5, 14, '2008-01-16'),
+(5, 15, '2008-01-16'),
+(5, 23, '2008-01-16'),
+(5, 24, '2008-01-16'),
+(5, 25, '2008-01-16'),
+(5, 26, '2008-01-16'),
+(5, 27, '2008-01-16');
 
 --
 -- Indexes for dumped tables
@@ -733,6 +843,12 @@ INSERT INTO `user_notification` (`nID`, `uID`, `send_date`) VALUES
 --
 ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `mycontacts`
+--
+ALTER TABLE `mycontacts`
+  ADD PRIMARY KEY (`ContactID`);
 
 --
 -- Indexes for table `notification`
@@ -791,42 +907,47 @@ ALTER TABLE `user_notification`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `mycontacts`
+--
+ALTER TABLE `mycontacts`
+  MODIFY `ContactID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `nID` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `nID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `repeatexam_notification`
 --
 ALTER TABLE `repeatexam_notification`
-  MODIFY `nID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `nID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `repeat_exam`
 --
 ALTER TABLE `repeat_exam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transactionID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+  MODIFY `transactionID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=296;
 --
 -- AUTO_INCREMENT for table `transaction_temp`
 --
 ALTER TABLE `transaction_temp`
-  MODIFY `traID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=251;
+  MODIFY `traID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=296;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `users_session`
 --
 ALTER TABLE `users_session`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

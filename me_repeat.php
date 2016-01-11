@@ -38,12 +38,13 @@ if (!$sql->count()) {
     $sub_name=$res->sub_name;
 }
 // for getting the  name with initials
-$sql2=DB::getInstance()->query2('SELECT name_initial from u_student WHERE index_no=?',array($user->data()->indexNumber));
+$sql2=DB::getInstance()->query2('SELECT name_initial,name_full from u_student WHERE index_no=?',array($user->data()->indexNumber));
 if (!$sql->count()) {
     echo "Full name doesn't exist";
 }else{
     $res2=$sql2->results()[0];
     $name_ini=$res2->name_initial;
+	$full_name= $res2->name_full;
 }
 
 
@@ -88,7 +89,7 @@ if (!$sql->count()) {
         $result1=$fillResult->result1;
         $result2=$fillResult->result2;
         $result3=$fillResult->result3;
-        $full_name=$user->data()->fname." ".$user->data()->lname;
+        //$full_name=$user->data()->fname." ".$user->data()->lname;
 
         if($acaYear==1){
             if($acaSem==1){
@@ -175,7 +176,7 @@ if (!$sql->count()) {
                         )
                     );
                 }
-                $_SESSION['num'] = $numForms;
+                $_SESSION['num'] = 1;
                 Redirect::to('p_repeatExam.php');
             }
         }
@@ -207,7 +208,7 @@ if (!$sql->count()) {
                 </div>
                 <div class="col-sm-6">
                     <label>Name in full</label>
-                    <input class="form-control" type="text" name="fullName" required="true" value="<?php echo escape($user->data()->fname)." ".escape($user->data()->lname); ?>"disabled>
+                    <input class="form-control" type="text" name="fullName" required="true" value="<?php echo $full_name; ?>"disabled>
                 </div>
                 <div class="col-sm-12">
                     <h4><strong>Contacts</strong></h4>
@@ -267,14 +268,15 @@ if (!$sql->count()) {
 
                 </div>
                 <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
-
+				
                 <div class="col-sm-12">
-                    <input class="btn btn-default col-sm-2"type="submit" value="Next">
+					<br>
+					<input class="btn btn-primary col-sm-2"type="submit" value="Next">
                 </div>
             </div>
 
         </form>
-        <button class="btn btn-primary btn-xs col-sm-2" style="float: right" onclick="window.location.href='duepayments.php'"><< Back</button>
+        <button class="btn btn-danger btn-xs col-sm-2" style="float: right" onclick="window.location.href='duepayments.php'"><< Back</button>
     </div>
 </div>
 

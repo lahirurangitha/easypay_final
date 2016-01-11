@@ -57,19 +57,19 @@ $pdf->SetY(65);
 $pdf->SetFont("Arial", "B", 10);
 //$pdf->Cell(10, 10, " No.", 1, 0);
 $pdf->Cell(30, 10, " Transaction ID", 1, 0);
-$pdf->Cell(40, 10, " Student Index No.", 1, 0);
-$pdf->Cell(35, 10, " Payment type", 1, 0);
-$pdf->Cell(60, 10, " Status", 1, 0);
+$pdf->Cell(35, 10, " Student Index No.", 1, 0);
+$pdf->Cell(45, 10, " Payment type", 1, 0);
+$pdf->Cell(50, 10, " Status", 1, 0);
 $pdf->Cell(20, 10, " Amount", 1, 1);
 
 //fill data
 $pdf->SetFont("Arial", "", 10);
 //    $pdf->Cell(10, 10, $counter, 1, 0);
 $pdf->Cell(30, 10, $transID, 1, 0);
-$pdf->Cell(40, 10, $index, 1, 0);
-$pdf->Cell(35, 10, $paymentType, 1, 0);
-$pdf->Cell(60, 10, $paymentStatus, 1, 0);
-$pdf->Cell(20, 10, "Rs.".$amount, 1, 1);
+$pdf->Cell(35, 10, $index, 1, 0);
+$pdf->Cell(45, 10, $paymentType, 1, 0);
+$pdf->Cell(50, 10, $paymentStatus, 1, 0);
+$pdf->Cell(20, 10, "Rs.".$amount.'.00', 1, 1);
 
 
 $str = "Transaction ID = $transID \n Student Index Number = $index \n Payment type = $paymentType \n Amount = $amount \n Payment Status = $paymentStatus \n ";
@@ -81,6 +81,6 @@ $pdf->Image('images/QR.png',175, 12, 20);
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->SetTextColor(255, 192, 203);
 $pdf->Text(160, 10, "www.easypaysl.com");
-$pdf->Output('Reciept.pdf');
+$pdf->Output();
 ob_end_clean();
 ?>

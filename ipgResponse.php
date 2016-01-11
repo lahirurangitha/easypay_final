@@ -7,6 +7,9 @@
  */
 require_once 'core/init.php';
 require 'payment/decrypt.php';
+require_once 'PHPMailer/PHPMailerAutoload.php';
+require_once 'PHPMailer/class.phpmailer.php';
+require_once 'PHPMailer/class.smtp.php';
 /*
  * transaction type codes
  * 1 : UCSC registration fee
@@ -108,6 +111,55 @@ $email = $user->data()->email;
                     $_SESSION['stts'] = $statusDescription;
                     $_SESSION['amnt'] = $transactionAmount;
                     $_SESSION['index'] = $index;
+					
+					//email
+					/* CONFIGURATION */
+						$crendentials = array(
+							'email'     => 'easypayucsc2@gmail.com',    //Your GMail adress
+							'password'  => 'easypayucsc@123'               //Your GMail password
+						);
+
+						/* SPECIFIC TO GMAIL SMTP */
+						$smtp = array(
+
+							'host' => 'smtp.gmail.com',
+							'port' => 587,
+							'username' => $crendentials['email'],
+							'password' => $crendentials['password'],
+							'secure' => 'tls' //SSL or TLS
+
+						);
+
+						/* TO, SUBJECT, CONTENT */
+						$to         = $user->data()->email; //The 'To' field
+
+						$mailer = new PHPMailer();
+
+					//SMTP Configuration
+						$mailer->isSMTP();
+						$mailer->SMTPAuth   = true; //We need to authenticate
+						$mailer->Host       = $smtp['host'];
+						$mailer->Port       = $smtp['port'];
+						$mailer->Username   = $smtp['username'];
+						$mailer->Password   = $smtp['password'];
+						$mailer->SMTPSecure = $smtp['secure'];
+
+					//Now, send mail :
+					//From - To :
+						$mailer->From       = $crendentials['email'];
+						$mailer->FromName   = 'Easy Pay'; //Optional
+						$mailer->addAddress($to);  // Add a recipient
+
+					//Subject - Body :
+						$mailer->Subject        = 'Payment via Easypay';
+						$mailer->Body           = "Your Payment was successfull.";
+						$mailer->isHTML(true); //Mail body contains HTML tags
+
+					//Check if mail is sent :
+						if(!$mailer->send()) {
+							echo 'Error sending mail : ' . $mailer->ErrorInfo;
+						} 
+					//endEmail
 
                     echo "$str";
                     echo "<button class='btn btn-primary btn-xs' onclick='window.open(\"transactionReciept.php\")' style='float: right'>Download Receipt</button>";
